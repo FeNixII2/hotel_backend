@@ -1,0 +1,52 @@
+hr {
+    border-color: #4d5053;
+    width: 90%;
+    margin: 20px auto;
+}
+
+h1 {
+    font-family: Kanit;
+    margin: 0;
+}
+
+h2 {
+    font-family: Kanit;
+    margin: 0;
+}
+h3 {
+    font-family: Kanit;
+    margin: 0;
+}
+
+p {
+    font-family: Kanit;
+    margin: 0;
+}
+
+h4 {
+    font-family: Kanit;
+}
+
+section {
+    display: none;
+    /* transform: translateY(45px); */
+    z-index: 1;
+}
+
+.container {
+    width: 100%;
+}
+
+.text-column {
+    float: left;
+    width: 50%;
+}
+
+.image-column {
+    float: right;
+    width: 50%;
+}
+
+@media screen and (max-width: 1000px) {}
+
+@media screen and (max-width: 600px) {}

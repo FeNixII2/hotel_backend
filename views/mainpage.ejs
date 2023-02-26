@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http - equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    Jaidee Hotel
+  </title>
+
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css / 4 / w3.css " />
+  <!-- import font -->
+  <link rel=" stylesheet " href=" https : // fonts.googleapis.com/css?family=Kanit">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/th.js"></script>
+  <!-- <icon awesome> -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,700,0,0" />
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script src="https://kit.fontawesome.com/4dd06c2468.js" crossorigin="anonymous"></script>
+  <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+  <!-- css import -->
+  <link rel="stylesheet" href="body.css">
+  <link rel="stylesheet" href="topnav.css">
+  <link rel="stylesheet" href="allTag.css">
+  <!-- css import -->
+</head>
+
+<body>
+
+  <div class="topnav" id="topnav">
+    <div class="topnav-logo">
+      <img src="hotel.png">
+    </div>
+    <ul class="menu">
+      <li>
+        <a href="#home" onclick="showSection('home')">หน้าหลัก</a>
+      </li>
+      <li>
+        <a href="#" onclick="showSection('')">ห้องพัก</a>
+      </li>
+
+      <li>
+        <a href="#" onclick="showSection('')">จองห้องพัก</a>
+      </li>
+      <li>
+        <a href="#">
+          <img src="world.png"></a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- section -->
+  <main>
+    <%- include('homesection.ejs') %>
+
+  </main>
+</body>
+
+<script>
+  // fix show section when you refresh webpage
+  window.addEventListener('load', function() {
+    let hash = location.hash; // get current hash location
+    let id = hash.substring(1); // remove # from location
+    if (id != (null || '' || "")) {
+      document.querySelectorAll('section').forEach(function(element) {
+        element.style.display = 'none';
+      });
+      showSection(id)
+    } else {
+      showSection('home')
+    }
+  });
+
+  // JavaScript function to show a specific section
+  function showSection(id) { // hide all sections
+    document.querySelectorAll('section').forEach(function(element) {
+      element.style.display = 'none';
+    });
+    // show the selected section
+    document.getElementById(id).style.display = 'block';
+  }
+
+  // fix topnav and section is override
+  window.onload = function() {
+    var topnav = document.getElementById("topnav"); // get the topnav element
+    var topnavHeight = topnav.offsetHeight;
+    // get the height of the topnav element
+    // var section = document.querySelector("section"); //get the section element
+
+    document.querySelectorAll('section').forEach(function(element) {
+      element.style.transform = 'translateY(' + topnavHeight + 'px)';
+    }); // assign the topnav height as margin-top to the section
+  }
+</script>
+</head>
+
+</html>
+</head>
+
+</html>
+</body>
