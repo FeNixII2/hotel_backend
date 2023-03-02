@@ -51,7 +51,13 @@ app.listen(port, () => {
 
 app.get("/", (req, res) => {
 
-    res.render("mainpage.ejs", {});
+    con.query("select * from rooms", (err, rooms) => {
+        con.query("select * from reserv", (err, reserv) => {
+            con.query("select * from roomstype", (err, roomstype) => {
+                res.render("mainpage.ejs", { rooms, reserv, roomstype });
+            })
+        })
+    })
 
 });
 //js file include

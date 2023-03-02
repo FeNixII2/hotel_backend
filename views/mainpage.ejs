@@ -6,7 +6,7 @@
   <meta http - equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>
-    Jaidee Hotel
+    hotel backend
   </title>
 
   <link rel="stylesheet" href="https://www.w3schools.com/w3css / 4 / w3.css " />
@@ -41,7 +41,7 @@
         <a href="#home" onclick="showSection('home')">หน้าหลัก</a>
       </li>
       <li>
-        <a href="#" onclick="showSection('')">ห้องพัก</a>
+        <a href="#room_add_section" onclick="showSection('')">room_add_section</a>
       </li>
 
       <li>
@@ -56,6 +56,7 @@
 
   <!-- section -->
   <main>
+    <%- include('roomaddsection.ejs') %>
     <%- include('homesection.ejs') %>
 
   </main>
