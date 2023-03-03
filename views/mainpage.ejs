@@ -22,10 +22,12 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <script src="https://kit.fontawesome.com/4dd06c2468.js" crossorigin="anonymous"></script>
-  <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+
   <!-- css import -->
   <link rel="stylesheet" href="body.css">
-  <link rel="stylesheet" href="sidebarsection.css">
+  <link rel="stylesheet" href="sidenav.css">
+  <link rel="stylesheet" href="mainpage.css">
+  <link rel="stylesheet" href="createTypesection.css">
   <!-- css import -->
 </head>
 
@@ -55,19 +57,15 @@
 
   <!-- section -->
 
-  <div class="sidenav">
-    <a href="#">Home</a>
-    <a href="#">About Us</a>
-    <a href="#">Services</a>
-    <a href="#">Contact Us</a>
+  <%- include('sidenav.ejs') %>
+
+
+  <div class="main">
+    <%- include('Roomsection.ejs') %>
+    <%- include('Typesection.ejs') %>
+
+
   </div>
-
-
-
-  <main>
-    <%- include('sidebarsection.ejs') %>
-
-  </main>
 </body>
 
 <script>
@@ -81,7 +79,7 @@
       });
       showSection(id)
     } else {
-      showSection('home')
+      showSection('creatType')
     }
   });
 
@@ -93,18 +91,6 @@
     // show the selected section
     document.getElementById(id).style.display = 'block';
   }
-
-  // Get the side navigation menu element
-  var sideNav = document.querySelector('.sidenav');
-
-  // Get the button that toggles the side navigation menu
-  var menuToggle = document.querySelector('#menu-toggle');
-
-  // Add an event listener to the menu toggle button
-  menuToggle.addEventListener('click', function() {
-    // Toggle the "active" class on the side navigation menu
-    sideNav.classList.toggle('active');
-  });
 </script>
 </head>
 
