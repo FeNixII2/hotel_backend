@@ -25,14 +25,13 @@
   <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
   <!-- css import -->
   <link rel="stylesheet" href="body.css">
-  <link rel="stylesheet" href="topnav.css">
-  <link rel="stylesheet" href="allTag.css">
+  <link rel="stylesheet" href="sidebarsection.css">
   <!-- css import -->
 </head>
 
 <body>
 
-  <div class="topnav" id="topnav">
+  <!-- <div class="topnav" id="topnav">
     <div class="topnav-logo">
       <img src="hotel.png">
     </div>
@@ -52,12 +51,21 @@
           <img src="world.png"></a>
       </li>
     </ul>
-  </div>
+  </div> -->
 
   <!-- section -->
+
+  <div class="sidenav">
+    <a href="#">Home</a>
+    <a href="#">About Us</a>
+    <a href="#">Services</a>
+    <a href="#">Contact Us</a>
+  </div>
+
+
+
   <main>
-    <%- include('roomaddsection.ejs') %>
-    <%- include('homesection.ejs') %>
+    <%- include('sidebarsection.ejs') %>
 
   </main>
 </body>
@@ -86,17 +94,17 @@
     document.getElementById(id).style.display = 'block';
   }
 
-  // fix topnav and section is override
-  window.onload = function() {
-    var topnav = document.getElementById("topnav"); // get the topnav element
-    var topnavHeight = topnav.offsetHeight;
-    // get the height of the topnav element
-    // var section = document.querySelector("section"); //get the section element
+  // Get the side navigation menu element
+  var sideNav = document.querySelector('.sidenav');
 
-    document.querySelectorAll('section').forEach(function(element) {
-      element.style.transform = 'translateY(' + topnavHeight + 'px)';
-    }); // assign the topnav height as margin-top to the section
-  }
+  // Get the button that toggles the side navigation menu
+  var menuToggle = document.querySelector('#menu-toggle');
+
+  // Add an event listener to the menu toggle button
+  menuToggle.addEventListener('click', function() {
+    // Toggle the "active" class on the side navigation menu
+    sideNav.classList.toggle('active');
+  });
 </script>
 </head>
 
