@@ -5,10 +5,10 @@
         <input type="text" id="id" readonly="readonly" />
         <br/>
         <br/> ชื่อประเภทห้อง
-        <input type="text" id="roomtype_th" />
+        <input type="text" id="name_th" />
         <br/>
         <br/> ชื่อประเภทห้องภาษาอังกฤษ
-        <input type="text" id="roomtype" />
+        <input type="text" id="name" />
         <br/><br/> ราคา
         <input type="text" id="price" />
         <br/>
@@ -80,7 +80,9 @@
         <div id="imageContainer"></div>
         <div id="fileNamesContainer"></div>
         <br/>
-        <button id="save">บันทึก</button>
+        <button id="edit_save">บันทึก</button>
+        <button id="edit_cancle">ยกเลิก</button>
+
     </center>
 
     <script>
@@ -108,7 +110,7 @@
             }
         });
 
-        document.getElementById('save').onclick = () => {
+        document.getElementById('edit_save').onclick = () => {
             fetch("/get_edit_data", {
                 method: "post",
                 headers: {
@@ -120,6 +122,27 @@
                     id
                 })
             }).then((response) => response.json()).then((body) => {});
+        }
+
+        document.getElementById('edit_cancle').onclick = () => {
+            showSection('Typesection')
+            document.getElementById('id').value = type_info.id
+            document.getElementById('name_th').value = ''
+            document.getElementById('name').value = ''
+
+            document.getElementById('price').value = ''
+            document.getElementById('rm_dct').value = ''
+
+            document.getElementById('ex_bed').checked = false
+            document.getElementById('wifi').checked = false
+            document.getElementById('breakfast').checked = false
+            document.getElementById('air_con').checked = false
+            document.getElementById('tv').checked = false
+            document.getElementById('bath').checked = false
+            document.getElementById('minifridge').checked = false
+            document.getElementById('fitness').checked = false
+            document.getElementById('pool').checked = false
+            document.getElementById('bar').checked = false
         }
     </script>
 </section>

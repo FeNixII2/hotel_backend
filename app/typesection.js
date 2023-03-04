@@ -8,5 +8,7 @@ module.exports = function(app, con) {
         })
     })
 
+    app.post("/update_type_room", (req, res) => {
 
+    })
 }

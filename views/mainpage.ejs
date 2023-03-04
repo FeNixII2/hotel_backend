@@ -2,103 +2,101 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http - equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>
-    hotel backend
-  </title>
+    <meta charset="UTF-8">
+    <meta http="http" -="-" equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        hotel backend
+    </title>
 
-  <!-- import sweetalert -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- import sweetalert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  <!-- import date picker -->
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/th.js"></script>
+    <!-- import date picker -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/th.js"></script>
 
-  <!-- <icon awesome> -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,700,0,0" />
+    <!-- <icon awesome> -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,700,0,0" />
 
-  <script src="https://kit.fontawesome.com/4dd06c2468.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/4dd06c2468.js" crossorigin="anonymous"></script>
 
-  <!-- css import -->
-  <link rel="stylesheet" href="body.css">
-  <link rel="stylesheet" href="sidenav.css">
-  <link rel="stylesheet" href="mainpage.css">
-  <link rel="stylesheet" href="Typesection.css">
-  <!-- css import -->
+    <!-- css import -->
+    <link rel="stylesheet" href="body.css">
+    <link rel="stylesheet" href="sidenav.css">
+    <link rel="stylesheet" href="mainpage.css">
+    <link rel="stylesheet" href="Typesection.css">
+    <!-- css import -->
 </head>
 
 <body>
 
-  <!-- <div class="topnav" id="topnav">
-    <div class="topnav-logo">
-      <img src="hotel.png">
-    </div>
-    <ul class="menu">
-      <li>
-        <a href="#home" onclick="showSection('home')">หน้าหลัก</a>
-      </li>
-      <li>
-        <a href="#room_add_section" onclick="showSection('')">room_add_section</a>
-      </li>
+    <!-- <div class="topnav" id="topnav">
+                                        <div class="topnav-logo">
+                                          <img src="hotel.png">
+                                        </div>
+                                        <ul class="menu">
+                                          <li>
+                                            <a href="#home" onclick="showSection('home')">หน้าหลัก</a>
+                                          </li>
+                                          <li>
+                                            <a href="#room_add_section" onclick="showSection('')">room_add_section</a>
+                                          </li>
+                                    
+                                          <li>
+                                            <a href="#" onclick="showSection('')">จองห้องพัก</a>
+                                          </li>
+                                          <li>
+                                            <a href="#">
+                                              <img src="world.png"></a>
+                                          </li>
+                                        </ul>
+                                      </div> -->
 
-      <li>
-        <a href="#" onclick="showSection('')">จองห้องพัก</a>
-      </li>
-      <li>
-        <a href="#">
-          <img src="world.png"></a>
-      </li>
-    </ul>
-  </div> -->
+    <!-- section -->
 
-  <!-- section -->
-
-  <%- include('sidenav.ejs') %>
-
-
-  <div class="main">
-    <%- include('Roomsection.ejs') %>
+    <%- include('sidenav.ejs') %>
 
 
-    <%- include('Typesection.ejs') %>
-    <%- include('editTypesection.ejs') %>
+        <div class="main">
+            <%- include('Roomsection.ejs') %>
 
 
+                <%- include('Typesection.ejs') %>
+                    <%- include('editTypesection.ejs') %>
 
-  </div>
+
+        </div>
 </body>
 
 <script>
-  // fix show section when you refresh webpage
-  window.addEventListener('load', function() {
-    let hash = location.hash; // get current hash location
-    let id = hash.substring(1); // remove # from location
-    if (id != (null || '' || "")) {
-      document.querySelectorAll('section').forEach(function(element) {
-        element.style.display = 'none';
-      });
-      showSection(id)
-    } else {
-      showSection('Typesection')
-    }
-  });
-
-  // JavaScript function to show a specific section
-  function showSection(id) { // hide all sections
-    document.querySelectorAll('section').forEach(function(element) {
-      element.style.display = 'none';
+    // fix show section when you refresh webpage
+    window.addEventListener('load', function() {
+        let hash = location.hash; // get current hash location
+        let id = hash.substring(1); // remove # from location
+        if (id != (null || '' || "")) {
+            document.querySelectorAll('section').forEach(function(element) {
+                element.style.display = 'none';
+            });
+            showSection(id)
+        } else {
+            showSection('Typesection')
+        }
     });
-    // show the selected section
-    document.getElementById(id).style.display = 'block';
-  }
-  // Listen for the hashchange event
-  window.addEventListener('hashchange', function() {
-    // Reload the page
-    location.reload();
-  });
+
+    // JavaScript function to show a specific section
+    function showSection(id) { // hide all sections
+        document.querySelectorAll('section').forEach(function(element) {
+            element.style.display = 'none';
+        });
+        // show the selected section
+        document.getElementById(id).style.display = 'block';
+    }
+    // Listen for the hashchange event
+    window.addEventListener('hashchange', function() { // Reload the page
+        location.reload();
+    });
 </script>
 </head>
 
