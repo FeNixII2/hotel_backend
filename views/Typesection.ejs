@@ -16,8 +16,8 @@
                     </td>
                     <td>
                         <%= roomstype[i].name_th %>
-                        (
-                        <%= roomstype[i].name %>)</td>
+                            (
+                            <%= roomstype[i].name %>)</td>
                     <td>
                         <%= roomstype[i].price %>
                     </td>
@@ -29,7 +29,7 @@
                         <button onclick="delete_room_type('<%= roomstype[i].id %>')">ลบ</button>
                     </td>
                 </tr>
-            <%}%>
+                <%}%>
         </table>
     </center>
 
@@ -55,14 +55,30 @@
                             "Content-Type": "application/json"
                         },
 
-                        body: JSON.stringify({id})
+                        body: JSON.stringify({
+                            id
+                        })
                     }).then((response) => response.json()).then((body) => {
                         console.log(body);
                         var type_info = body.type_info[0]
                         document.getElementById('id').value = type_info.id
+                        document.getElementById('roomtype_th').value = type_info.name_th
                         document.getElementById('roomtype').value = type_info.name
+
                         document.getElementById('price').value = type_info.price
                         document.getElementById('rm_dct').value = type_info.rm_dct
+
+                        document.getElementById('ex_bed').checked = (type_info.ex_bed === 1)
+                        document.getElementById('wifi').checked = (type_info.wifi === 1)
+                        document.getElementById('breakfast').checked = (type_info.breakfast === 1)
+                        document.getElementById('air_con').checked = (type_info.air_con === 1)
+                        document.getElementById('tv').checked = (type_info.tv === 1)
+                        document.getElementById('bath').checked = (type_info.bath === 1)
+                        document.getElementById('minifridge').checked = (type_info.minifridge === 1)
+                        document.getElementById('fitness').checked = (type_info.fitness === 1)
+                        document.getElementById('pool').checked = (type_info.pool === 1)
+                        document.getElementById('bar').checked = (type_info.bar === 1)
+
                     });
                     showSection('editTypesection')
                 }

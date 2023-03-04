@@ -1,4 +1,4 @@
-module.exports = function (app, con) {
+module.exports = function(app, con) {
 
     app.post('/get_edit_data', (req, res) => {
         var { id } = req.body
@@ -7,5 +7,6 @@ module.exports = function (app, con) {
             res.send({ type_info })
         })
     })
+
 
 }

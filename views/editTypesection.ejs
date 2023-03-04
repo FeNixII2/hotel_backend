@@ -2,15 +2,21 @@
     <center>
         <h1>แก้ไขประเภทห้อง</h1>
         รหัสประเภทห้อง
-        <input type="text" id="id" readonly />
-        <br />
-        <br /> ชื่อประเภทห้อง
+        <input type="text" id="id" readonly="readonly" />
+        <br/>
+        <br/> ชื่อประเภทห้อง
+        <input type="text" id="roomtype_th" />
+        <br/>
+        <br/> ชื่อประเภทห้องภาษาอังกฤษ
         <input type="text" id="roomtype" />
-        <br /><br /> ราคา
+        <br/><br/> ราคา
         <input type="text" id="price" />
-        <br />
-        <br /> คำอธิบายเพิ่มเติม <br />
+        <br/>
+        <br/> คำอธิบายเพิ่มเติม
+        <br/>
+
         <textarea name="rm_dct" id="rm_dct" cols="30" rows="10"></textarea>
+
         <table id="facilities">
             <tr>
                 <td>สิ่งอำนวยความสะดวก</td>
@@ -68,10 +74,13 @@
                 </td>
             </tr>
         </table>
+
         เลือกรูปภาพ
-        <input type="file" id="fileInput" multiple />
+        <input type="file" id="fileInput" multiple="multiple" />
         <div id="imageContainer"></div>
         <div id="fileNamesContainer"></div>
+        <br/>
+        <button id="save">บันทึก</button>
     </center>
 
     <script>
@@ -98,5 +107,19 @@
                 fileNamesContainer.appendChild(fileNameElement);
             }
         });
+
+        document.getElementById('save').onclick = () => {
+            fetch("/get_edit_data", {
+                method: "post",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    id
+                })
+            }).then((response) => response.json()).then((body) => {});
+        }
     </script>
 </section>
