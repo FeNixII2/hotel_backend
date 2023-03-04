@@ -47,37 +47,36 @@
             }).then((result) => {
                 if (result.isConfirmed) {
 
-
                     fetch("/get_edit_data", {
                         method: "post",
                         headers: {
                             Accept: "application/json",
                             "Content-Type": "application/json"
                         },
-
                         body: JSON.stringify({
                             id
                         })
                     }).then((response) => response.json()).then((body) => {
                         console.log(body);
                         var type_info = body.type_info[0]
-                        document.getElementById('id').value = type_info.id
-                        document.getElementById('name_th').value = type_info.name_th
-                        document.getElementById('name').value = type_info.name
+                        document.getElementById('edit_id').value = type_info.id
+                        document.getElementById('edit_name_th').value = type_info.name_th
+                        document.getElementById('edit_name').value = type_info.name
+                        document.getElementById('edit_size').value = type_info.size
+                        document.getElementById('edit_price').value = type_info.price
+                        document.getElementById('edit_rm_dct').value = type_info.rm_dct
 
-                        document.getElementById('price').value = type_info.price
-                        document.getElementById('rm_dct').value = type_info.rm_dct
+                        document.getElementById('edit_ex_bed').checked = (type_info.ex_bed === 1)
+                        document.getElementById('edit_wifi').checked = (type_info.wifi === 1)
+                        document.getElementById('edit_breakfast').checked = (type_info.breakfast === 1)
+                        document.getElementById('edit_air_con').checked = (type_info.air_con === 1)
+                        document.getElementById('edit_tv').checked = (type_info.tv === 1)
+                        document.getElementById('edit_bath').checked = (type_info.bath === 1)
+                        document.getElementById('edit_minifridge').checked = (type_info.minifridge === 1)
+                        document.getElementById('edit_fitness').checked = (type_info.fitness === 1)
+                        document.getElementById('edit_pool').checked = (type_info.pool === 1)
+                        document.getElementById('edit_bar').checked = (type_info.bar === 1)
 
-                        document.getElementById('ex_bed').checked = (type_info.ex_bed === 1)
-                        document.getElementById('wifi').checked = (type_info.wifi === 1)
-                        document.getElementById('breakfast').checked = (type_info.breakfast === 1)
-                        document.getElementById('air_con').checked = (type_info.air_con === 1)
-                        document.getElementById('tv').checked = (type_info.tv === 1)
-                        document.getElementById('bath').checked = (type_info.bath === 1)
-                        document.getElementById('minifridge').checked = (type_info.minifridge === 1)
-                        document.getElementById('fitness').checked = (type_info.fitness === 1)
-                        document.getElementById('pool').checked = (type_info.pool === 1)
-                        document.getElementById('bar').checked = (type_info.bar === 1)
 
                     });
                     showSection('editTypesection')

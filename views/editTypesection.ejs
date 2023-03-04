@@ -2,75 +2,84 @@
     <center>
         <h1>แก้ไขประเภทห้อง</h1>
         รหัสประเภทห้อง
-        <input type="text" id="id" readonly="readonly" />
+        <input type="text" id="edit_id" readonly="readonly" />
         <br/>
         <br/> ชื่อประเภทห้อง
-        <input type="text" id="name_th" />
+        <input type="text" id="edit_name_th" />
         <br/>
         <br/> ชื่อประเภทห้องภาษาอังกฤษ
-        <input type="text" id="name" />
+        <input type="text" id="edit_name" />
         <br/><br/> ราคา
-        <input type="text" id="price" />
+        <input type="text" id="edit_price" />
+        <br/><br/> ขนาดห้อง
+        <input type="text" id="edit_size" />
         <br/>
-        <br/> คำอธิบายเพิ่มเติม
+        <br/>ประเภทเตียง
+        <select name="edit_bed" id="edit_bed">
+            <option value="เตียงเดี่ยว">เตียงเดี่ยว</option>
+            <option value="เตียงคู่">เตียงคู่</option>
+        </select>
+        <br>
+        <br> คำอธิบายเพิ่มเติม
         <br/>
 
-        <textarea name="rm_dct" id="rm_dct" cols="30" rows="10"></textarea>
+        <textarea name="edit_rm_dct" id="edit_rm_dct" cols="30" rows="10"></textarea>
+
 
         <table id="facilities">
             <tr>
                 <td>สิ่งอำนวยความสะดวก</td>
                 <td>
-                    <input type="checkbox" name="ex_bed" id="ex_bed" />
-                    <label for="ex_bed">เตียงเสริม</label>
+                    <input type="checkbox" name="edit_ex_bed" id="edit_ex_bed" />
+                    <label for="edit_ex_bed">เตียงเสริม</label>
                 </td>
                 <td>
-                    <input type="checkbox" name="wifi" id="wifi" />
-                    <label for="wifi">WIFI</label>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <input type="checkbox" name="breakfast" id="breakfast" />
-                    <label for="breakfast">อาหารเช้า</label>
-                </td>
-                <td>
-                    <input type="checkbox" name="air_con" id="air_con" />
-                    <label for="air_con">แอร์</label>
+                    <input type="checkbox" name="edit_wifi" id="edit_wifi" />
+                    <label for="edit_wifi">WIFI</label>
                 </td>
             </tr>
             <tr>
                 <td></td>
                 <td>
-                    <input type="checkbox" name="tv" id="tv" />
-                    <label for="tv">ทีวี</label>
+                    <input type="checkbox" name="edit_breakfast" id="edit_breakfast" />
+                    <label for="edit_breakfast">อาหารเช้า</label>
                 </td>
                 <td>
-                    <input type="checkbox" name="bath" id="bath" />
-                    <label for="bath">อ่างอาบน้ำ</label>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <input type="checkbox" name="minifridge" id="minifridge" />
-                    <label for="minifridge">ตู้เย็น</label>
-                </td>
-                <td>
-                    <input type="checkbox" name="fitness" id="fitness" />
-                    <label for="fitness">Fitness</label>
+                    <input type="checkbox" name="edit_air_con" id="edit_air_con" />
+                    <label for="edit_air_con">แอร์</label>
                 </td>
             </tr>
             <tr>
                 <td></td>
                 <td>
-                    <input type="checkbox" name="pool" id="pool" />
-                    <label for="pool">สระว่ายน้ำ</label>
+                    <input type="checkbox" name="edit_tv" id="edit_tv" />
+                    <label for="edit_tv">ทีวี</label>
                 </td>
                 <td>
-                    <input type="checkbox" name="bar" id="bar" />
-                    <label for="bar">Bar</label>
+                    <input type="checkbox" name="edit_bath" id="edit_bath" />
+                    <label for="edit_bath">อ่างอาบน้ำ</label>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="checkbox" name="edit_minifridge" id="edit_minifridge" />
+                    <label for="edit_minifridge">ตู้เย็น</label>
+                </td>
+                <td>
+                    <input type="checkbox" name="edit_fitness" id="edit_fitness" />
+                    <label for="edit_fitness">Fitness</label>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="checkbox" name="edit_pool" id="edit_pool" />
+                    <label for="edit_pool">สระว่ายน้ำ</label>
+                </td>
+                <td>
+                    <input type="checkbox" name="edit_bar" id="edit_bar" />
+                    <label for="edit_bar">Bar</label>
                 </td>
             </tr>
         </table>
@@ -111,7 +120,26 @@
         });
 
         document.getElementById('edit_save').onclick = () => {
-            fetch("/get_edit_data", {
+            var ex_bed = document.getElementById('edit_ex_bed').checked
+            var wifi = document.getElementById('edit_wifi').checked
+            var breakfast = document.getElementById('edit_breakfast').checked
+            var air_con = document.getElementById('edit_air_con').checked
+            var tv = document.getElementById('edit_tv').checked
+            var bath = document.getElementById('edit_bath').checked
+            var minifridge = document.getElementById('edit_minifridge').checked
+            var fitness = document.getElementById('edit_fitness').checked
+            var pool = document.getElementById('edit_pool').checked
+            var bar = document.getElementById('edit_bar').checked
+
+            var id = document.getElementById('edit_id').value
+            var name_th = document.getElementById('edit_name_th').value
+            var name = document.getElementById('edit_name').value
+            var price = document.getElementById('edit_price').value
+            var size = document.getElementById('edit_size').value
+            var rm_dct = document.getElementById('edit_rm_dct').value
+            var bed = document.getElementById('edit_bed').value
+
+            fetch("/update_type_room", {
                 method: "post",
                 headers: {
                     Accept: "application/json",
@@ -119,30 +147,69 @@
                 },
 
                 body: JSON.stringify({
-                    id
+                    ex_bed,
+                    wifi,
+                    breakfast,
+                    air_con,
+                    tv,
+                    bath,
+                    minifridge,
+                    fitness,
+                    pool,
+                    bar,
+                    id,
+                    name_th,
+                    name,
+                    price,
+                    size,
+                    rm_dct,
+                    bed
                 })
-            }).then((response) => response.json()).then((body) => {});
+            }).then((response) => response.json()).then((body) => {
+                Swal.fire({
+                    title: 'ยืนยันการแก้ไข',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'แก้ไขข้อมูลแล้ว',
+                            showConfirmButton: false,
+                            timer: 1500,
+                            didClose: () => {
+                                location.reload();
+                            }
+                        });
+                    }
+                })
+            });
+
         }
 
         document.getElementById('edit_cancle').onclick = () => {
             showSection('Typesection')
-            document.getElementById('id').value = type_info.id
-            document.getElementById('name_th').value = ''
-            document.getElementById('name').value = ''
+            window.location.hash = "Typesection";
+            document.getElementById('edit_id').value = ''
+            document.getElementById('edit_name_th').value = ''
+            document.getElementById('edit_name').value = ''
 
-            document.getElementById('price').value = ''
-            document.getElementById('rm_dct').value = ''
+            document.getElementById('edit_price').value = ''
+            document.getElementById('edit_rm_dct').value = ''
 
-            document.getElementById('ex_bed').checked = false
-            document.getElementById('wifi').checked = false
-            document.getElementById('breakfast').checked = false
-            document.getElementById('air_con').checked = false
-            document.getElementById('tv').checked = false
-            document.getElementById('bath').checked = false
-            document.getElementById('minifridge').checked = false
-            document.getElementById('fitness').checked = false
-            document.getElementById('pool').checked = false
-            document.getElementById('bar').checked = false
+            document.getElementById('edit_ex_bed').checked = false
+            document.getElementById('edit_wifi').checked = false
+            document.getElementById('edit_breakfast').checked = false
+            document.getElementById('edit_air_con').checked = false
+            document.getElementById('edit_tv').checked = false
+            document.getElementById('edit_bath').checked = false
+            document.getElementById('edit_minifridge').checked = false
+            document.getElementById('edit_fitness').checked = false
+            document.getElementById('edit_pool').checked = false
+            document.getElementById('edit_bar').checked = false
         }
     </script>
 </section>

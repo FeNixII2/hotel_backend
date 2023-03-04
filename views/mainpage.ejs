@@ -32,36 +32,12 @@
 
 <body>
 
-    <!-- <div class="topnav" id="topnav">
-                                        <div class="topnav-logo">
-                                          <img src="hotel.png">
-                                        </div>
-                                        <ul class="menu">
-                                          <li>
-                                            <a href="#home" onclick="showSection('home')">หน้าหลัก</a>
-                                          </li>
-                                          <li>
-                                            <a href="#room_add_section" onclick="showSection('')">room_add_section</a>
-                                          </li>
-                                    
-                                          <li>
-                                            <a href="#" onclick="showSection('')">จองห้องพัก</a>
-                                          </li>
-                                          <li>
-                                            <a href="#">
-                                              <img src="world.png"></a>
-                                          </li>
-                                        </ul>
-                                      </div> -->
-
     <!-- section -->
 
     <%- include('sidenav.ejs') %>
 
-
         <div class="main">
             <%- include('Roomsection.ejs') %>
-
 
                 <%- include('Typesection.ejs') %>
                     <%- include('editTypesection.ejs') %>
@@ -82,6 +58,8 @@
             showSection(id)
         } else {
             showSection('Typesection')
+            window.location.hash = "Typesection";
+
         }
     });
 
@@ -98,6 +76,8 @@
         location.reload();
     });
 </script>
+
+</html>
 </head>
 
 </html>
