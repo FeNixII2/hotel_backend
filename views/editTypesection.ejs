@@ -1,0 +1,102 @@
+<section id="editTypesection">
+    <center>
+        <h1>แก้ไขประเภทห้อง</h1>
+        รหัสประเภทห้อง
+        <input type="text" id="id" readonly />
+        <br />
+        <br /> ชื่อประเภทห้อง
+        <input type="text" id="roomtype" />
+        <br /><br /> ราคา
+        <input type="text" id="price" />
+        <br />
+        <br /> คำอธิบายเพิ่มเติม <br />
+        <textarea name="rm_dct" id="rm_dct" cols="30" rows="10"></textarea>
+        <table id="facilities">
+            <tr>
+                <td>สิ่งอำนวยความสะดวก</td>
+                <td>
+                    <input type="checkbox" name="ex_bed" id="ex_bed" />
+                    <label for="ex_bed">เตียงเสริม</label>
+                </td>
+                <td>
+                    <input type="checkbox" name="wifi" id="wifi" />
+                    <label for="wifi">WIFI</label>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="checkbox" name="breakfast" id="breakfast" />
+                    <label for="breakfast">อาหารเช้า</label>
+                </td>
+                <td>
+                    <input type="checkbox" name="air_con" id="air_con" />
+                    <label for="air_con">แอร์</label>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="checkbox" name="tv" id="tv" />
+                    <label for="tv">ทีวี</label>
+                </td>
+                <td>
+                    <input type="checkbox" name="bath" id="bath" />
+                    <label for="bath">อ่างอาบน้ำ</label>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="checkbox" name="minifridge" id="minifridge" />
+                    <label for="minifridge">ตู้เย็น</label>
+                </td>
+                <td>
+                    <input type="checkbox" name="fitness" id="fitness" />
+                    <label for="fitness">Fitness</label>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="checkbox" name="pool" id="pool" />
+                    <label for="pool">สระว่ายน้ำ</label>
+                </td>
+                <td>
+                    <input type="checkbox" name="bar" id="bar" />
+                    <label for="bar">Bar</label>
+                </td>
+            </tr>
+        </table>
+        เลือกรูปภาพ
+        <input type="file" id="fileInput" multiple />
+        <div id="imageContainer"></div>
+        <div id="fileNamesContainer"></div>
+    </center>
+
+    <script>
+        const fileInput = document.getElementById("fileInput");
+        const imageContainer = document.getElementById("imageContainer");
+        const fileNamesContainer = document.getElementById("fileNamesContainer");
+
+        fileInput.addEventListener("change", (event) => {
+            const files = event.target.files;
+            fileNamesContainer.innerHTML = "";
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const reader = new FileReader();
+                reader.addEventListener("load", (event) => {
+                    const imageUrl = event.target.result;
+                    const imageElement = document.createElement("img");
+                    imageElement.src = imageUrl;
+                    imageContainer.appendChild(imageElement);
+                });
+                reader.readAsDataURL(file);
+
+                const fileNameElement = document.createElement("p");
+                fileNameElement.textContent = file.name;
+                fileNamesContainer.appendChild(fileNameElement);
+            }
+        });
+    </script>
+</section>

@@ -12,7 +12,7 @@ const con = mysql.createConnection({
     user: "root",
     password: "",
     database: "hotel",
-    connectTimeout: 100000,
+    connectTimeout: 10000,
 });
 
 con.connect((err) => {
@@ -60,5 +60,6 @@ app.get("/", (req, res) => {
     })
 
 });
+
 //js file include
-// require("./app/empty.js")(app, con);
+require("./app/typesection.js")(app, con);

@@ -1,40 +1,40 @@
 <section id="Typesection">
-  <center>
-    <h1>จัดการประเภทห้อง</h1>
-    <table id="type_info">
-      <tr>
-        <th>ลำดับที่</th>
-        <th>ประเภทห้อง</th>
-        <th>ราคา</th>
-        <th>ดูข้อมูลเพิ่มเติม</th>
-        <th>ลบ-แก้ไข</th>
-      </tr>
-      <%for(i=0;i<roomstype.length;i++){%>
-      <tr>
-        <td>
-          <%= i %>
-        </td>
-        <td>
-          <%= roomstype[i].name_th %>
-          (
-          <%= roomstype[i].name %>)</td>
-        <td>
-          <%= roomstype[i].price %>
-        </td>
-        <td><button onclick="moreinfo('<%= roomstype[i].id %>')">เพิ่มเติม</button></td>
-        <td colspan="2">
-          <button onclick="edit_room_type('<%= roomstype[i].id %>')">แก้ไข</button>
-          <button onclick="delete_room_type('<%= roomstype[i].id %>')">ลบ</button>
-        </td>
-      </tr>
-      <%}%>
+    <center>
+        <h1>จัดการประเภทห้อง</h1>
+        <table id="type_info">
+            <tr>
+                <th>ลำดับที่</th>
+                <th>ประเภทห้อง</th>
+                <th>ราคา</th>
+                <th>ดูข้อมูลเพิ่มเติม</th>
+                <th>ลบ-แก้ไข</th>
+            </tr>
+            <%for(i=0;i<roomstype.length;i++){%>
+                <tr>
+                    <td>
+                        <%= i %>
+                    </td>
+                    <td>
+                        <%= roomstype[i].name_th %>
+                        (
+                        <%= roomstype[i].name %>)</td>
+                    <td>
+                        <%= roomstype[i].price %>
+                    </td>
+                    <td>
+                        <button onclick="moreinfo('<%= roomstype[i].id %>')">เพิ่มเติม</button>
+                    </td>
+                    <td colspan="2">
+                        <button onclick="edit_room_type('<%= roomstype[i].id %>')">แก้ไข</button>
+                        <button onclick="delete_room_type('<%= roomstype[i].id %>')">ลบ</button>
+                    </td>
+                </tr>
+            <%}%>
         </table>
     </center>
 
     <script>
-        function moreinfo(id) {
-
-        }
+        function moreinfo(id) {}
 
         function edit_room_type(id) {
             Swal.fire({
@@ -47,11 +47,28 @@
             }).then((result) => {
                 if (result.isConfirmed) {
 
+
+                    fetch("/get_edit_data", {
+                        method: "post",
+                        headers: {
+                            Accept: "application/json",
+                            "Content-Type": "application/json"
+                        },
+
+                        body: JSON.stringify({id})
+                    }).then((response) => response.json()).then((body) => {
+                        console.log(body);
+                        var type_info = body.type_info[0]
+                        document.getElementById('id').value = type_info.id
+                        document.getElementById('roomtype').value = type_info.name
+                        document.getElementById('price').value = type_info.price
+                        document.getElementById('rm_dct').value = type_info.rm_dct
+                    });
+                    showSection('editTypesection')
                 }
             })
         }
     </script>
-
 
 
 </section>
