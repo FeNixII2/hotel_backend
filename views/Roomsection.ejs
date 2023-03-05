@@ -74,6 +74,19 @@
         function edit_rooms(id) {
             showSection('editRoomsection')
         }
+
+        function add_rooms() {
+            var roomstype = <%- roomstype %>
+            select = document.getElementById('type_room');
+            for (i = 0; i < roomstype.length; i ++) {
+                var opt = document.createElement('option');
+                opt.value = roomstype[i].id;
+                opt.innerHTML = roomstype[i].name_th + '(' + roomstype[i].name + ')'
+                select.appendChild(opt);
+            }
+
+            showSection('addRoomsection')
+        }
     </script>
 
 </section>
