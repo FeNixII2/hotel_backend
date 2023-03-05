@@ -5,3 +5,9 @@
 #type_info {
     background-color: lightgray;
 }
+
+.my-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}

@@ -33,6 +33,8 @@
         </table>
     </center>
 
+    <button class="my-button" onclick="add_type()">เพิ่มประเภทห้อง</button>
+
     <script>
         function moreinfo(id) {}
 
@@ -82,6 +84,57 @@
                     showSection('editTypesection')
                 }
             })
+        }
+
+        function delete_room_type(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch("/delete_roomtype", {
+                        method: "post",
+                        headers: {
+                            Accept: "application/json",
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            id
+                        })
+                    }).then((response) => response.json()).then((body) => {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'ลบข้อมูลแล้ว',
+                            showConfirmButton: false,
+                            timer: 1500,
+                            didClose: () => {
+                                location.reload();
+                            }
+                        });
+                    });
+
+                }
+            })
+        }
+
+        function add_type() {
+            Swal.fire({
+                title: 'Are you sure?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    showSection('addTypesection')
+                }
+            })
+
         }
     </script>
 

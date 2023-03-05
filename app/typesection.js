@@ -14,4 +14,21 @@ module.exports = function(app, con) {
             res.send({})
         })
     })
+
+    app.post("/delete_roomtype", (req, res) => {
+        var { id } = req.body
+        con.query("delete from roomstype where id = ?", [id], (err, result) => {
+            res.send({})
+        })
+    })
+
+    app.post('/add_roomtype', (req, res) => {
+        var { add_name_th, add_name, add_price, add_size, add_bed, add_rm_dct, add_ex_bed, add_wifi, add_breakfast, add_air_con, add_tv, add_bath, add_minifridge, add_fitness, add_pool, add_bar } = req.body
+
+        con.query("insert into roomstype values ('',?,?,?,?,0,?,?,?,?,?,?,?,?,?,?,?,?)", [add_name, add_name_th, add_size, add_price, add_ex_bed, add_wifi, add_breakfast, add_air_con, add_tv, add_bath, add_minifridge, add_fitness, add_pool, add_bar, add_rm_dct, add_bed], (err, result) => {
+            if (err) throw err
+            res.send({})
+        })
+
+    })
 }
