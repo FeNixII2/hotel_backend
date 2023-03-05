@@ -16,8 +16,8 @@
                     </td>
                     <td>
                         <%= roomstype[i].name_th %>
-                            (
-                            <%= roomstype[i].name %>)</td>
+                        (
+                        <%= roomstype[i].name %>)</td>
                     <td>
                         <%= roomstype[i].price %>
                     </td>
@@ -29,11 +29,11 @@
                         <button onclick="delete_room_type('<%= roomstype[i].id %>')">ลบ</button>
                     </td>
                 </tr>
-                <%}%>
+            <%}%>
         </table>
     </center>
 
-    <button class="my-button" onclick="add_type()">เพิ่มประเภทห้อง</button>
+    <button class="add-button" onclick="add_type()">เพิ่มประเภทห้อง</button>
 
     <script>
         function moreinfo(id) {}
@@ -55,9 +55,7 @@
                             Accept: "application/json",
                             "Content-Type": "application/json"
                         },
-                        body: JSON.stringify({
-                            id
-                        })
+                        body: JSON.stringify({id})
                     }).then((response) => response.json()).then((body) => {
                         console.log(body);
                         var type_info = body.type_info[0]
@@ -102,9 +100,7 @@
                             Accept: "application/json",
                             "Content-Type": "application/json"
                         },
-                        body: JSON.stringify({
-                            id
-                        })
+                        body: JSON.stringify({id})
                     }).then((response) => response.json()).then((body) => {
                         Swal.fire({
                             icon: 'success',

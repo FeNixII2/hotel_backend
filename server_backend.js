@@ -51,7 +51,7 @@ app.listen(port, () => {
 
 app.get("/", (req, res) => {
 
-    con.query("select * from rooms", (err, rooms) => {
+    con.query("SELECT rooms.*, roomstype.name,roomstype.name_th FROM rooms INNER JOIN roomstype ON rooms.id_typeroom = roomstype.id", (err, rooms) => {
         con.query("select * from reserv", (err, reserv) => {
             con.query("select * from roomstype", (err, roomstype) => {
                 res.render("mainpage.ejs", { rooms, reserv, roomstype });
@@ -63,3 +63,4 @@ app.get("/", (req, res) => {
 
 //js file include
 require("./app/typesection.js")(app, con);
+require("./app/roomsection.js")(app, con);
