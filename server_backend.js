@@ -4,7 +4,6 @@ const session = require("express-session");
 const mysql = require("mysql");
 const moment = require('moment');
 
-
 // database connect setup
 const con = mysql.createConnection({
     host: "25.19.244.218",
@@ -51,16 +50,10 @@ app.listen(port, () => {
 
 app.get("/", (req, res) => {
 
-    con.query("SELECT rooms.*, roomstype.name,roomstype.name_th FROM rooms INNER JOIN roomstype ON rooms.id_typeroom = roomstype.id", (err, rooms) => {
-        con.query("select * from reserv", (err, reserv) => {
-            con.query("select * from roomstype", (err, roomstype) => {
-                res.render("mainpage.ejs", { rooms, reserv, roomstype });
-            })
-        })
-    })
+    res.render("mainpage.ejs", {});
+
 
 });
 
 //js file include
-require("./app/typesection.js")(app, con);
-require("./app/roomsection.js")(app, con);
+// require("./app/typesection.js")(app, con);
