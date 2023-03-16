@@ -1,7 +1,43 @@
 <section id="room_confirmation">
-
+    <%- include('room_confirmation_modal.ejs')%>
     <center>
         <h1>ยืนยันห้องพัก</h1>
-    </center>
+        <div class="table-responsive" style="max-height: 100vh;">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">ลำดับที่</th>
+                        <th scope="col">ห้องที่</th>
+                        <th scope="col">วันเข้าพัก</th>
+                        <th scope="col">วันเช็คเอาท์</th>
+                        <th scope="col">เพิ่มเติม</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(i=0;i<unconfirm_room.length;i++){ %>
 
+                        <tr>
+                            <th scope="row ">
+                                <%= i %>
+                            </th>
+                            <td>
+                                <%= unconfirm_room[i].num_room %>
+                            </td>
+                            <td>
+                                <%= unconfirm_room[i].checkin %>
+                            </td>
+                            <td>
+                                <%= unconfirm_room[i].checkout %>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    เพิ่มเติม
+                                </button>
+                            </td>
+                        </tr>
+                    <%}%>
+                </tbody>
+            </table>
+        </div>
+    </center>
 </section>
