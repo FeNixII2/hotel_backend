@@ -1,7 +1,13 @@
 <section id="room_confirmation">
     <%- include('room_confirmation_modal.ejs')%>
     <center>
-        <h1>ยืนยันห้องพัก</h1>
+        <br>
+        <div class="container">
+            <div class="border p-3 rounded-3 shadow" style="max-width: 800px;">
+                <h1 class="text-center">ยืนยันห้องพัก</h1>
+            </div>
+        </div>
+        <br><br>
         <div class="table-responsive" style="max-height: 100vh;">
             <table class="table table-striped table-hover">
                 <thead>
@@ -30,7 +36,7 @@
                                 <%= unconfirm_room[i].checkout %>
                             </td>
                             <td>
-                                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <button type="button" class="btn btn-secondary" onclick="openModal(<%= unconfirm_room[i].id %>)">
                                     เพิ่มเติม
                                 </button>
                             </td>
@@ -40,4 +46,14 @@
             </table>
         </div>
     </center>
+
+    <script>
+        function openModal(id) {
+            alert(id)
+            var modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+            modal.show();
+        }
+    </script>
+
+
 </section>
