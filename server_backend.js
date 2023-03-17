@@ -49,11 +49,11 @@ app.listen(port, () => {
 
 
 app.get("/", (req, res) => {
-    con.query("select * from reserved where status = '0'", (err, unconfirm_room) => {
+    con.query("SELECT * FROM reserved,customer,payment WHERE reserved.cus_id = customer.id AND reserved.payment = payment.id AND reserved.status = '0'", (err, unconfirm_room) => {
         if (err) throw err
         con.query("SELECT * FROM payment_log,customer WHERE payment_log.cus_id = customer.id", (err, payment) => {
             if (err) throw err
-            con.query("select * from reserved", (err, all_room) => {
+            con.query("SELECT * FROM reserved,customer,payment WHERE reserved.cus_id = customer.id AND reserved.payment = payment.id", (err, all_room) => {
                 res.render("mainpage.ejs", { unconfirm_room, payment, all_room });
             })
         })
