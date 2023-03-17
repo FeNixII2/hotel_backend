@@ -25,25 +25,28 @@
                         <tr>
                             <td scope="row ">
                                 <%= i %>
-                            </td>
-                            <td>
-                                <%= all_room[i].num_room %>
-                            </td>
-                            <td>
-                                <%= all_room[i].checkin %>
-                            </td>
-                            <td>
-                                <%= all_room[i].checkout %>
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-secondary" onclick="openModal(<%= all_room[i].id %>)">
-                                                เพิ่มเติม
-                                            </button>
-                            </td>
-                        </tr>
-                        <%}%>
-                </tbody>
-            </table>
-        </div>
-    </center>
-</section>
+                                </td>
+                                <td>
+                                    <%= all_room[i].num_room %>
+                                    </td>
+                                    <td>
+                                        <%= all_room[i].checkin %>
+                                        </td>
+                                        <td>
+                                            <%= all_room[i].checkout %>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn
+                                                    btn-secondary"
+                                                    onclick="openModal(<%=
+                                                    all_room[i].id %>)">
+                                                    เพิ่มเติม
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <%}%>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </center>
+                        </section>

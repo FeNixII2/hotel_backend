@@ -1,118 +1,130 @@
 <section id="check_rooms_cleaning">
-    <div class="container">
 
 
-        <a class="btn btn-primary" href="#" role="button"
-            id="back-roomcleaning">กลับ</a>
-        รายการทำความสะอาด
+    <% console.log(list_roomcleaning+" AAAAAAAAAAAA"); %>
+
+        <div class="container">
+
+
+            <a class="btn btn-primary" href="#rooms_cleaning"
+                onclick="showSection('rooms_cleaning')" role="button"
+                id="back-roomcleaning">กลับ</a>
+            รายการทำความสะอาด
 
 
 
 
-        <div class="rows">
+            <div class="rows">
 
-            <div class=" col-sm-12 col-md-6 col-lg-4">
-                <div class="a">
-                    <input class="form-check-input" type="checkbox" value=""
-                        id="item1">
-                    <label class="form-check-label" for="item1">
-                        เปลี่ยนผ้าปูที่นอน
-                    </label>
+                <div class=" col-sm-12 col-md-6 col-lg-4">
+                    <div class="a">
+                        <input class="form-check-input" type="checkbox" value=""
+                            id="item1">
+                        <label class="form-check-label" for="item1">
+                            เปลี่ยนผ้าปูที่นอน
+                        </label>
+                    </div>
                 </div>
+
+                <div class=" col-sm-12 col-md-6 col-lg-4">
+                    <div class="a">
+                        <input class="form-check-input" type="checkbox" value=""
+                            id="item2">
+                        <label class="form-check-label" for="item2">
+                            เตรียมเตียง
+                        </label>
+                    </div>
+                </div>
+
+
+                <div class=" col-sm-12 col-md-6 col-lg-4">
+                    <div class="a">
+                        <input class="form-check-input" type="checkbox" value=""
+                            id="item3">
+                        <label class="form-check-label" for="item3">
+                            ล้างถังขยะ
+                        </label>
+                    </div>
+                </div>
+                <div class=" col-sm-12 col-md-6 col-lg-4">
+                    <div class="a">
+                        <input class="form-check-input" type="checkbox" value=""
+                            id="item4">
+                        <label class="form-check-label" for="item4">
+                            ปัดฝุ่น
+                        </label>
+                    </div>
+                </div>
+
+                <div class=" col-sm-12 col-md-6 col-lg-4">
+                    <div class="a">
+                        <input class="form-check-input" type="checkbox" value=""
+                            id="item5">
+                        <label class="form-check-label" for="item5">
+                            เช็ดและทำความสะอาดฟอนิเจอร์
+                        </label>
+                    </div>
+                </div>
+
+                <div class=" col-sm-12 col-md-6 col-lg-4">
+                    <div class="a">
+                        <input class="form-check-input" type="checkbox" value=""
+                            id="item6">
+                        <label class="form-check-label" for="item6">
+                            ทำความสะอาดห้องน้ำ
+                        </label>
+                    </div>
+                </div>
+
+                <div class=" col-sm-12 col-md-6 col-lg-4">
+                    <div class="a">
+                        <input class="form-check-input" type="checkbox" value=""
+                            id="item7">
+                        <label class="form-check-label" for="item7">
+                            เติมรายการที่ขาด
+                        </label>
+                    </div>
+                </div>
+
+                <div class=" col-sm-12 col-md-6 col-lg-4">
+                    <div class="a">
+                        <input class="form-check-input" type="checkbox" value=""
+                            id="item8">
+                        <label class="form-check-label" for="item8">
+                            กวาดพื้น ดูดฝุ่น ถูพื้น
+                        </label>
+                    </div>
+                </div>
+
+                <div class=" col-sm-12 col-md-6 col-lg-4">
+                    <div class="a">
+                        <input class="form-check-input" type="checkbox" value=""
+                            id="item9">
+                        <label class="form-check-label" for="item9">
+                            ตรวจเช็คอีกครั้ง
+                        </label>
+                    </div>
+                </div>
+
+
+
+
+
             </div>
 
-            <div class=" col-sm-12 col-md-6 col-lg-4">
-                <div class="a">
-                    <input class="form-check-input" type="checkbox" value=""
-                        id="item2">
-                    <label class="form-check-label" for="item2">
-                        เตรียมเตียง
-                    </label>
-                </div>
-            </div>
 
 
-            <div class=" col-sm-12 col-md-6 col-lg-4">
-                <div class="a">
-                    <input class="form-check-input" type="checkbox" value=""
-                        id="item3">
-                    <label class="form-check-label" for="item3">
-                        ล้างถังขยะ
-                    </label>
-                </div>
-            </div>
-            <div class=" col-sm-12 col-md-6 col-lg-4">
-                <div class="a">
-                    <input class="form-check-input" type="checkbox" value=""
-                        id="item4">
-                    <label class="form-check-label" for="item4">
-                        ปัดฝุ่น
-                    </label>
-                </div>
-            </div>
-
-            <div class=" col-sm-12 col-md-6 col-lg-4">
-                <div class="a">
-                    <input class="form-check-input" type="checkbox" value=""
-                        id="item5">
-                    <label class="form-check-label" for="item5">
-                        เช็ดและทำความสะอาดฟอนิเจอร์
-                    </label>
-                </div>
-            </div>
-
-            <div class=" col-sm-12 col-md-6 col-lg-4">
-                <div class="a">
-                    <input class="form-check-input" type="checkbox" value=""
-                        id="item6">
-                    <label class="form-check-label" for="item6">
-                        ทำความสะอาดห้องน้ำ
-                    </label>
-                </div>
-            </div>
-
-            <div class=" col-sm-12 col-md-6 col-lg-4">
-                <div class="a">
-                    <input class="form-check-input" type="checkbox" value=""
-                        id="item7">
-                    <label class="form-check-label" for="item7">
-                        เติมรายการที่ขาด
-                    </label>
-                </div>
-            </div>
-
-            <div class=" col-sm-12 col-md-6 col-lg-4">
-                <div class="a">
-                    <input class="form-check-input" type="checkbox" value=""
-                        id="item8">
-                    <label class="form-check-label" for="item8">
-                        กวาดพื้น ดูดฝุ่น ถูพื้น
-                    </label>
-                </div>
-            </div>
-
-            <div class=" col-sm-12 col-md-6 col-lg-4">
-                <div class="a">
-                    <input class="form-check-input" type="checkbox" value=""
-                        id="item9">
-                    <label class="form-check-label" for="item9">
-                        ตรวจเช็คอีกครั้ง
-                    </label>
-                </div>
-            </div>
+            <button type="submit" class="btn btn-primary btn-lg"
+                id="check-items-button">ยืนยัน</button>
 
 
 
 
 
-        </div>
 
+        </section>
 
-        <button type="button" class="btn btn-primary btn-lg"
-            id="check-items-button">ยืนยัน</button>
-    </section>
-
-    <script>
+        <script>
         const checkItemsButton = document.getElementById('check-items-button');
         checkItemsButton.addEventListener('click', () => {
         const checkboxes = document.querySelectorAll('.form-check-input');
@@ -125,6 +137,19 @@
         }
         if (allChecked) {
           alert('ทำความสะอาดเสร็จแล้ว!');
+            fetch("/roomstype", {
+            method: "post",
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+            //ตัวแปร
+            })
+            })
+            .then(response => response.json())
+            .then((body) => {});
+
         } else {
           alert('มีบางรายการที่คุณยังไม่ได้ทำ');
         }

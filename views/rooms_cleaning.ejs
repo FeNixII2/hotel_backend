@@ -1,28 +1,33 @@
 <section id="rooms_cleaning">
-    <div class="container">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>NumRoom</th>
-                    <th>Floor</th>
-                    <th>Status</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <% list_roomcleaning.forEach(function(room) { %>
+    <% console.log(list_roomcleaning); %>
+
+        <div class="container">
+            <table class="table table-striped table-hover text-center">
+                <thead>
                     <tr>
-                        <td><%= room.num_room %></td>
-                            <td><%= room.floor %></td>
-                                <td><%= room.status %></td>
-                                    <td><button class="btn btn-primary">View
-                                            Details</button></td>
-                                </tr>
-                                <% }); %>
-                                </tbody>
-                            </table>
-                        </div>
+                        <th>NumRoom</th>
+                        <th>Floor</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% list_roomcleaning.forEach(function(room) { %>
+                        <tr>
+                            <td><%= room.num_room %></td>
+                                <td><%= room.floor %></td>
+                                    <td><%= room.status %></td>
+                                        <td><a class="btn btn-primary"
+                                                href="#check_rooms_cleaning"
+                                                onclick="showSection('check_rooms_cleaning')">จัดการ</ฟ></td>
+                                    </tr>
+                                    <% }); %>
+                                    </tbody>
+                                </table>
+                            </div>
 
 
 
-                    </section>
+
+
+                        </section>
