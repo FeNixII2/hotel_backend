@@ -48,13 +48,23 @@ app.listen(port, () => {
 });
 
 app.get("/", (req, res) => {
-    con.query("select * from reserved where status = '0'", (err, unconfirm_room) => {
-        if (err) throw err
-        con.query("select * from payment_log", (err, payment) => {
-            if (err) throw err
-            res.render("mainpage.ejs", { unconfirm_room, payment });
-        })
-    })
+  con.query(
+    "select * from reserved where status = '0'",
+    (err, unconfirm_room) => {
+      if (err) throw err;
+      con.query("select * from payment_log", (err, payment) => {
+        if (err) throw err;
+        con.query("SELECT * FROM rooms", (error, list_roomcleaning, fields) => {
+          if (error) throw error;
+          res.render("mainpage.ejs", {
+            unconfirm_room,
+            payment,
+            list_roomcleaning,
+          });
+        });
+      });
+    }
+  );
 });
 
 //js file include
