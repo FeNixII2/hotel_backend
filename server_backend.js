@@ -53,7 +53,9 @@ app.get("/", (req, res) => {
         if (err) throw err
         con.query("SELECT * FROM payment_log,customer WHERE payment_log.cus_id = customer.id", (err, payment) => {
             if (err) throw err
-            res.render("mainpage.ejs", { unconfirm_room, payment });
+            con.query("select * from reserved", (err, all_room) => {
+                res.render("mainpage.ejs", { unconfirm_room, payment, all_room });
+            })
         })
     })
 });

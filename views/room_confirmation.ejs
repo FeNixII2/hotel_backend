@@ -24,9 +24,9 @@
                         <% for(i=0;i<unconfirm_room.length;i++){ %>
 
                             <tr>
-                                <th scope="row ">
+                                <td scope="row ">
                                     <%= i %>
-                                </th>
+                                </td>
                                 <td>
                                     <%= unconfirm_room[i].num_room %>
                                 </td>
@@ -48,14 +48,10 @@
             </div>
         </center>
 
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                    Launch static backdrop modal
-                </button>
-
         <script>
             function openModal(id) {
-                var modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+
+                var modal = new bootstrap.Modal(document.getElementById('confirmModal'));
                 modal.show();
             }
         </script>
