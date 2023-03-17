@@ -107,9 +107,9 @@
 
                 <%- include('room_confirmation.ejs') %>
                     <%- include('payment_log.ejs')%>
+                        <%- include('history.ejs')%>
+                            <%- include('rooms_cleaning.ejs')%>
 
-                        <%- include('rooms_cleaning.ejs')%>
-                            <%- include('check_rooms_cleaning.ejs')%>
                             </main>
                         </div>
                     </body>
@@ -130,28 +130,40 @@
             }
         });
 
-        // JavaScript function to show a specific section
-        function showSection(id) { // hide all sections
-            document.querySelectorAll('section').forEach(function (element) {
-                element.style.display = 'none';
-            });
-            // show the selected section
-            document.getElementById(id).style.display = 'block';
-        }
-
-        const menuItems = document.querySelectorAll('.nav-link');
-
-        menuItems.forEach(item => {
-            item.addEventListener('click', () => {
-                menuItems.forEach(item => {
-                    item.classList.remove('active');
-                });
-                item.classList.add('active');
-            });
+    // JavaScript function to show a specific section
+    function showSection(id) { // hide all sections
+        document.querySelectorAll('section').forEach(function(element) {
+            element.style.display = 'none';
         });
+        // show the selected section
+        document.getElementById(id).style.display = 'block';
+    }
 
-        // window.addEventListener("hashchange", function() { // Reload the page
-        //     location.reload();
-        // })
-    </script>
-                </html>
+    const menuItems = document.querySelectorAll('.nav-link');
+
+    menuItems.forEach(item => {
+        item.addEventListener('click', () => {
+            menuItems.forEach(item => {
+                item.classList.remove('active');
+            });
+            item.classList.add('active');
+        });
+    });
+
+    // window.addEventListener("hashchange", function() { // Reload the page
+    //     location.reload();
+    // })
+
+    function openModal(id) {
+
+        var modal = new bootstrap.Modal(document.getElementById('confirmModal'));
+        modal.show();
+    }
+
+    function openModal(id, modal_id) {
+        var modal = new bootstrap.Modal(document.getElementById(modal_id));
+        modal.show();
+    }
+</script>
+
+</html>

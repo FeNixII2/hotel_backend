@@ -1,0 +1,8 @@
+.modal-content-fit {
+    width: fit-content;
+    max-width: 100%;
+}
+
+#confirmModal td {
+    border-bottom: none;
+}
