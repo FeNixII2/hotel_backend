@@ -48,33 +48,19 @@ app.listen(port, () => {
 });
 
 app.get("/", (req, res) => {
-  con.query(
-    "SELECT * FROM reserved,customer,payment WHERE reserved.cus_id = customer.id AND reserved.payment = payment.id AND reserved.status = '0'",
-    (err, unconfirm_room) => {
-      if (err) throw err;
-      con.query(
-        "SELECT * FROM payment_log,customer WHERE payment_log.cus_id = customer.id",
-        (err, payment) => {
-          if (err) throw err;
-          con.query(
-            "SELECT * FROM reserved,customer,payment WHERE reserved.cus_id = customer.id AND reserved.payment = payment.id",
-            (err, all_room) => {
-              if (err) throw err;
-              con.query("SELECT * FROM rooms", (err, list_roomcleaning) => {
+    con.query("SELECT * FROM reserved,customer,payment WHERE reserved.cus_id = customer.id AND reserved.payment = payment.id AND reserved.status = '0'", (err, unconfirm_room) => {
+        if (err) throw err;
+        con.query("SELECT * FROM payment_log,customer WHERE payment_log.cus_id = customer.id", (err, payment) => {
+            if (err) throw err;
+            con.query("SELECT * FROM reserved,customer,payment WHERE reserved.cus_id = customer.id AND reserved.payment = payment.id", (err, all_room) => {
                 if (err) throw err;
-                res.render("mainpage.ejs", {
-                  unconfirm_room,
-                  payment,
-                  all_room,
-                  list_roomcleaning,
+                con.query("SELECT * FROM rooms", (err, list_roomcleaning) => {
+                    if (err) throw err;
+                    res.render("mainpage.ejs", { unconfirm_room, payment, all_room, list_roomcleaning, });
                 });
-              });
-            }
-          );
-        }
-      );
-    }
-  );
+            });
+        });
+    });
 });
 
 //js file include
