@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const session = require("express-session");
 const mysql = require("mysql");
-const moment = require('moment');
+const moment = require("moment");
 
 // database connect setup
 const con = mysql.createConnection({
@@ -46,7 +46,6 @@ var port = 8888;
 app.listen(port, () => {
     console.log("web start listening on port  : " + port);
 });
-
 
 app.get("/", (req, res) => {
     con.query("SELECT * FROM reserved,customer,payment WHERE reserved.cus_id = customer.id AND reserved.payment = payment.id AND reserved.status = '0'", (err, unconfirm_room) => {
