@@ -1,134 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 
-        <link rel="stylesheet" href="main.css">
-        <link rel="stylesheet" href="c-check_rooms_cleaning.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="c-check_rooms_cleaning.css">
 
-        
-        <script src="bootstrap.bundle.min.js"></script>
 
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script
-            src="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"></script>
-        <link rel="stylesheet" href="room_confirmation_modal.css">
+    <script src="bootstrap.bundle.min.js"></script>
 
-    </head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"></script>
+    <link rel="stylesheet" href="room_confirmation_modal.css">
 
-    <body>
-        <div class="d-flex">
-            <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark"
-                id="sidenav" style="width: 280px;height: 100vh;">
-                <a href="/" class="d-flex align-items-center mb-3 mb-md-0
-                    me-md-auto text-white text-decoration-none">
-                    <svg class="bi me-2" width="40" height="32">
+</head>
+
+<body>
+    <div class="d-flex">
+        <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" id="sidenav" style="width: 280px;height: 100vh;">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0
+                                                                                            me-md-auto text-white text-decoration-none">
+                <svg class="bi me-2" width="40" height="32">
                         <use xlink:href="#bootstrap"></use>
                     </svg>
-                    <span class="fs-4">ส่วนพนักงาน</span>
-                </a>
-                <hr>
-                <ul class="nav nav-pills flex-column mb-auto">
-                    <li class="nav-item">
-                        <a href="#room_confirmation"
-                            onclick="showSection('room_confirmation')"
-                            class="nav-link active text-white"
-                            aria-current="page">
-                            <svg class="bi me-2" width="16" height="16">
+                <span class="fs-4">ส่วนพนักงาน</span>
+            </a>
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a href="#room_confirmation" onclick="showSection('room_confirmation')" class="nav-link active text-white" aria-current="page">
+                        <svg class="bi me-2" width="16" height="16">
                                 <use xlink:href="#"></use>
-                            </svg>
-                            ยืนยันสถานะห้อง
-                        </a>
+                            </svg> ยืนยันสถานะห้อง
+                    </a>
+                </li>
+                <li>
+                    <a href="#payment_log" onclick="showSection('payment_log')" class="
+                                                                                                                            nav-link text-white ">
+                        <svg class="bi me-2 " width="16 " height="16 ">
+                                <use xlink:href="# "></use>
+                            </svg> รายการชำระเงิน
+                    </a>
+                </li>
+                <li>
+                    <a href="#history" class="nav-link text-white ">
+                        <svg class="bi me-2 " width="16 " height="16 ">
+                                <use xlink:href="# "></use>
+                            </svg> ประวัติ
+                    </a>
+                </li>
+                <li>
+                    <a href="#rooms_cleaning" onclick="showSection('rooms_cleaning')" class="nav-link text-white ">
+                        <svg class="bi me-2 " width="16 " height="16 ">
+                                <use xlink:href="# "></use>
+                            </svg> รายงานแม่บ้าน
+                    </a>
+                </li>
+            </ul>
+            <hr>
+            <div class="dropdown ">
+                <a href="# " class="d-flex align-items-center text-white
+                                                                                                text-decoration-none dropdown-toggle " id="dropdownUser1
+                                                                                                " data-bs-toggle="dropdown " aria-expanded="false ">
+                    <img src="https://github.com/mdo.png " alt=" " width="32
+                                                                                                                " height="32 " class="rounded-circle me-2 ">
+                    <strong>mdo</strong>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark text-small
+                                                                                                shadow " aria-labelledby="dropdownUser1 ">
+                    <li>
+                        <a class="dropdown-item " href="# ">New project...</a>
                     </li>
                     <li>
-                        <a href="#payment_log"
-                            onclick="showSection('payment_log')" class="
-                            nav-link text-white ">
-                            <svg class="bi me-2 " width="16 " height="16 ">
-                                <use xlink:href="# "></use>
-                            </svg>
-                            รายการชำระเงิน
-                        </a>
+                        <a class="dropdown-item " href="# ">Settings</a>
                     </li>
                     <li>
-                        <a href="#history" class="nav-link text-white ">
-                            <svg class="bi me-2 " width="16 " height="16 ">
-                                <use xlink:href="# "></use>
-                            </svg>
-                            ประวัติ
-                        </a>
+                        <a class="dropdown-item " href="# ">Profile</a>
                     </li>
                     <li>
-                        <a href="#rooms_cleaning"
-                            onclick="showSection('rooms_cleaning')"
-                            class="nav-link text-white ">
-                            <svg class="bi me-2 " width="16 " height="16 ">
-                                <use xlink:href="# "></use>
-                            </svg>
-                            รายงานแม่บ้าน
-                        </a>
+                        <hr class="dropdown-divider ">
+                    </li>
+                    <li>
+                        <a class="dropdown-item " href="# ">Sign out</a>
                     </li>
                 </ul>
-                <hr>
-                <div class="dropdown ">
-                    <a href="# " class="d-flex align-items-center text-white
-                        text-decoration-none dropdown-toggle " id="dropdownUser1
-                        " data-bs-toggle="dropdown " aria-expanded="false ">
-                        <img src="https://github.com/mdo.png " alt=" " width="32
-                            " height="32 " class="rounded-circle me-2 ">
-                        <strong>mdo</strong>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-dark text-small
-                        shadow " aria-labelledby="dropdownUser1 ">
-                        <li>
-                            <a class="dropdown-item " href="# ">New project...</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item " href="# ">Settings</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item " href="# ">Profile</a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider ">
-                        </li>
-                        <li>
-                            <a class="dropdown-item " href="# ">Sign out</a>
-                        </li>
-                    </ul>
-                </div>
             </div>
-            <main style="width: 100%;">
+        </div>
+        <main style="width: 100%;">
 
-                <%- include('room_confirmation.ejs') %>
-                    <%- include('payment_log.ejs')%>
-                        <%- include('history.ejs')%>
-                            <%- include('rooms_cleaning.ejs')%>
+            <%- include('room_confirmation.ejs') %>
+                <%- include('payment_log.ejs')%>
+                    <%- include('history.ejs')%>
+                        <%- include('rooms_cleaning.ejs')%>
 
-                            </main>
-                        </div>
-                    </body>
+        </main>
+    </div>
+</body>
 
 
-                    <script>
-        // fix show section when you refresh webpage
-        window.addEventListener('load', function () {
-            let hash = location.hash; // get current hash location
-            let id = hash.substring(1); // remove # from location
-            if (id != (null || '' || "")) {
-                document.querySelectorAll('section').forEach(function (element) {
-                    element.style.display = 'none';
-                });
-                showSection(id)
-            } else {
-                showSection('room_confirmation')
-            }
-        });
+<script>
+    // fix show section when you refresh webpage
+    window.addEventListener('load', function() {
+        let hash = location.hash; // get current hash location
+        let id = hash.substring(1); // remove # from location
+        if (id != (null || '' || "")) {
+            document.querySelectorAll('section').forEach(function(element) {
+                element.style.display = 'none';
+            });
+            showSection(id)
+        } else {
+            showSection('room_confirmation')
+        }
+    });
 
     // JavaScript function to show a specific section
     function showSection(id) { // hide all sections
