@@ -1,0 +1,15 @@
+.a {
+  margin: 0.5rem;
+  background-color: gray;
+  padding: 0.5rem;
+  display: flex;
+}
+
+.rows {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.form-check-label {
+  padding-left: 1rem;
+}
