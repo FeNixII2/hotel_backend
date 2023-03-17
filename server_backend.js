@@ -51,7 +51,7 @@ app.listen(port, () => {
 app.get("/", (req, res) => {
     con.query("select * from reserved where status = '0'", (err, unconfirm_room) => {
         if (err) throw err
-        con.query("select * from payment_log", (err, payment) => {
+        con.query("SELECT * FROM payment_log,customer WHERE payment_log.cus_id = customer.id", (err, payment) => {
             if (err) throw err
             res.render("mainpage.ejs", { unconfirm_room, payment });
         })
