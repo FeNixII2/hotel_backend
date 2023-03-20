@@ -42,26 +42,15 @@ app.use(
 );
 
 //port setting to run on the server
-var port = 8888;
+var port = 9999;
 app.listen(port, () => {
     console.log("web start listening on port  : " + port);
 });
 
 app.get("/", (req, res) => {
-    con.query("SELECT * FROM reserved,customer,payment WHERE reserved.cus_id = customer.id AND reserved.payment = payment.id AND reserved.status = '0'", (err, unconfirm_room) => {
-        if (err) throw err;
-        con.query("SELECT * FROM payment_log,customer WHERE payment_log.cus_id = customer.id", (err, payment) => {
-            if (err) throw err;
-            con.query("SELECT * FROM reserved,customer,payment WHERE reserved.cus_id = customer.id AND reserved.payment = payment.id", (err, all_room) => {
-                if (err) throw err;
-                con.query("SELECT * FROM rooms", (err, list_roomcleaning) => {
-                    if (err) throw err;
-                    res.render("mainpage.ejs", { unconfirm_room, payment, all_room, list_roomcleaning, });
-                });
-            });
-        });
-    });
+    res.render("index.ejs");
 });
 
 //js file include
-// require("./app/typesection.js")(app, con);
+require("./app/roomconfirmation.js")(app, con);
+require("./app/payment_history.js")(app, con);

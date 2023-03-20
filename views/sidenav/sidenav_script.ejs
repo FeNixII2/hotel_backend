@@ -1,0 +1,22 @@
+<script>
+    const menuItems = document.querySelectorAll('.nav-link');
+
+    menuItems.forEach(item => {
+        item.addEventListener('click', () => {
+            menuItems.forEach(item => {
+                item.classList.remove('active');
+            });
+            item.classList.add('active');
+        });
+    });
+
+    function confirmRoom(id) {
+        fetch(id, {
+            method: 'POST'
+        }).then(res => res.text()).then(html => {
+            document.open();
+            document.write(html);
+            document.close();
+        });
+    }
+</script>

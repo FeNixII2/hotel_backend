@@ -1,0 +1,102 @@
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-content-fit">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">ข้อมูลเพิ่มเติม</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h4>ข้อมูลลูกค้า</h4>
+                <div class="table-responsive">
+                    <table class="table">
+                        <tr>
+                            <td class="align-middle">
+                                <label for="con_cus_id">รหัสลูกค้า</label>
+                            </td>
+                            <td class="align-middle">
+                                <input type="text" name="con_cus_id" id="con_cus_id" readonly>
+                            </td>
+                            <td class="align-middle">
+                                <label for="con_f_name">ชื่อ-นามสกุล</label>
+                            </td>
+                            <td class="align-middle">
+                                <input type="text" name="con_f_name" id="con_f_name" readonly>
+                            </td>
+                            <td class="align-middle">
+                                <label for="con_card_num">เลขบัตรประชาชน</label>
+                            </td>
+                            <td class="align-middle">
+                                <input type="text" name="con_card_num" id="con_card_num" readonly>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="align-middle">
+                                <label for="con_p_num">เบอร์โทรติดต่อ</label>
+                            </td>
+                            <td class="align-middle">
+                                <input type="text" name="con_p_num" id="con_p_num" readonly>
+                            </td>
+                            <td class="align-middle">
+                                <label for="con_email">Email</label>
+                            </td>
+                            <td class="align-middle">
+                                <input type="text" name="con_email" id="con_email" readonly>
+                            </td>
+                        </tr>
+                    </table>
+                    <h4>ข้อมูลการจอง</h4>
+                    <table class="table" id="confirm_data_table">
+                        <tr>
+                            <td class="align-middle">
+                                <label for="con_reserv_id">รหัสการจอง</label>
+                            </td>
+                            <td class="align-middle">
+                                <input type="text" name="con_reserv_id" id="con_reserv_id" readonly>
+                            </td>
+                            <td class="align-middle">
+                                <label for="con_room_number">เลขห้อง</label>
+                            </td>
+                            <td class="align-middle">
+                                <input type="text" name="con_room_number" id="con_room_number" readonly>
+                            </td>
+                            <td class="align-middle">
+                                <label for="con_room_type">ประเภทห้อง</label>
+                            </td>
+                            <td class="align-middle">
+                                <input type="text" name="con_room_type" id="con_room_type" readonly>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="align-middle">
+                                <label for="con_check_in">วันเข้าพัก</label>
+                            </td>
+                            <td class="align-middle">
+                                <input type="text" name="con_check_in" id="con_check_in" readonly>
+                            </td>
+                            <td class="align-middle">
+                                <label for="con_check_out">วันออก</label>
+                            </td>
+                            <td class="align-middle">
+                                <input type="text" name="con_check_out" id="con_check_out" readonly>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="form-floating">
+                        เพิ่มเติม
+                        <br>
+                        <textarea class="form-control" placeholder="Enter your
+                                                                                                                                                                                                                    message here" id="con_more_info" rows="30"
+                            readonly></textarea>
+                        <label for="message"></label>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+                <button type="button" class="btn btn-primary" id="room_confirm_btn">ยืนยันการจอง</button>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('roomconfirmation_modal_script.ejs') %>

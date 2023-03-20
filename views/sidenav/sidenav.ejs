@@ -1,0 +1,42 @@
+<div class="d-flex">
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" id="sidenav" style="width: 280px;height: 100vh;">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+            <svg class="bi me-2" width="40" height="32">
+                <use xlink:href="#bootstrap"></use>
+            </svg>
+            <span class="fs-4">ส่วนพนักงาน</span>
+        </a>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item">
+                <a href="" onclick="confirmRoom('/indexroomconfirmation')" class="nav-link text-white" aria-current="page">
+                    <svg class="bi me-2" width="16" height="16">
+                        <use xlink:href="#"></use>
+                    </svg> ยืนยันสถานะห้อง
+                </a>
+            </li>
+            <li>
+                <a href="" onclick="confirmRoom('/payment_history')" class="nav-link text-white ">
+                    <svg class="bi me-2 " width="16 " height="16 ">
+                        <use xlink:href="# "></use>
+                    </svg> รายการชำระเงิน
+                </a>
+            </li>
+            <li>
+                <a href="#history" onclick="showSection('history')" class="nav-link text-white ">
+                    <svg class="bi me-2 " width="16 " height="16 ">
+                        <use xlink:href="# "></use>
+                    </svg> ประวัติ
+                </a>
+            </li>
+            <li>
+                <a href="#rooms_cleaning" onclick="showSection('rooms_cleaning')" class="nav-link text-white ">
+                    <svg class="bi me-2 " width="16 " height="16 ">
+                        <use xlink:href="# "></use>
+                    </svg> รายงานแม่บ้าน
+                </a>
+            </li>
+        </ul>
+        <hr>
+    </div>
+    <main style="width: 100%;">
