@@ -37,30 +37,39 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% for(i=0;i<unconfirm_room.length;i++){ %>
+                        <% if (unconfirm_room.length===0) { %>
                             <tr>
-                                <td scope="row ">
-                                    <%= i %>
-                                </td>
-                                <td>
-                                    <%= unconfirm_room[i].num_room %>
-                                </td>
-                                <td>
-                                    <%= unconfirm_room[i].checkin %>
-                                </td>
-                                <td>
-                                    <%= unconfirm_room[i].checkout %>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-secondary" onclick="openModal('confirmModal'),show_confirm_modal_data('<%= JSON.stringify(unconfirm_room[i]) %>')">
-                                        เพิ่มเติม
-                                    </button>
+                                <td colspan="5">
+                                    <h2>ยังไม่มีการจองห้องพัก</h2>
                                 </td>
                             </tr>
-                            <%}%>
+                            <% } else { %>
+                                <% for (var i=0; i < unconfirm_room.length; i++) { %>
+                                    <tr>
+                                        <td scope="row">
+                                            <%= i %>
+                                        </td>
+                                        <td>
+                                            <%= unconfirm_room[i].num_room %>
+                                        </td>
+                                        <td>
+                                            <%= unconfirm_room[i].checkin %>
+                                        </td>
+                                        <td>
+                                            <%= unconfirm_room[i].checkout %>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-secondary" onclick="openModal('confirmModal'),show_confirm_modal_data('<%= JSON.stringify(unconfirm_room[i]) %>')">
+                                                เพิ่มเติม
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                                        <% } %>
                     </tbody>
                 </table>
             </div>
+
         </center>
 
         <%- include('./sidenav/sidenav_close.ejs')%>
