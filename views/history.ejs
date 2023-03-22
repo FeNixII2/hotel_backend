@@ -9,6 +9,7 @@
 </head>
 <link rel="stylesheet" href="main.css">
 <script src="bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="/modal_css/modal.css">
 
 <body>
     <%- include('./sidenav/sidenav.ejs') %>
@@ -50,7 +51,7 @@
                                     <%= history[i].checkout %>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-secondary" onclick="openModal('history_more_info'),show_confirm_modal_data('<%= JSON.stringify(history[i]) %>')">
+                                    <button type="button" class="btn btn-secondary" onclick="openModal('history_more_info'),show_his_more_info('<%= JSON.stringify(history[i]) %>')">
                                         เพิ่มเติม
                                     </button>
                                 </td>
@@ -63,7 +64,7 @@
 
         <%- include('./sidenav/sidenav_close.ejs') %>
             <%- include('./sidenav/sidenav_script.ejs') %>
-                <%- include('./modal/modal_script.ejs')%>
+                <%- include('./modal/main_modal.ejs')%>
 </body>
 
 </html>
