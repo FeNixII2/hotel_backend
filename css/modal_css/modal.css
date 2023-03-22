@@ -3,6 +3,6 @@
     max-width: 100%;
 }
 
-#confirmModal td {
+.modal-table td {
     border-bottom: none;
 }

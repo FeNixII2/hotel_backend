@@ -5,4 +5,13 @@ module.exports = function (app, con) {
             res.render('roomconfirmation', { unconfirm_room })
         });
     })
+
+    app.post('/confirmroom', (req, res) => {
+        var { id } = req.body
+        console.log(id);
+        con.query("update reserved set status = '1' where id = ?", [id], (err, result) => {
+            if (err) throw err
+            res.send({})
+        })
+    })
 }

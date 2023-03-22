@@ -17,18 +17,48 @@
     function confirmRoom() {
         // show SweetAlert confirmation dialog
         Swal.fire({
-            title: 'Are you sure?',
-            text: 'You won\'t be able to revert this!',
+            title: 'ต้องการยืนยันการเข้าพักหรือไม่',
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'No, cancel!',
+            confirmButtonText: 'ยืนยัน',
+            cancelButtonText: 'ยกเลิก',
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33'
         }).then((result) => {
             if (result.isConfirmed) {
-                var id = document.getElementById('con_reserv_id').innerHTML
-                alert(id)
+                var id = document.getElementById('con_reserv_id').value
+                fetch('/confirmroom', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        id
+                    })
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        Swal.fire({
+                            title: 'Success!',
+                            text: 'ยืนยันการจองแล้ว',
+                            icon: 'success',
+                            timer: 1000,
+                            timerProgressBar: true,
+                            showConfirmButton: false
+                        }).then(() => {
+                            changepage('/indexroomconfirmation')
+                        });
+
+
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
             }
         })
 
