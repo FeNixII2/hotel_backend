@@ -54,3 +54,4 @@ app.get("/", (req, res) => {
 //js file include
 require("./app/roomconfirmation.js")(app, con);
 require("./app/payment_history.js")(app, con);
+require("./app/history.js")(app, con);

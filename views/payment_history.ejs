@@ -18,7 +18,7 @@
             <br>
             <div class="container">
                 <div class="border p-3 rounded-3 shadow" style="max-width: 800px;">
-                    <h1 class="text-center">ประวัติการจองห้องทั้งหมด</h1>
+                    <h1 class="text-center">ประวัติการชำระเงิน</h1>
                 </div>
             </div>
             <br>
@@ -28,31 +28,43 @@
                     <thead>
                         <tr>
                             <th scope="col">ลำดับที่</th>
-                            <th scope="col">ห้องที่</th>
-                            <th scope="col">วันเข้าพัก</th>
-                            <th scope="col">วันเช็คเอาท์</th>
-                            <th scope="col">เพิ่มเติม</th>
+                            <th scope="col">รหัส</th>
+                            <th scope="col">ข้อมูล</th>
+                            <th scope="col">รหัสลูกค้า</th>
+                            <th scope="col">ชื่อ-นามสกุล</th>
+                            <th scope="col">รหัสบัตรประชาชน</th>
+                            <th scope="col">เบอร์โทร</th>
+                            <th scope="col">email</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <% for(i=0;i<history.length;i++){ %>
+                        <% for(i=0;i<payment.length;i++){ %>
+
                             <tr>
                                 <td scope="row ">
                                     <%= i %>
                                 </td>
                                 <td>
-                                    <%= history[i].num_room %>
+                                    <%= payment[i].id%>
                                 </td>
                                 <td>
-                                    <%= history[i].checkin %>
+                                    <%= payment[i].detail %>
                                 </td>
                                 <td>
-                                    <%= history[i].checkout %>
+                                    <%= payment[i].cus_id %>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-secondary" onclick="openModal('history_more_info'),show_confirm_modal_data('<%= JSON.stringify(history[i]) %>')">
-                                        เพิ่มเติม
-                                    </button>
+                                    <%= payment[i].f_name %>
+                                        <%= payment[i].l_name %>
+                                </td>
+                                <td>
+                                    <%= payment[i].card_num %>
+                                </td>
+                                <td>
+                                    <%= payment[i].p_num %>
+                                </td>
+                                <td>
+                                    <%= payment[i].email %>
                                 </td>
                             </tr>
                             <%}%>
@@ -63,7 +75,6 @@
 
         <%- include('./sidenav/sidenav_close.ejs') %>
             <%- include('./sidenav/sidenav_script.ejs') %>
-                <%- include('./modal/modal_script.ejs')%>
 </body>
 
 </html>
