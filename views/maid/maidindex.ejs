@@ -52,7 +52,9 @@
                                         ยังไม่ได้ทำความสะอาด
                                         <%}else if(room[i].status==1){%>
                                             กำลังทำความสะอาด
-                                            <%}%>
+                                            <%}else if(room[i].status==2){%>
+                                                ทำความสะอาดเรียบร้อยแล้ว
+                                                <%}%>
                                 </td>
                                 <td>
                                     <button class="btn btn-primary" onclick="cleaningmodal('<%= room[i].id %>')">เริ่มทำความสะอาด</button>
@@ -80,78 +82,151 @@
                 } else if (statusCell.innerText.trim() === 'กำลังทำความสะอาด') {
                     // Set the background color to yellow
                     row.style.backgroundColor = 'lightyellow';
+                } else if (statusCell.innerText.trim() === 'ทำความสะอาดเรียบร้อยแล้ว') {
+                    row.style.backgroundColor = '#77DD77';
                 }
             });
         </script>
 
-        <%- include('../maid/sidenav/sidenav_close.ejs') %>
-            <%- include('../maid/sidenav/sidenav_script.ejs') %>
-                <%- include('../maid/modal/cleaning_modal.ejs') %>
+        <div class="modal fade " id="todo_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="todo_modal_Label">รายการทำความสะอาดห้องพัก</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="checkbox-container"></div>
+                        <button onclick="done_cleaning()" id="done_cleaning_but" class="btn btn-primary">ทำความสะอาดเสร็จแล้ว</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-</body>
 
-<script>
-    function cleaningmodal(id) {
-        Swal.fire({
-            title: 'ต้องการเริ่มทำความสะอาดห้องนี้หรือไม่',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            cancelButtonText: 'ยกเลิก',
-            confirmButtonText: 'ใช่ เริ่มทำความสะอาดเลย'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                fetch("/get_todo_data", {
-                    method: "post",
-                    headers: {
-                        Accept: "application/json",
-                        "Content-Type": "application/json"
-                    },
+        <script>
+            function cleaningmodal(id) {
+                Swal.fire({
+                    title: 'ต้องการเริ่มทำความสะอาดห้องนี้หรือไม่',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: 'ยกเลิก',
+                    confirmButtonText: 'ใช่ เริ่มทำความสะอาดเลย'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        fetch("/get_todo_data", {
+                            method: "post",
+                            headers: {
+                                Accept: "application/json",
+                                "Content-Type": "application/json"
+                            },
 
-                    body: JSON.stringify({
-                        id
-                    })
-                }).then((response) => response.json()).then((body) => {
-                    var checklist = body.checklist
-                    const container = document.getElementById('checkbox-container');
-                    container.innerHTML = '';
+                            body: JSON.stringify({
+                                id
+                            })
+                        }).then((response) => response.json()).then((body) => {
+                            var checklist = body.checklist
+                            const container = document.getElementById('checkbox-container');
+                            container.innerHTML = '';
 
-                    for (let i = 0; i < checklist.length; i++) {
-                        // Create the checkbox element
-                        const checkbox = document.createElement('input');
-                        checkbox.type = 'checkbox';
-                        checkbox.value = checklist[i].id;
-                        checkbox.id = `checklist` + [i];
+                            for (let i = 0; i < checklist.length; i++) {
+                                // Create the checkbox element
+                                const checkbox = document.createElement('input');
+                                checkbox.type = 'checkbox';
+                                checkbox.value = checklist[i].id;
+                                checkbox.id = `checklist` + [i];
 
-                        // Create the label element
-                        const label = document.createElement('label');
-                        label.setAttribute('for', `checklist` + [i]);
-                        label.textContent = checklist[i].todo;
+                                // Create the label element
+                                const label = document.createElement('label');
+                                label.setAttribute('for', `checklist` + [i]);
+                                label.textContent = checklist[i].todo;
 
-                        // Create a div element to hold the checkbox and label
-                        const checkboxDiv = document.createElement('div');
-                        checkboxDiv.classList.add('form-check');
-                        checkboxDiv.appendChild(checkbox);
-                        checkboxDiv.appendChild(label);
+                                // Create a div element to hold the checkbox and label
+                                const checkboxDiv = document.createElement('div');
+                                checkboxDiv.classList.add('form-check');
+                                checkboxDiv.appendChild(checkbox);
+                                checkboxDiv.appendChild(label);
 
-                        // Add the div to the container
-                        container.appendChild(checkboxDiv);
+                                // Add the div to the container
+                                container.appendChild(checkboxDiv);
+                            }
+                            // Get a reference to the Bootstrap modal element
+                            const modalElement = document.getElementById('todo_modal');
+
+                            // Create a new Modal instance using the modal element
+                            const modalInstance = new bootstrap.Modal(modalElement);
+
+                            // define button value equal id
+                            document.getElementById('done_cleaning_but').value = id
+
+                            // Show the modal
+                            modalInstance.show();
+
+                        })
                     }
-                    // Get a reference to the Bootstrap modal element
-                    const modalElement = document.getElementById('todo_modal');
-
-                    // Create a new Modal instance using the modal element
-                    const modalInstance = new bootstrap.Modal(modalElement);
-
-                    // Show the modal
-                    modalInstance.show();
-
                 })
             }
-        })
-    }
-</script>
 
+            function done_cleaning() {
+
+
+                const container = document.getElementById('checkbox-container');
+                const checkboxes = container.querySelectorAll('input[type="checkbox"]');
+                let isChecked = true;
+                checkboxes.forEach((checkbox) => {
+                    if (!checkbox.checked) {
+                        isChecked = false;
+                    }
+                });
+
+                if (!isChecked) {
+                    Swal.fire({
+                        title: 'กรุณาทำความสะอาดให้ครบตามรายการด้วย',
+                    });
+                } else if (isChecked) {
+                    Swal.fire({
+                        title: 'ยืนยันการทำความสะอาดห้อง ?',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        cancelButtonText: 'ยกเลิก',
+                        confirmButtonText: 'ทำความสะอาดเรียบร้อยแล้ว'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            var id = document.getElementById('done_cleaning_but').value
+                            fetch("/done_cleaning", {
+                                method: "post",
+                                headers: {
+                                    Accept: "application/json",
+                                    "Content-Type": "application/json"
+                                },
+
+                                body: JSON.stringify({
+                                    id
+                                })
+                            }).then((response) => response.json()).then((body) => {
+                                Swal.fire({
+                                    position: 'top',
+                                    icon: 'success',
+                                    title: 'บันทึกข้อมูลเรียบร้อยแล้ว',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }).then(() => {
+                                    changepage('/maidindex');
+                                });
+                            })
+                        }
+                    })
+                }
+            }
+        </script>
+
+        <%- include('../maid/sidenav/sidenav_close.ejs') %>
+            <%- include('../maid/sidenav/sidenav_script.ejs') %>
+
+</body>
 
 </html>

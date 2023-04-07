@@ -1,4 +1,4 @@
-module.exports = function (app, con) {
+module.exports = function(app, con) {
     app.post('/maidindex', (req, res) => {
         con.query("select * from rooms where status !=3", (err, room) => {
             if (err) throw err
@@ -15,5 +15,11 @@ module.exports = function (app, con) {
             })
         })
     })
-
+    app.post('/done_cleaning', (req, res) => {
+        var { id } = req.body
+        con.query("update rooms set status = 2 where id = ?", [id], (err, result) => {
+            if (err) throw err
+            res.send({})
+        })
+    })
 }
