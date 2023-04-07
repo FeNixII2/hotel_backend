@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แม่บ้าน</title>
+</head>
+<link rel="stylesheet" href="main.css">
+<script src="bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.all.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css" />
+<link rel="stylesheet" href="/maid/maid_modal_css/maid_modal.css">
+
+<body>
+    <%- include('../maid/sidenav/sidenav.ejs') %>
+
+        <!-- your code here -->
+        <center>
+            <br>
+            <div class="container">
+                <div class="border p-3 rounded-3 shadow" style="max-width: 800px;">
+                    <h1 class="text-center">ข้อมูลทำความสะอาดห้อง</h1>
+                </div>
+            </div>
+            <br>
+            <br>
+
+            <div class="table-responsive " style="max-height: 100vh;">
+                <table class="table table-striped table-hover text-center">
+                    <thead>
+                        <tr>
+                            <th scope="col">ลำดับที่</th>
+                            <th scope="col">ห้องที่</th>
+                            <th scope="col">สถานะ</th>
+                            <th scope="col">เริ่มทำความสะอาด</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for(i=0;i<room.length;i++){ %>
+
+                            <tr>
+                                <td scope="row ">
+                                    <%= i %>
+                                </td>
+                                <td>
+                                    <%= room[i].num_room %>
+                                </td>
+                                <td id="status">
+                                    <%if(room[i].status==0){%>
+                                        ยังไม่ได้ทำความสะอาด
+                                        <%}else if(room[i].status==1){%>
+                                            กำลังทำความสะอาด
+                                            <%}%>
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary" onclick="cleaningmodal('<%= room[i].id %>')">เริ่มทำความสะอาด</button>
+                                </td>
+                            </tr>
+                            <%}%>
+                    </tbody>
+                </table>
+            </div>
+        </center>
+        <script>
+            // Get all the table rows
+            var rows = document.querySelectorAll('table tbody tr');
+
+            // Loop through the rows
+            rows.forEach((row) => {
+                // Get the status cell in the row
+                var statusCell = row.querySelector('#status');
+
+                // Check the value of the status
+                if (statusCell.innerText.trim() === 'ยังไม่ได้ทำความสะอาด') {
+                    // Set the background color to red
+                    statusCell.style.backgroundColor = 'red';
+                    statusCell.style.color = '#fff';
+                } else if (statusCell.innerText.trim() === 'กำลังทำความสะอาด') {
+                    // Set the background color to yellow
+                    statusCell.style.backgroundColor = 'yellow';
+                }
+            });
+        </script>
+
+        <%- include('../maid/sidenav/sidenav_close.ejs') %>
+            <%- include('../maid/sidenav/sidenav_script.ejs') %>
+                <%- include('../maid/modal/cleaning_modal.ejs') %>
+
+</body>
+
+<script>
+    function cleaningmodal(id) {
+        Swal.fire({
+            title: 'ต้องการเริ่มทำความสะอาดห้องนี้หรือไม่',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'ยกเลิก',
+            confirmButtonText: 'ใช่ เริ่มทำความสะอาดเลย'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch("/get_todo_data", {
+                    method: "post",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        id
+                    })
+                }).then((response) => response.json()).then((body) => {
+                    var checklist = body.checklist
+                    const container = document.getElementById('checkbox-container');
+                    container.innerHTML = '';
+
+                    for (let i = 0; i < checklist.length; i++) {
+                        // Create the checkbox element
+                        const checkbox = document.createElement('input');
+                        checkbox.type = 'checkbox';
+                        checkbox.value = checklist[i].id;
+                        checkbox.id = `checklist` + [i];
+
+                        // Create the label element
+                        const label = document.createElement('label');
+                        label.setAttribute('for', `checklist` + [i]);
+                        label.textContent = checklist[i].todo;
+
+                        // Create a div element to hold the checkbox and label
+                        const checkboxDiv = document.createElement('div');
+                        checkboxDiv.classList.add('form-check');
+                        checkboxDiv.appendChild(checkbox);
+                        checkboxDiv.appendChild(label);
+
+                        // Add the div to the container
+                        container.appendChild(checkboxDiv);
+                    }
+                    // Get a reference to the Bootstrap modal element
+                    const modalElement = document.getElementById('todo_modal');
+
+                    // Create a new Modal instance using the modal element
+                    const modalInstance = new bootstrap.Modal(modalElement);
+
+                    // Show the modal
+                    modalInstance.show();
+
+                })
+            }
+        })
+    }
+</script>
+
+
+</html>
