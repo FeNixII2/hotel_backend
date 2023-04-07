@@ -96,12 +96,7 @@
                                     <td class="align-middle">
                                         <input type="text" name="con_f_name" id="con_f_name" readonly>
                                     </td>
-                                    <td class="align-middle">
-                                        <label for="con_card_num">เลขบัตรประชาชน</label>
-                                    </td>
-                                    <td class="align-middle">
-                                        <input type="text" name="con_card_num" id="con_card_num" readonly>
-                                    </td>
+
                                 </tr>
                                 <tr>
                                     <td class="align-middle">
@@ -178,7 +173,6 @@
                 var data = JSON.parse(data);
                 document.getElementById("con_cus_id").value = data.id
                 document.getElementById("con_f_name").value = data.f_name + " " + data.l_name
-                document.getElementById("con_card_num").value = data.card_num
                 document.getElementById("con_p_num").value = data.p_num
                 document.getElementById("con_email").value = data.email
                 document.getElementById("con_reserv_id").value = data.reserv_id
