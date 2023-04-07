@@ -56,3 +56,4 @@ require("./app/roomconfirmation.js")(app, con);
 require("./app/payment_history.js")(app, con);
 require("./app/history.js")(app, con);
 require("./app/chambermaid.js")(app, con);
+require("./app/checkout.js")(app, con);

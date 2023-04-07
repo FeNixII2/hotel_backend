@@ -72,10 +72,176 @@
 
         </center>
 
+        <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-content-fit">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="exampleModalLabel">ข้อมูลเพิ่มเติม</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h4>ข้อมูลลูกค้า</h4>
+                        <div class="table-responsive">
+                            <table class="table modal-table">
+                                <tr>
+                                    <td class="align-middle">
+                                        <label for="con_cus_id">รหัสลูกค้า</label>
+                                    </td>
+                                    <td class="align-middle">
+                                        <input type="text" name="con_cus_id" id="con_cus_id" readonly>
+                                    </td>
+                                    <td class="align-middle">
+                                        <label for="con_f_name">ชื่อ-นามสกุล</label>
+                                    </td>
+                                    <td class="align-middle">
+                                        <input type="text" name="con_f_name" id="con_f_name" readonly>
+                                    </td>
+                                    <td class="align-middle">
+                                        <label for="con_card_num">เลขบัตรประชาชน</label>
+                                    </td>
+                                    <td class="align-middle">
+                                        <input type="text" name="con_card_num" id="con_card_num" readonly>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle">
+                                        <label for="con_p_num">เบอร์โทรติดต่อ</label>
+                                    </td>
+                                    <td class="align-middle">
+                                        <input type="text" name="con_p_num" id="con_p_num" readonly>
+                                    </td>
+                                    <td class="align-middle">
+                                        <label for="con_email">Email</label>
+                                    </td>
+                                    <td class="align-middle">
+                                        <input type="text" name="con_email" id="con_email" readonly>
+                                    </td>
+                                </tr>
+                            </table>
+                            <h4>ข้อมูลการจอง</h4>
+                            <table class="table modal-table" id="confirm_data_table">
+                                <tr>
+                                    <td class="align-middle">
+                                        <label for="con_reserv_id">รหัสการจอง</label>
+                                    </td>
+                                    <td class="align-middle">
+                                        <input type="text" name="con_reserv_id" id="con_reserv_id" readonly>
+                                    </td>
+                                    <td class="align-middle">
+                                        <label for="con_room_number">เลขห้อง</label>
+                                    </td>
+                                    <td class="align-middle">
+                                        <input type="text" name="con_room_number" id="con_room_number" readonly>
+                                    </td>
+                                    <td class="align-middle">
+                                        <label for="con_room_type">ประเภทห้อง</label>
+                                    </td>
+                                    <td class="align-middle">
+                                        <input type="text" name="con_room_type" id="con_room_type" readonly>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle">
+                                        <label for="con_check_in">วันเข้าพัก</label>
+                                    </td>
+                                    <td class="align-middle">
+                                        <input type="text" name="con_check_in" id="con_check_in" readonly>
+                                    </td>
+                                    <td class="align-middle">
+                                        <label for="con_check_out">วันออก</label>
+                                    </td>
+                                    <td class="align-middle">
+                                        <input type="text" name="con_check_out" id="con_check_out" readonly>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="form-floating">
+                                เพิ่มเติม
+                                <br>
+                                <textarea class="form-control" placeholder="Enter your message here" id="con_more_info" rows="30" readonly></textarea>
+                                <label for="message"></label>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+                        <button type="button" class="btn btn-primary" id="room_confirm_btn" onclick="confirmRoom()">ยืนยันการจอง</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <script>
+            function show_confirm_modal_data(data) {
+                var data = JSON.parse(data);
+                document.getElementById("con_cus_id").value = data.id
+                document.getElementById("con_f_name").value = data.f_name + " " + data.l_name
+                document.getElementById("con_card_num").value = data.card_num
+                document.getElementById("con_p_num").value = data.p_num
+                document.getElementById("con_email").value = data.email
+                document.getElementById("con_reserv_id").value = data.reserv_id
+                document.getElementById("con_room_number").value = data.num_room
+                document.getElementById("con_room_type").value = data.name_th + " " + data.bed
+                document.getElementById("con_check_in").value = data.checkin
+                document.getElementById("con_check_out").value = data.checkout
+                document.getElementById("con_more_info").value = data.more_info
+            }
+
+            function confirmRoom() {
+                // show SweetAlert confirmation dialog
+                Swal.fire({
+                    title: 'ต้องการยืนยันการเข้าพักหรือไม่',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'ยืนยัน',
+                    cancelButtonText: 'ยกเลิก',
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var id = document.getElementById('con_reserv_id').value
+                        fetch('/confirmroom', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    id
+                                })
+                            })
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error(`HTTP error! status: ${response.status}`);
+                                }
+                                return response.json();
+                            })
+                            .then(data => {
+                                Swal.fire({
+                                    title: 'Success!',
+                                    text: 'ยืนยันการจองแล้ว',
+                                    icon: 'success',
+                                    timer: 1000,
+                                    timerProgressBar: true,
+                                    showConfirmButton: false
+                                }).then(() => {
+                                    changepage('/indexroomconfirmation')
+                                });
+
+
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
+                    }
+                })
+
+
+            }
+        </script>
+
         <%- include('./sidenav/sidenav_close.ejs')%>
-
-
-
             <%- include('./sidenav/sidenav_script.ejs')%>
                 <%- include('./modal/main_modal.ejs')%>
 

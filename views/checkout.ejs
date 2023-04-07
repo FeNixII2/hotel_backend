@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>empty</title>
+</head>
+<link rel="stylesheet" href="main.css">
+<script src="bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.all.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css" />
+<link rel="stylesheet" href="/modal_css/modal.css">
+
+<body>
+    <%- include('./sidenav/sidenav.ejs') %>
+
+        <!-- your code here -->
+        <center>
+            <br>
+            <div class="container">
+                <div class="border p-3 rounded-3 shadow" style="max-width: 800px;">
+                    <h1 class="text-center">เช็คเอาท์</h1>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="table-responsive" style="max-height: 100vh;">
+                <table class="table table-striped table-hover text-center">
+                    <thead>
+                        <tr>
+                            <th scope="col">ลำดับที่</th>
+                            <th scope="col">ห้องที่</th>
+                            <th scope="col">วันเข้าพัก</th>
+                            <th scope="col">วันเช็คเอาท์</th>
+                            <th scope="col">เพิ่มเติม</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if (stay.length===0) { %>
+                            <tr>
+                                <td colspan="5">
+                                    <h2>ยังไม่มีการจองห้องพัก</h2>
+                                </td>
+                            </tr>
+                            <% } else { %>
+                                <% for (var i=0; i < stay.length; i++) { %>
+                                    <tr>
+                                        <td scope="row">
+                                            <%= i %>
+                                        </td>
+                                        <td>
+                                            <%= stay[i].num_room %>
+                                        </td>
+                                        <td>
+                                            <%= stay[i].checkin %>
+                                        </td>
+                                        <td>
+                                            <%= stay[i].checkout %>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-secondary" onclick="openModal('checkout_nore_info')">
+                                                เพิ่มเติม
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+
+
+        </center>
+        <%- include('./sidenav/sidenav_close.ejs') %>
+            <%- include('./sidenav/sidenav_script.ejs') %>
+                <%- include('./modal/main_modal.ejs')%>
+
+</body>
+
+</html>
