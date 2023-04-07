@@ -111,7 +111,7 @@
                                 </tr>
                             </table>
                             <h4>ข้อมูลการจอง</h4>
-                            <table class="table modal-table" id="confirm_data_table">
+                            <table class="table modal-table" id="his_data_table">
                                 <tr>
                                     <td class="align-middle">
                                         <label for="his_reserv_id">รหัสการจอง</label>
@@ -160,27 +160,27 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <script>
+            function show_his_more_info(data) {
+                var data = JSON.parse(data);
+                document.getElementById("his_cus_id").value = data.id
+                document.getElementById("his_f_name").value = data.f_name + " " + data.l_name
+                document.getElementById("his_card_num").value = data.card_num
+                document.getElementById("his_p_num").value = data.p_num
+                document.getElementById("his_email").value = data.email
+                document.getElementById("his_reserv_id").value = data.reserv_id
+                document.getElementById("his_room_number").value = data.num_room
+                document.getElementById("his_room_type").value = data.name_th + " " + data.bed
+                document.getElementById("his_check_in").value = data.checkin
+                document.getElementById("his_check_out").value = data.checkout
+                document.getElementById("his_more_info").value = data.more_info
+            }
+        </script>
 
-            <script>
-                function show_his_more_info(data) {
-                    var data = JSON.parse(data);
-                    document.getElementById("his_cus_id").value = data.id
-                    document.getElementById("his_f_name").value = data.f_name + " " + data.l_name
-                    document.getElementById("his_card_num").value = data.card_num
-                    document.getElementById("his_p_num").value = data.p_num
-                    document.getElementById("his_email").value = data.email
-                    document.getElementById("his_reserv_id").value = data.reserv_id
-                    document.getElementById("his_room_number").value = data.num_room
-                    document.getElementById("his_room_type").value = data.name_th + " " + data.bed
-                    document.getElementById("his_check_in").value = data.checkin
-                    document.getElementById("his_check_out").value = data.checkout
-                    document.getElementById("his_more_info").value = data.more_info
-                }
-            </script>
-
-            <%- include('./sidenav/sidenav_close.ejs') %>
-                <%- include('./sidenav/sidenav_script.ejs') %>
-                    <%- include('./modal/main_modal.ejs')%>
+        <%- include('./sidenav/sidenav_close.ejs') %>
+            <%- include('./sidenav/sidenav_script.ejs') %>
+                <%- include('./modal/main_modal.ejs')%>
 </body>
 
 </html>
