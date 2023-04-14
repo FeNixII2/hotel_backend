@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>แม่บ้าน</title>
+
 </head>
 <link rel="stylesheet" href="main.css">
 <script src="bootstrap.bundle.min.js"></script>
@@ -26,43 +27,44 @@
             </div>
             <br>
             <br>
-
-            <div class="table-responsive " style="max-height: 100vh;">
-                <table class="table table-hover text-center">
-                    <thead>
-                        <tr>
-                            <th scope="col">ลำดับที่</th>
-                            <th scope="col">ห้องที่</th>
-                            <th scope="col">สถานะ</th>
-                            <th scope="col">เริ่มทำความสะอาด</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% for(i=0;i<room.length;i++){ %>
-
+            <div class="container">
+                <div class="table-responsive ">
+                    <table class="table table-hover text-center align-middle">
+                        <thead>
                             <tr>
-                                <td scope="row ">
-                                    <%= i %>
-                                </td>
-                                <td>
-                                    <%= room[i].num_room %>
-                                </td>
-                                <td id="status">
-                                    <%if(room[i].status==0){%>
-                                        ยังไม่ได้ทำความสะอาด
-                                        <%}else if(room[i].status==1){%>
-                                            กำลังทำความสะอาด
-                                            <%}else if(room[i].status==2){%>
-                                                ทำความสะอาดเรียบร้อยแล้ว
-                                                <%}%>
-                                </td>
-                                <td>
-                                    <button class="btn btn-primary" onclick="cleaningmodal('<%= room[i].id %>')">เริ่มทำความสะอาด</button>
-                                </td>
+                                <th scope="col">ลำดับที่</th>
+                                <th scope="col">ห้องที่</th>
+                                <th scope="col">สถานะ</th>
+                                <th scope="col">เริ่มทำความสะอาด</th>
                             </tr>
-                            <%}%>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <% for(i=0;i<room.length;i++){ %>
+
+                                <tr>
+                                    <td scope="row ">
+                                        <%= i %>
+                                    </td>
+                                    <td>
+                                        <%= room[i].num_room %>
+                                    </td>
+                                    <td id="status">
+                                        <%if(room[i].status==0){%>
+                                            ยังไม่ได้ทำความสะอาด
+                                            <%}else if(room[i].status==1){%>
+                                                กำลังทำความสะอาด
+                                                <%}else if(room[i].status==2){%>
+                                                    ทำความสะอาดเรียบร้อยแล้ว
+                                                    <%}%>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-primary" onclick="cleaningmodal('<%= room[i].id %>')">เริ่มทำความสะอาด</button>
+                                    </td>
+                                </tr>
+                                <%}%>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </center>
         <script>
@@ -77,13 +79,13 @@
                 // Check the value of the status
                 if (statusCell.innerText.trim() === 'ยังไม่ได้ทำความสะอาด') {
                     // Set the background color to red
-                    row.style.backgroundColor = '#E55451';
-                    row.style.color = '#fff';
+                    statusCell.style.backgroundColor = '#E55451';
+                    statusCell.style.color = '#fff';
                 } else if (statusCell.innerText.trim() === 'กำลังทำความสะอาด') {
                     // Set the background color to yellow
-                    row.style.backgroundColor = 'lightyellow';
+                    statusCell.style.backgroundColor = 'lightyellow';
                 } else if (statusCell.innerText.trim() === 'ทำความสะอาดเรียบร้อยแล้ว') {
-                    row.style.backgroundColor = '#77DD77';
+                    statusCell.style.backgroundColor = '#77DD77';
                 }
             });
         </script>
@@ -96,8 +98,19 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
+                        <center>
+                            <h5>ความคืบหน้า</h5>
+                        </center>
+                        <div class="progress">
+                            <div class="progress-bar" id="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
                         <div id="checkbox-container"></div>
-                        <button onclick="done_cleaning()" id="done_cleaning_but" class="btn btn-primary">ทำความสะอาดเสร็จแล้ว</button>
+                    </div>
+                    <center> เพิ่มเติม </center>
+                    <textarea class="form-control w-75 mx-auto" name="room_comment" id="room_comment" cols="10" rows="3"></textarea>
+                    <br>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button onclick="done_cleaning(this.value)" id="done_cleaning_but" class="btn btn-primary">ทำความสะอาดเสร็จแล้ว</button>
                     </div>
                 </div>
             </div>
@@ -136,12 +149,14 @@
                                 const checkbox = document.createElement('input');
                                 checkbox.type = 'checkbox';
                                 checkbox.value = checklist[i].id;
-                                checkbox.id = `checklist` + [i];
+                                checkbox.id = `checklist${i}`;
+                                checkbox.classList.add('form-check-input');
 
                                 // Create the label element
                                 const label = document.createElement('label');
-                                label.setAttribute('for', `checklist` + [i]);
+                                label.setAttribute('for', `checklist${i}`);
                                 label.textContent = checklist[i].todo;
+                                label.classList.add('form-check-label');
 
                                 // Create a div element to hold the checkbox and label
                                 const checkboxDiv = document.createElement('div');
@@ -151,7 +166,11 @@
 
                                 // Add the div to the container
                                 container.appendChild(checkboxDiv);
+
+                                // Add an event listener to the checkbox
+                                checkbox.addEventListener('change', updateProgressBar);
                             }
+
                             // Get a reference to the Bootstrap modal element
                             const modalElement = document.getElementById('todo_modal');
 
@@ -161,16 +180,30 @@
                             // define button value equal id
                             document.getElementById('done_cleaning_but').value = id
 
+                            //reset progress bar
+                            const progressBar = document.getElementById('progress-bar');
+                            progressBar.style.width = `0`;
+
                             // Show the modal
                             modalInstance.show();
-
                         })
                     }
                 })
             }
 
-            function done_cleaning() {
 
+            function updateProgressBar() {
+                const container = document.getElementById('checkbox-container');
+                const checkboxes = container.querySelectorAll('input[type="checkbox"]');
+                const checkedCheckboxes = container.querySelectorAll('input[type="checkbox"]:checked');
+                const percentage = Math.floor((checkedCheckboxes.length / checkboxes.length) * 100);
+                const progressBar = document.getElementById('progress-bar');
+                progressBar.style.width = `${percentage}%`;
+                progressBar.setAttribute('aria-valuenow', percentage);
+                progressBar.textContent = `${percentage}%`;
+            }
+
+            function done_cleaning(id) {
 
                 const container = document.getElementById('checkbox-container');
                 const checkboxes = container.querySelectorAll('input[type="checkbox"]');

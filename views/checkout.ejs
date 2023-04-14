@@ -150,9 +150,15 @@
                                     </tr>
                                 </table>
                                 <div class="form-floating">
-                                    Customer Comment
+                                    Comment ลูกค้า
                                     <br>
                                     <textarea class="form-control" placeholder="Enter your message here" id="cus_comment" rows="30" readonly></textarea>
+                                    <label for="message"></label>
+                                </div>
+                                <div class="form-floating">
+                                    Comment เพิ่มเติม
+                                    <br>
+                                    <textarea class="form-control" placeholder="Enter your message here" id="more_cus_comment" rows="30"></textarea>
                                     <label for="message"></label>
                                 </div>
                             </div>
@@ -181,8 +187,9 @@
                 document.getElementById("checkout_room_type").value = data.name_th + " " + data.bed
                 document.getElementById("checkout_check_in").value = data.checkin
                 document.getElementById("checkout_check_out").value = data.checkout
-                document.getElementById("checkout_more_info").value = data.more_info
+                document.getElementById("cus_comment").value = data.cus_comment
                 document.getElementById("checkout_btn").value = data.reserv_id
+
             }
 
             function confirm_checkout(id) {
