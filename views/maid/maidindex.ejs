@@ -229,7 +229,7 @@
                         confirmButtonText: 'ทำความสะอาดเรียบร้อยแล้ว'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            var id = document.getElementById('done_cleaning_but').value
+                            var room_comment = document.getElementById("room_comment").value
                             fetch("/done_cleaning", {
                                 method: "post",
                                 headers: {
@@ -238,7 +238,8 @@
                                 },
 
                                 body: JSON.stringify({
-                                    id
+                                    id,
+                                    room_comment
                                 })
                             }).then((response) => response.json()).then((body) => {
                                 Swal.fire({

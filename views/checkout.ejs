@@ -41,7 +41,7 @@
                         <% if (stay.length===0) { %>
                             <tr>
                                 <td colspan="5">
-                                    <h2>ยังไม่มีการจองห้องพัก</h2>
+                                    <h2>ยังไม่มีการเช็คเอาท์</h2>
                                 </td>
                             </tr>
                             <% } else { %>
@@ -188,12 +188,49 @@
                 document.getElementById("checkout_check_in").value = data.checkin
                 document.getElementById("checkout_check_out").value = data.checkout
                 document.getElementById("cus_comment").value = data.cus_comment
-                document.getElementById("checkout_btn").value = data.reserv_id
+                document.getElementById("checkout_btn").value = data.id
+
+                // document.getElementById("checkout_btn").value = data.reserv_id
 
             }
 
             function confirm_checkout(id) {
-
+                Swal.fire({
+                    title: 'ต้องการเช็คเอาท์ห้องนี้',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: 'ยกเลิก',
+                    confirmButtonText: 'ใช่ เริ่มทำความสะอาดเลย'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var more_cus_comment = document.getElementById("more_cus_comment").value
+                        var reserv_id = document.getElementById("checkout_reserv_id").value
+                        fetch("/confirm_checkout", {
+                            method: "post",
+                            headers: {
+                                Accept: "application/json",
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({
+                                id,
+                                more_cus_comment,
+                                reserv_id
+                            })
+                        }).then((response) => response.json()).then((body) => {
+                            Swal.fire({
+                                position: 'top',
+                                icon: 'success',
+                                title: 'บันทึกข้อมูลเรียบร้อยแล้ว',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(() => {
+                                changepage('/checkout');
+                            });
+                        })
+                    }
+                })
             }
         </script>
 

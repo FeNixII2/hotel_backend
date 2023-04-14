@@ -42,7 +42,7 @@ app.use(
 );
 
 //port setting to run on the server
-var port = 9999;
+var port = 8080;
 app.listen(port, () => {
     console.log("web start listening on port  : " + port);
 });
@@ -55,5 +55,5 @@ app.get("/", (req, res) => {
 require("./app/roomconfirmation.js")(app, con);
 require("./app/payment_history.js")(app, con);
 require("./app/history.js")(app, con);
-require("./app/chambermaid.js")(app, con);
-require("./app/checkout.js")(app, con);
+require("./app/chambermaid.js")(app, con, moment);
+require("./app/checkout.js")(app, con, moment);
