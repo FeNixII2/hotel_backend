@@ -57,3 +57,4 @@ require("./app/payment_history.js")(app, con);
 require("./app/history.js")(app, con);
 require("./app/chambermaid.js")(app, con, moment);
 require("./app/checkout.js")(app, con, moment);
+require("./app/maidhistory.js")(app, con);

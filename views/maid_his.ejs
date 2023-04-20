@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>empty</title>
+</head>
+<link rel="stylesheet" href="main.css">
+<script src="bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.all.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css" />
+
+<body>
+    <%- include('./sidenav/sidenav.ejs') %>
+
+        <center>
+            <br>
+            <div class="container">
+                <div class="border p-3 rounded-3 shadow" style="max-width: 800px;">
+                    <h1 class="text-center">ข้อมูลทำความสะอาดห้อง</h1>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="container">
+                <div class="table-responsive ">
+                    <table class="table table-hover text-center align-middle">
+                        <thead>
+                            <tr>
+                                <th scope="col">ลำดับที่</th>
+                                <th scope="col">ห้องที่</th>
+                                <th scope="col">สถานะ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(i=0;i<room.length;i++){ %>
+
+                                <tr>
+                                    <td scope="row ">
+                                        <%= i %>
+                                    </td>
+                                    <td>
+                                        <%= room[i].num_room %>
+                                    </td>
+                                    <td id="status">
+                                        <%if(room[i].status==0){%>
+                                            ยังไม่ได้ทำความสะอาด
+                                            <%}else if(room[i].status==1){%>
+                                                กำลังทำความสะอาด
+                                                <%}else if(room[i].status==2){%>
+                                                    ทำความสะอาดเรียบร้อยแล้ว
+                                                    <%}%>
+                                    </td>
+                                </tr>
+                                <%}%>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </center>
+        <%- include('./sidenav/sidenav_close.ejs') %>
+            <%- include('./sidenav/sidenav_script.ejs') %>
+</body>
+<script>
+    // Get all the table rows
+    var rows = document.querySelectorAll('table tbody tr');
+    // Loop through the rows
+    rows.forEach((row) => {
+        // Get the status cell in the row
+        var statusCell = row.querySelector('#status');
+
+        // Check the value of the status
+        if (statusCell.innerText.trim() === 'ยังไม่ได้ทำความสะอาด') {
+            // Set the background color to red
+            statusCell.style.backgroundColor = '#E55451';
+            statusCell.style.color = '#fff';
+        } else if (statusCell.innerText.trim() === 'กำลังทำความสะอาด') {
+            // Set the background color to yellow
+            statusCell.style.backgroundColor = 'lightyellow';
+        } else if (statusCell.innerText.trim() === 'ทำความสะอาดเรียบร้อยแล้ว') {
+            statusCell.style.backgroundColor = '#77DD77';
+        }
+    });
+</script>
+</script>
+
+</html>
