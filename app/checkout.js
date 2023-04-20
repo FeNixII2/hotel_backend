@@ -5,7 +5,7 @@ module.exports = function(app, con, moment) {
             res.render(('checkout'), { stay })
         })
     })
-
+    44
     app.post('/confirm_checkout', (req, res) => {
         var { id, more_cus_comment, reserv_id } = req.body
         const currentDate = moment().format('DD/MM/YYYY HH:mm:ss');
