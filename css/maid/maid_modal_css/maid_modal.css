@@ -44,3 +44,12 @@
     background-color: #0079bf;
     transition: width 0.3s ease-in-out;
 }
+
+.modal-content-fit {
+    width: fit-content;
+    max-width: 100%;
+}
+
+.modal-table td {
+    border-bottom: none;
+}
