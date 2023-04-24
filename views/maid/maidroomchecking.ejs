@@ -35,31 +35,39 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% for(i=0;i< wait_for_check.length;i++){%>
+                    <% if (wait_for_check.length===0) { %>
                         <tr>
-                            <td>
-                                <%= i %>
-                            </td>
-                            <td>
-                                <%= wait_for_check[i].id %>
-                            </td>
-                            <td>
-                                <%= wait_for_check[i].num_room %>
-                            </td>
-                            <td>
-                                <% if ( wait_for_check[i].status==1) { %>
-                                    เข้าพักอยู่
-                                    <%}else if (wait_for_check[i].status==2) {%>
-                                        รอตรวจสอบ
-                                        <%}else if (wait_for_check[i].status==3) {%>
-                                            ตรวจสอบแล้ว
-                                            <%}%>
-                            </td>
-                            <td>
-                                <button class="btn btn-sm btn-info" onclick="getTableData('<%= wait_for_check[i].id %>')">ดูเพิ่มเติม</button>
+                            <td colspan="5">
+                                <h2>ยังไม่มีการเช็คเอาท์</h2>
                             </td>
                         </tr>
-                        <%}%>
+                        <% } else { %>
+                            <% for(i=0;i< wait_for_check.length;i++){%>
+                                <tr>
+                                    <td>
+                                        <%= i %>
+                                    </td>
+                                    <td>
+                                        <%= wait_for_check[i].id %>
+                                    </td>
+                                    <td>
+                                        <%= wait_for_check[i].num_room %>
+                                    </td>
+                                    <td>
+                                        <% if ( wait_for_check[i].status==1) { %>
+                                            เข้าพักอยู่
+                                            <%}else if (wait_for_check[i].status==2) {%>
+                                                รอตรวจสอบ
+                                                <%}else if (wait_for_check[i].status==3) {%>
+                                                    ตรวจสอบแล้ว
+                                                    <%}%>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-sm btn-info" onclick="getTableData('<%= wait_for_check[i].id %>')">ดูเพิ่มเติม</button>
+                                    </td>
+                                </tr>
+                                <%}%>
+                                    <%}%>
                 </tbody>
             </table>
         </div>
@@ -73,7 +81,7 @@
                     </div>
                     <div class="modal-body">
                         ข้อมูลการตรวจสอบห้องพัก
-                        <textarea class="form-control" id="checking_text" rows="3" cols="100"></textarea>
+                        <textarea class="form-control" id="checking_comment" rows="3" cols="100"></textarea>
 
                         <div class="modal-footer d-flex justify-content-center ">
 
@@ -101,14 +109,16 @@
             cancelButtonText: 'ยกเลิก',
             confirmButtonText: 'ใช่ '
         }).then((result) => {
+            if (result.isConfirmed) {
 
-            document.getElementById('done_checking_btn').value = id
+                document.getElementById('done_checking_btn').value = id
 
-            const modalElement = document.getElementById('maidClean_more_info');
+                const modalElement = document.getElementById('maidClean_more_info');
 
-            const modalInstance = new bootstrap.Modal(modalElement);
+                const modalInstance = new bootstrap.Modal(modalElement);
 
-            modalInstance.show();
+                modalInstance.show();
+            }
         })
     }
 
@@ -121,18 +131,23 @@
             cancelButtonText: 'ยกเลิก',
             confirmButtonText: 'ใช่ '
         }).then((result) => {
-            fetch("/done_checking", {
-                method: "post",
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    id
+            if (result.isConfirmed) {
+                var checking_comment = document.getElementById('checking_comment').value
+                fetch("/done_checking", {
+                    method: "post",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        id,
+                        checking_comment
+                    })
+                }).then((response) => response.json()).then((body) => {
+                    changepage('/maidroomchecking')
                 })
-            }).then((response) => response.json()).then((body) => {
+            }
 
-            })
         })
     }
 </script>

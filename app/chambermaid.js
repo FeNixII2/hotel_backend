@@ -40,7 +40,23 @@ module.exports = function(app, con, moment) {
     })
 
     app.post('/done_checking', (req, res) => {
-        con.query("")
+        var {
+            id,
+            checking_comment
+        } = req.body
+        const currentDate = moment().format('DD/MM/YYYY HH:mm:ss');
+        con.query("select * from reserved where id = ?", [id], (err, reserved_info) => {
+            if (err) throw err
+            reserved_info = reserved_info[0]
+            con.query("insert into checkout_comment (detail,date,cus_id,room_number,type) values (?,?,?,?,?)", [checking_comment, currentDate, reserved_info.cus_id, reserved_info.num_room, '2'], (err, comment_insert) => {
+                if (err) throw err
+                var insert_id = comment_insert.insertId
+                con.query("update reserved set status = '3' where id = ?", [id], (err, result) => {
+                    if (err) throw err
+                    res.send({})
+                })
+            })
+        })
     })
 
 }
