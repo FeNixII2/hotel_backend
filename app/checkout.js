@@ -18,11 +18,13 @@ module.exports = function(app, con, moment) {
     app.post('/confirm_checkout', (req, res) => {
         var { id, more_cus_comment, reserv_id } = req.body
         const currentDate = moment().format('DD/MM/YYYY HH:mm:ss');
-        con.query("insert into cus_comment value ('',?,?,?)", [more_cus_comment, currentDate, id], (err, result) => {
-            if (err) throw err
-            con.query("update reserved set status = 4 where id = ?", [reserv_id], (err, result) => {
+        con.query("select * from reserved where id =?", [reserv_id], (err, reserv_info) => {
+            con.query("insert into checkout_comment (detail,date,cus_id,room_number,type,reserved_id)  values (?,?,?,?,?,?)", [more_cus_comment, currentDate, id, reserv_info[0].num_room, '1', reserv_id], (err, result) => {
                 if (err) throw err
-                res.send({})
+                con.query("update reserved set status = 4 where id = ?", [reserv_id], (err, result) => {
+                    if (err) throw err
+                    res.send({})
+                })
             })
         })
     })

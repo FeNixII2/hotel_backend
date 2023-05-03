@@ -167,12 +167,12 @@
                                     </tr>
                                 </table>
                                 <div id="more_info_section">
-                                    <div class="form-floating">
+                                    <!-- <div class="form-floating">
                                         Comment ลูกค้า
                                         <br>
                                         <textarea class="form-control" placeholder="Enter your message here" id="cus_comment" rows="30" readonly></textarea>
                                         <label for="message"></label>
-                                    </div>
+                                    </div> -->
                                     <div class="form-floating">
                                         Comment เพิ่มเติม
                                         <br>
@@ -206,6 +206,7 @@
                 document.getElementById("checkout_room_type").value = data.name_th + " " + data.bed
                 document.getElementById("checkout_check_in").value = data.checkin
                 document.getElementById("checkout_check_out").value = data.checkout
+                document.getElementById("checkout_btn").value = data.reserv_id
                 var status
                 if (data.status == 1) {
                     status = 'เข้าพักอยู่'
@@ -221,12 +222,12 @@
                     document.getElementById('more_info_section').style.display = 'none'
                 }
                 document.getElementById("checkout_status").value = status
-                document.getElementById("cus_comment").value = data.cus_comment
-                document.getElementById("checkout_btn").value = data.reserv_id
+                    // document.getElementById("cus_comment").value = data.cus_comment
 
                 var btn = document.getElementById("checkout_btn")
-                btn.onclick = null
+
                 if (data.status == 1) {
+                    btn.onclick = null
                     btn.disabled = false
                     btn.addEventListener('click', function() {
                         room_checking(btn.value);
@@ -234,10 +235,12 @@
                     btn.innerHTML = 'ตรวจสอบห้องพัก'
 
                 } else if (data.status == 2) {
+                    btn.onclick = null
                     btn.disabled = true
                     btn.innerHTML = 'รอแม่บ้านตรวจสอบห้องพัก'
 
                 } else if (data.status == 3) {
+                    btn.onclick = null
                     btn.disabled = false
                     btn.innerHTML = 'เช็คเอาท์'
                     btn.addEventListener('click', function() {
