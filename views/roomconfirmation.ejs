@@ -162,6 +162,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+                        <button type="button" class="btn btn-danger" id="cancel_room" onclick="cancelRoom();">ยกเลิก</button>
                         <button type="button" class="btn btn-primary" id="room_confirm_btn" onclick="confirmRoom()">ยืนยันการจอง</button>
                     </div>
                 </div>
@@ -223,8 +224,6 @@
                                 }).then(() => {
                                     changepage('/indexroomconfirmation')
                                 });
-
-
                             })
                             .catch(error => {
                                 console.error('Error:', error);
@@ -233,6 +232,53 @@
                 })
 
 
+            }
+
+            function cancelRoom() {
+                Swal.fire({
+                    title: 'ต้องการยกเลิกรายการนี้ ?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'ยืนยัน',
+                    cancelButtonText: 'ยกเลิก',
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var id = document.getElementById('con_reserv_id').value
+
+                        fetch('/cancelroom', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    id
+                                })
+                            })
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error(`HTTP error! status: ${response.status}`);
+                                }
+                                return response.json();
+                            })
+                            .then(data => {
+                                Swal.fire({
+                                    title: 'Success!',
+                                    text: 'ยกเลิกรายการแล้ว',
+                                    icon: 'success',
+                                    timer: 1000,
+                                    timerProgressBar: true,
+                                    showConfirmButton: false
+                                }).then(() => {
+                                    changepage('/indexroomconfirmation')
+                                });
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
+                    }
+                })
             }
         </script>
 

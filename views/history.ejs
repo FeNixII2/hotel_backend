@@ -142,6 +142,12 @@
                                     <td class="align-middle">
                                         <input type="text" name="his_check_out" id="his_check_out" readonly>
                                     </td>
+                                    <td class="align-middle">
+                                        <label for="his_status">สถานะ</label>
+                                    </td>
+                                    <td class="align-middle">
+                                        <input type="text" name="his_status" id="his_status" readonly>
+                                    </td>
                                 </tr>
                             </table>
                             <div class="form-floating">
@@ -171,6 +177,9 @@
                 document.getElementById("his_check_in").value = data.checkin
                 document.getElementById("his_check_out").value = data.checkout
                 document.getElementById("his_more_info").value = data.more_info
+                var status_array = ['รอยืนยัน', 'ยืนยันแล้ว', 'รอตรวจสอบ', 'ตรวจสอบแล้ว', ' เช็คเอาท์แล้ว', 'ยกเลิก']
+                document.getElementById("his_status").value = status_array[data.status]
+
             }
         </script>
 

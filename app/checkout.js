@@ -1,4 +1,4 @@
-module.exports = function(app, con, moment) {
+module.exports = function (app, con, moment) {
     app.post('/checkout', (req, res) => {
         con.query("SELECT *,reserved.id as reserv_id FROM reserved INNER JOIN customer ON reserved.cus_id = customer.id INNER JOIN roomstype ON reserved.id_typeroom = roomstype.id WHERE status NOT IN (0, 4); ", (err, stay) => {
             if (err) throw err
@@ -22,11 +22,14 @@ module.exports = function(app, con, moment) {
             con.query("insert into checkout_comment (detail,date,cus_id,room_number,type,reserved_id)  values (?,?,?,?,?,?)", [more_cus_comment, currentDate, id, reserv_info[0].num_room, '1', reserv_id], (err, result) => {
                 if (err) throw err
                 con.query("update reserved set status = 4 where id = ?", [reserv_id], (err, result) => {
-                    if (err) throw err
-                    res.send({})
+                    con.query("update rooms set status = 0 where num_room = ?", [reserv_info[0].num_room], (err, result) => {
+                        if (err) throw err
+                        res.send({})
+                    })
                 })
             })
         })
     })
+
 
 }
