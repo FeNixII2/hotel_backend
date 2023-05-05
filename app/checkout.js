@@ -33,7 +33,6 @@ module.exports = function (app, con, moment) {
 
     app.post('/get_comment', (req, res) => {
         var { num_room, cus_id } = req.body
-        console.log(cus_id);
         con.query("SELECT * FROM checkout_comment WHERE TYPE = 2 and room_number = ? ORDER BY id desc", [num_room], (err, room_coms) => {
             con.query("SELECT * FROM checkout_comment WHERE TYPE = 1 and cus_id = ? ORDER BY id desc", [cus_id], (err, cus_coms) => {
                 res.send({ room_coms, cus_coms })

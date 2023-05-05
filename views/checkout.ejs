@@ -170,12 +170,26 @@
                                     <div class="form-floating" id='all_comment'>
                                         ประวัติลูกค้า
                                         <br>
-                                        <table class="table" id="cus_comment_table"></table>
+                                        <div class="container">
+                                            <table class="table table-striped text-center" id="cus_comment_table">
+                                                <thead>
+                                                    <tr>
+                                                        <td>ลำดับที่</td>
+                                                        <td>รายละเอียด</td>
+                                                        <td>วันที่</td>
+                                                        <td>ห้องเลขที่</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
                                         <label for="message"></label>
                                         <br> ข้อมูลการตรวจสอบห้องพัก
                                         <br>
                                         <div class="container">
-                                            <table class="table" id="room_comment_table">
+                                            <table class="table table-striped text-center" id="room_comment_table">
                                                 <thead>
                                                     <tr>
                                                         <td>ลำดับที่</td>
@@ -250,22 +264,36 @@
                             cus_id: data.cus_id
                         })
                     }).then((response) => response.json()).then((body) => {
-                        // cus_comment_table
+
+                        var cus_coms = body.cus_coms
+                        var cus_comment_tbody = document.getElementById('cus_comment_table').getElementsByTagName('tbody')[0];
+                        cus_comment_tbody.innerHTML = ''
+                        for (i = 0; i < cus_coms.length; i++) {
+                            var newRow = cus_comment_tbody.insertRow();
+                            var cell1 = newRow.insertCell(0);
+                            var cell2 = newRow.insertCell(1);
+                            var cell3 = newRow.insertCell(2);
+                            var cell4 = newRow.insertCell(3);
+                            cell1.innerHTML = i + 1;
+                            cell2.innerHTML = cus_coms[i].detail;
+                            cell3.innerHTML = cus_coms[i].date;
+                            cell4.innerHTML = cus_coms[i].room_number;
+                        }
+
                         var room_coms = body.room_coms
-                        console.log(room_coms);
                         var room_comment_tbody = document.getElementById('room_comment_table').getElementsByTagName('tbody')[0];
+                        room_comment_tbody.innerHTML = ''
                         for (i = 0; i < room_coms.length; i++) {
                             var newRow = room_comment_tbody.insertRow();
                             var cell1 = newRow.insertCell(0);
                             var cell2 = newRow.insertCell(1);
                             var cell3 = newRow.insertCell(2);
-                            var cell3 = newRow.insertCell(3);
+                            var cell4 = newRow.insertCell(3);
                             cell1.innerHTML = i + 1;
                             cell2.innerHTML = room_coms[i].detail;
                             cell3.innerHTML = room_coms[i].date;
                             cell4.innerHTML = room_coms[i].room_number;
                         }
-                        // console.log(body);
                     })
 
                 } else if (data.status == 4) {
