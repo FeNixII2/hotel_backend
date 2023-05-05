@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css" />
 <link rel="stylesheet" href="/modal_css/modal.css">
 
-<body>
+<tbody>
     <%- include('./sidenav/sidenav.ejs') %>
 
         <!-- your code here -->
@@ -42,7 +42,7 @@
                         <tbody>
                             <% if (stay.length===0) { %>
                                 <tr>
-                                    <td colspan="5">
+                                    <td colspan="6">
                                         <h2>ยังไม่มีการเช็คเอาท์</h2>
                                     </td>
                                 </tr>
@@ -167,12 +167,30 @@
                                     </tr>
                                 </table>
                                 <div id="more_info_section">
-                                    <!-- <div class="form-floating">
-                                        Comment ลูกค้า
+                                    <div class="form-floating" id='all_comment'>
+                                        ประวัติลูกค้า
                                         <br>
-                                        <textarea class="form-control" placeholder="Enter your message here" id="cus_comment" rows="30" readonly></textarea>
+                                        <table class="table" id="cus_comment_table"></table>
                                         <label for="message"></label>
-                                    </div> -->
+                                        <br> ข้อมูลการตรวจสอบห้องพัก
+                                        <br>
+                                        <div class="container">
+                                            <table class="table" id="room_comment_table">
+                                                <thead>
+                                                    <tr>
+                                                        <td>ลำดับที่</td>
+                                                        <td>รายละเอียด</td>
+                                                        <td>วันที่</td>
+                                                        <td>ห้องเลขที่</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <label for="message"></label>
+                                    </div>
                                     <div class="form-floating">
                                         Comment เพิ่มเติม
                                         <br>
@@ -196,8 +214,12 @@
 
         <script>
             function show_checkout_more_info(data) {
+                var all_comment = document.getElementById("all_comment");
+                all_comment.classList.remove('d-block')
+                all_comment.classList.add('d-none')
+
                 var data = JSON.parse(data);
-                document.getElementById("checkout_cus_id").value = data.id
+                document.getElementById("checkout_cus_id").value = data.cus_id
                 document.getElementById("checkout_f_name").value = data.f_name + " " + data.l_name
                 document.getElementById("checkout_p_num").value = data.p_num
                 document.getElementById("checkout_email").value = data.email
@@ -210,19 +232,46 @@
                 var status
                 if (data.status == 1) {
                     status = 'เข้าพักอยู่'
-                    document.getElementById('more_info_section').style.display = 'none'
                 } else if (data.status == 2) {
                     status = 'รอตรวจสอบ'
-                    document.getElementById('more_info_section').style.display = 'none'
                 } else if (data.status == 3) {
                     status = 'ตรวจสอบเสร็จแล้ว'
-                    document.getElementById('more_info_section').style.display = 'block'
+                    all_comment.classList.remove('d-none')
+                    all_comment.classList.add('d-block')
+
+                    fetch("/get_comment", {
+                        method: "post",
+                        headers: {
+                            Accept: "application/json",
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            num_room: data.num_room,
+                            cus_id: data.cus_id
+                        })
+                    }).then((response) => response.json()).then((body) => {
+                        // cus_comment_table
+                        var room_coms = body.room_coms
+                        console.log(room_coms);
+                        var room_comment_tbody = document.getElementById('room_comment_table').getElementsByTagName('tbody')[0];
+                        for (i = 0; i < room_coms.length; i++) {
+                            var newRow = room_comment_tbody.insertRow();
+                            var cell1 = newRow.insertCell(0);
+                            var cell2 = newRow.insertCell(1);
+                            var cell3 = newRow.insertCell(2);
+                            var cell3 = newRow.insertCell(3);
+                            cell1.innerHTML = i + 1;
+                            cell2.innerHTML = room_coms[i].detail;
+                            cell3.innerHTML = room_coms[i].date;
+                            cell4.innerHTML = room_coms[i].room_number;
+                        }
+                        // console.log(body);
+                    })
+
                 } else if (data.status == 4) {
                     status = 'เช็คเอาท์แล้ว'
-                    document.getElementById('more_info_section').style.display = 'none'
                 }
                 document.getElementById("checkout_status").value = status
-                    // document.getElementById("cus_comment").value = data.cus_comment
 
                 var btn = document.getElementById("checkout_btn")
 
@@ -329,6 +378,6 @@
             <%- include('./sidenav/sidenav_script.ejs') %>
                 <%- include('./modal/main_modal.ejs')%>
 
-</body>
+                    </body>
 
 </html>

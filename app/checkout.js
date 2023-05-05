@@ -1,6 +1,6 @@
 module.exports = function (app, con, moment) {
     app.post('/checkout', (req, res) => {
-        con.query("SELECT *,reserved.id as reserv_id FROM reserved INNER JOIN customer ON reserved.cus_id = customer.id INNER JOIN roomstype ON reserved.id_typeroom = roomstype.id WHERE status NOT IN (0, 4); ", (err, stay) => {
+        con.query("SELECT *,reserved.id as reserv_id FROM reserved INNER JOIN customer ON reserved.cus_id = customer.id INNER JOIN roomstype ON reserved.id_typeroom = roomstype.id WHERE status NOT IN (0, 4,5); ", (err, stay) => {
             if (err) throw err
             res.render(('checkout'), { stay })
         })
@@ -31,5 +31,14 @@ module.exports = function (app, con, moment) {
         })
     })
 
+    app.post('/get_comment', (req, res) => {
+        var { num_room, cus_id } = req.body
+        console.log(cus_id);
+        con.query("SELECT * FROM checkout_comment WHERE TYPE = 2 and room_number = ? ORDER BY id desc", [num_room], (err, room_coms) => {
+            con.query("SELECT * FROM checkout_comment WHERE TYPE = 1 and cus_id = ? ORDER BY id desc", [cus_id], (err, cus_coms) => {
+                res.send({ room_coms, cus_coms })
+            })
+        })
+    })
 
 }
