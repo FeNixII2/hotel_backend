@@ -321,7 +321,7 @@
                     btn.disabled = false
                     btn.innerHTML = 'เช็คเอาท์'
                     btn.addEventListener('click', function() {
-                        confirm_checkout(btn.value);
+                        confirm_checkout(data.cus_id);
                     });
                 }
             }
@@ -336,26 +336,28 @@
                     cancelButtonText: 'ยกเลิก',
                     confirmButtonText: 'ใช่ '
                 }).then((result) => {
-                    fetch("/room_checking", {
-                        method: "post",
-                        headers: {
-                            Accept: "application/json",
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            id
+                    if (result.isConfirmed) {
+                        fetch("/room_checking", {
+                            method: "post",
+                            headers: {
+                                Accept: "application/json",
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({
+                                id
+                            })
+                        }).then((response) => response.json()).then((body) => {
+                            Swal.fire({
+                                position: 'top',
+                                icon: 'success',
+                                title: 'ส่งข้อมูลให้แม่บ้านแล้ว',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(() => {
+                                changepage('/checkout');
+                            });
                         })
-                    }).then((response) => response.json()).then((body) => {
-                        Swal.fire({
-                            position: 'top',
-                            icon: 'success',
-                            title: 'ส่งข้อมูลให้แม่บ้านแล้ว',
-                            showConfirmButton: false,
-                            timer: 1500
-                        }).then(() => {
-                            changepage('/checkout');
-                        });
-                    })
+                    }
                 })
             }
 
@@ -367,7 +369,7 @@
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
                     cancelButtonText: 'ยกเลิก',
-                    confirmButtonText: 'ใช่ เริ่มทำความสะอาดเลย'
+                    confirmButtonText: 'เช็คเอาท์'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         var more_cus_comment = document.getElementById("more_cus_comment").value
