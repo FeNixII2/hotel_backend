@@ -1,8 +1,8 @@
 <div class="d-flex vh-100">
     <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" id="sidenav" style="width: 280px;">
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+        <a onclick="window.app.changepage('/index')" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
             <svg class="bi me-2" width="40" height="32">
-                <use xlink:href="#bootstrap"></use>
+                <use xlink:href=""></use>
             </svg>
             <span class="fs-4">ส่วนพนักงาน</span>
         </a>
@@ -43,14 +43,34 @@
                     </svg> ประวัติการทำความสะอาด
                 </a>
             </li>
-            <li>
-                <a href="" onclick="window.app.changepage('/maidindex')" class="nav-link text-white ">
-                    <svg class="bi me-2 " width="16 " height="16 ">
-                        <use xlink:href="# "></use>
-                    </svg> รายงานแม่บ้าน
-                </a>
-            </li>
         </ul>
         <hr>
+        <a href="" onclick="logout()" class="nav-link text-white ">
+            <svg class="bi me-2 " width="16 " height="16 ">
+                <use xlink:href="# "></use>
+            </svg> ออกจากระบบ
+        </a>
+
     </div>
     <main style="width: 100%;">
+        <script>
+            function logout() {
+                fetch('/logout', {
+                        method: 'POST'
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            // Logout successful
+                            // Clear the URL by replacing it with the root path
+                            history.replaceState({}, '', '/');
+                            location.href = '/'
+                        } else {
+                            // Logout failed
+                            console.log('Logout failed');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            }
+        </script>

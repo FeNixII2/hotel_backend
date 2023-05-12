@@ -49,7 +49,14 @@ app.listen(port, () => {
 });
 
 app.get("/", (req, res) => {
-    res.render("login.ejs");
+    if (req.session.isLoggedIn) {
+        choosepage(req.session.emp_pos, function(page) {
+            console.log(page);
+            res.redirect(page)
+        })
+    } else {
+        res.render("login.ejs");
+    }
 });
 
 //js file include
@@ -60,3 +67,13 @@ require("./app/chambermaid.js")(app, con, moment);
 require("./app/checkout.js")(app, con, moment);
 require("./app/maidhistory.js")(app, con);
 require("./app/login.js")(app, con);
+
+function choosepage(pos, callback) {
+    let page
+    if (pos == 1) {
+        page = '/maidindex'
+    } else if (pos == 2) {
+        page = '/index'
+    }
+    callback(page);
+}

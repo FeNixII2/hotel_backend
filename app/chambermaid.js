@@ -1,4 +1,15 @@
-module.exports = function (app, con, moment) {
+module.exports = function(app, con, moment) {
+    app.get('/maidindex', (req, res) => {
+        if (req.session.isLoggedIn && req.session.emp_pos == 1) {
+            con.query("select * from rooms", (err, room) => {
+                if (err) throw err
+                res.render(('maid/maidindex.ejs'), { room })
+            })
+        } else {
+            res.render("login.ejs");
+        }
+    })
+
     app.post('/maidindex', (req, res) => {
         con.query("select * from rooms", (err, room) => {
             if (err) throw err
