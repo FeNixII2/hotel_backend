@@ -31,8 +31,9 @@ app.use(express.static("app"));
 
 app.use(express.static("views"));
 app.set("view engine", "ejs");
-app.use(express.json({ limit: "50mb" }));
-app.use(express.urlencoded({ limit: "50mb", extended: true }));
+app.use(express.json({ limit: '100kb' }));
+app.use(express.urlencoded({ limit: "10mb", extended: true }));
+
 app.use(
     session({
         secret: "keyboard cat",
@@ -58,3 +59,4 @@ require("./app/history.js")(app, con);
 require("./app/chambermaid.js")(app, con, moment);
 require("./app/checkout.js")(app, con, moment);
 require("./app/maidhistory.js")(app, con);
+require("./app/login.js")(app, con);

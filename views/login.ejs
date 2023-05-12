@@ -11,9 +11,9 @@
 </head>
 
 <body class="d-flex justify-content-center align-items-center vh-100">
-    <div class="card p-3 w-50" style="max-width: 500px;">
+    <div class="card p-3 mx-auto w-50" style="max-width: 500px;">
         <h1 class="text-center mb-3">Login</h1>
-        <form>
+        <form class="d-flex justify-content-center flex-column">
             <div class="mb-3">
                 <label for="username" class="form-label">Username:</label>
                 <input type="text" id="username" name="username" class="form-control" required>
@@ -22,15 +22,63 @@
                 <label for="password" class="form-label">Password:</label>
                 <input type="password" id="password" name="password" class="form-control" required>
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="submit" class="btn btn-primary" id="login-btn">เข้าสู่ระบบ</button>
         </form>
     </div>
 </body>
 
 <script>
-    function login() {
+    const loginBtn = document.getElementById('login-btn');
+    loginBtn.addEventListener('click', function(event) {
+        alert('hehe')
+        event.preventDefault();
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username,
+                    password
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Login successful
+                    console.log('Login successful');
+                    window.app.changepage('/indexroomconfirmation')
+                } else {
+                    // Login failed
+                    console.log('Login failed');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
 
-    }
+
+    (function() {
+        function changepage(id) {
+            fetch(id, {
+                method: 'POST'
+            }).then(res => res.text()).then(html => {
+                document.open();
+                document.write(html);
+                document.close();
+            });
+        }
+
+        // Other code and event listeners can be placed here
+
+        // Export the desired functionality
+        window.app = {
+            // Only expose the necessary functions to the global scope
+            changepage: changepage
+        };
+    })();
 </script>
 
 
