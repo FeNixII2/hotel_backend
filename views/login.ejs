@@ -57,27 +57,6 @@
             console.error('Error:', error);
         });
     });
-
-
-    (function () {
-        function changepage(id) {
-            fetch(id, {
-                method: 'POST'
-            }).then(res => res.text()).then(html => {
-                document.open();
-                document.write(html);
-                document.close();
-            });
-        }
-
-        // Other code and event listeners can be placed here
-
-        // Export the desired functionality
-        window.app = {
-            // Only expose the necessary functions to the global scope
-            changepage: changepage
-        };
-    })();
 </script>
 
 

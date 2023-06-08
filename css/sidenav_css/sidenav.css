@@ -1,20 +1,41 @@
-#sidenav {
+.sidenav {
     display: flex;
+    transition: transform 0.3s;
 }
 
-#menu_button {
+.menu_button {
     display: none;
 }
 
-@media (max-width: 767px) {
-    #sidenav {
+.back_button {
+    display: none;
+    color: white;
+}
+
+@media (max-width: 1024px) {
+    .sidenav {
         display: flex;
-        position: absolute;
+        position: fixed;
         z-index: 1;
         height: 100%;
+        transform: translateX(-100%);
     }
-    #menu_button {
+    .sidenav-active {
+        display: flex;
+        position: fixed;
+        z-index: 1;
+        height: 100%;
+        transform: translateX(0%);
+    }
+    .menu_button {
         display: block;
+    }
+    .back_button {
+        display: block;
+    }
+    .blur {
+        filter: blur(5px);
+        pointer-events: none;
     }
 }
 

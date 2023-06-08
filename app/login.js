@@ -24,20 +24,20 @@ module.exports = function (app, con) {
         if (pos == 1) {
             page = '/maidindex'
         } else if (pos == 2) {
-            page = '/index'
+            page = '/indexroomconfirmation'
         }
         callback(page);
     }
 
-    app.get('/index', (req, res) => {
+    // app.get('/index', (req, res) => {
 
-        if (req.session.isLoggedIn && req.session.emp_pos == 2) {
-            res.render('index.ejs')
-        } else {
-            res.render("login.ejs");
-        }
+    //     if (req.session.isLoggedIn && req.session.emp_pos == 2) {
+    //         res.render('index.ejs')
+    //     } else {
+    //         res.render("login.ejs");
+    //     }
 
-    })
+    // })
     // app.post('/index', (req, res) => {
     //     res.render(('index.ejs'))
     // })

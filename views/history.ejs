@@ -25,9 +25,12 @@
 
         <center>
             <br>
-            <div class="border p-3 rounded-3 shadow" style="max-width: 800px;">
-                <h1 class="text-center">ประวัติการจองห้องทั้งหมด</h1>
+            <div class="container">
+                <div class="border p-3 rounded-3 shadow container">
+                    <h1 class="text-center">ประวัติการจองห้องทั้งหมด</h1>
+                </div>
             </div>
+
             <br>
             <br>
             <div class="container" style="width: 50%;">
@@ -64,8 +67,8 @@
                                         </td>
                                         <td>
                                             <button type="button" class="btn btn-secondary" onclick="openModal('history_more_info'),show_his_more_info('<%= JSON.stringify(history[i]) %>')">
-                                            เพิ่มเติม
-                                        </button>
+                                                เพิ่มเติม
+                                            </button>
                                         </td>
                                     </tr>
                                     <%}%>
@@ -197,11 +200,11 @@
 
             }
 
-            document.getElementById("search_input").addEventListener("input", function() {
+            document.getElementById("search_input").addEventListener("input", function () {
                 var searchValue = this.value.toLowerCase();
                 var tableRows = document.querySelectorAll("#data_table tbody tr");
 
-                tableRows.forEach(function(row) {
+                tableRows.forEach(function (row) {
                     var rowData = row.textContent.toLowerCase();
                     if (rowData.includes(searchValue)) {
                         row.style.display = "table-row";

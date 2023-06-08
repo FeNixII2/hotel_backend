@@ -18,7 +18,7 @@ const con = mysql.createConnection({
     database: "hotel",
     connectTimeout: 10000,
 });
-
+``
 con.connect((err) => {
     if (err) {
         console.log(err);
@@ -88,13 +88,3 @@ require("./app/chambermaid.js")(app, con, moment);
 require("./app/checkout.js")(app, con, moment);
 require("./app/maidhistory.js")(app, con);
 require("./app/login.js")(app, con);
-
-function choosepage(pos, callback) {
-    let page
-    if (pos == 1) {
-        page = '/maidindex'
-    } else if (pos == 2) {
-        page = '/index'
-    }
-    callback(page);
-}

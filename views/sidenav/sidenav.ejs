@@ -1,15 +1,19 @@
 <link rel="stylesheet" href="sidenav_css/sidenav.css">
-
-
+<script src="https://kit.fontawesome.com/4dd06c2468.js" crossorigin="anonymous"></script>
 <div class="d-flex vh-100">
-    <div class=" flex-column flex-shrink-0 p-3 text-white bg-dark" id="sidenav" style="width: 280px;">
+    <div class=" flex-column flex-shrink-0 p-3 text-white bg-dark sidenav" id="sidenav" style="width: 280px;">
+        <div class="d-flex justify-content-end">
+            <a href="#" class="btn btn-link back_button" id="back_button"><i class="fa-solid fa-left-long fa-lg" style="color: white"></i></a>
+        </div>
         <a href="/indexroomconfirmation" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
             <svg class="bi me-2" width="40" height="32">
                 <use xlink:href=""></use>
             </svg>
             <span class="fs-4">ส่วนพนักงาน</span>
         </a>
-        <hr>
+        <a>
+            <hr>
+        </a>
         <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item">
                 <a href="/indexroomconfirmation" class="nav-link text-white" aria-current="page">
@@ -47,16 +51,20 @@
                 </a>
             </li>
         </ul>
-        <hr>
+        <a>
+            <hr>
+        </a>
         <a onclick="logout()" class="nav-link text-white " style="cursor: pointer;">
             <svg class="bi me-2 " width="16 " height="16 ">
                 <use xlink:href="# "></use>
             </svg> ออกจากระบบ
         </a>
     </div>
-    <main class="flex-grow-1" style="overflow: auto;">
-        <div class="div px-3" id="menu_button">
-            <span class=" menu-icon"></span>
+    <main class="flex-grow-1 main-content" id="main_content" style="overflow: auto;">
+        <div class="d-flex justify-content-start">
+            <div class="px-3 menu_button">
+                <span class=" menu-icon" id="menu_button"></span>
+            </div>
         </div>
         <script>
             function logout() {
@@ -87,18 +95,18 @@
                 })
             }
 
-            // // Function to handle toggle button click
-            // function handleToggleButton() {
-            //     var sidenav = document.getElementById("sidenav");
+            const sidenav = document.getElementById('sidenav');
+            const main_content = document.getElementById('main_content')
 
-            //     if (sidenav.style.display === "none") {
-            //         sidenav.style.display = "block";
-            //     } else {
-            //         sidenav.style.display = "none";
-            //     }
-            // }
+            const menu_button = document.getElementById('menu_button')
+            menu_button.onclick = function () {
+                sidenav.classList.toggle('sidenav-active');
+                main_content.classList.toggle('blur')
+            }
 
-            // // Event listener for toggle button click
-            // var toggleButton = document.getElementById("toggleButton");
-            // toggleButton.addEventListener('click', handleToggleButton);
+            const back_button = document.getElementById('back_button')
+            back_button.onclick = function () {
+                sidenav.classList.remove('sidenav-active');
+                main_content.classList.remove('blur')
+            }
         </script>
