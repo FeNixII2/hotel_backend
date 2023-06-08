@@ -1,6 +1,6 @@
 <div class="d-flex vh-100">
     <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" id="sidenav" style="width: 280px;">
-        <a onclick="window.app.changepage('/maidindex')" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+        <a href="maidindex" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
             <svg class="bi me-2" width="40" height="32">
                 <use xlink:href=""></use>
             </svg>
@@ -9,14 +9,14 @@
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
             <li>
-                <a href="" onclick="window.app.changepage('/maidindex')" class="nav-link text-white ">
+                <a href="/maidindex" class="nav-link text-white ">
                     <svg class="bi me-2 " width="16 " height="16 ">
                         <use xlink:href="# "></use>
                     </svg> ทำความสะอาดห้อง
                 </a>
             </li>
             <li>
-                <a href="" onclick="window.app.changepage('/maidroomchecking')" class="nav-link text-white ">
+                <a href="/maidroomchecking" class="nav-link text-white ">
                     <svg class="bi me-2 " width="16 " height="16 ">
                         <use xlink:href="# "></use>
                     </svg> ตรวจสอบห้อง
@@ -30,4 +30,4 @@
             </svg> ออกจากระบบ
         </a>
     </div>
-    <main style="width: 100%;">
+    <main class="flex-grow-1" style="overflow: auto;">

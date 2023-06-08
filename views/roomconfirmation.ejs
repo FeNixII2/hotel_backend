@@ -18,59 +18,65 @@
     <%- include('./sidenav/sidenav.ejs')%>
         <center>
             <br>
-            <div class="container">
-                <div class="border p-3 rounded-3 shadow" style="max-width: 800px;">
-                    <h1 class="text-center">ยืนยันห้องพัก</h1>
-                </div>
+            <div class="border p-3 rounded-3 shadow" style="max-width: 800px;">
+                <h1 class="text-center">ยืนยันห้องพัก</h1>
             </div>
             <br>
             <br>
+            <div class="container" style="width: 50%;">
+                <label for="search_input" class="form-label">ค้นหา:</label>
+                <input type="text" id="search_input" class="form-control" placeholder="คำค้นหา">
+            </div>
             <div class="container">
                 <div class="table-responsive">
-                    <table class="table table-hover text-center align-middle ">
-                        <thead>
-                            <tr>
-                                <th scope="col">ลำดับที่</th>
-                                <th scope="col">ห้องที่</th>
-                                <th scope="col">วันเข้าพัก</th>
-                                <th scope="col">วันเช็คเอาท์</th>
-                                <th scope="col">เพิ่มเติม</th>
-                            </tr>
-                        </thead>
-                        <tbody class="border-start border-end">
-                            <% if (unconfirm_room.length===0) { %>
-                                <tr>
-                                    <td colspan="5">
-                                        <h2>ยังไม่มีการจองห้องพัก</h2>
-                                    </td>
-                                </tr>
-                                <% } else { %>
-                                    <% for (var i=0; i < unconfirm_room.length; i++) { %>
+                    <div class="table-container">
+                        <div id="table_search" class="mb-3">
+
+                            <table class="table table-striped table-hover text-center align-middle " id='room_info'>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ลำดับที่</th>
+                                        <th scope="col">ห้องที่</th>
+                                        <th scope="col">วันเข้าพัก</th>
+                                        <th scope="col">วันเช็คเอาท์</th>
+                                        <th scope="col">เพิ่มเติม</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="border-start border-end">
+                                    <% if (unconfirm_room.length===0) { %>
                                         <tr>
-                                            <td scope="row">
-                                                <%= i %>
-                                            </td>
-                                            <td>
-                                                <%= unconfirm_room[i].num_room %>
-                                            </td>
-                                            <td>
-                                                <%= unconfirm_room[i].checkin %>
-                                            </td>
-                                            <td>
-                                                <%= unconfirm_room[i].checkout %>
-                                            </td>
-                                            <td>
-                                                <button type="button" class="btn btn-secondary" onclick="openModal('confirmModal'),show_confirm_modal_data('<%= JSON.stringify(unconfirm_room[i]) %>')">
-                                                    เพิ่มเติม
-                                                </button>
+                                            <td colspan="5">
+                                                <h2>ยังไม่มีการจองห้องพัก</h2>
                                             </td>
                                         </tr>
-                                        <% } %>
-                                            <% } %>
-                        </tbody>
-                    </table>
+                                        <% } else { %>
+                                            <% for (var i=0; i < unconfirm_room.length; i++) { %>
+                                                <tr>
+                                                    <td scope="row">
+                                                        <%= i %>
+                                                    </td>
+                                                    <td>
+                                                        <%= unconfirm_room[i].num_room %>
+                                                    </td>
+                                                    <td>
+                                                        <%= unconfirm_room[i].checkin %>
+                                                    </td>
+                                                    <td>
+                                                        <%= unconfirm_room[i].checkout %>
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-secondary" onclick="openModal('confirmModal'),show_confirm_modal_data('<%= JSON.stringify(unconfirm_room[i]) %>')">
+                                                    เพิ่มเติม
+                                                </button>
+                                                    </td>
+                                                </tr>
+                                                <% } %>
+                                                    <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-            </div>
         </center>
 
         <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -171,6 +177,10 @@
 
 
         <script>
+            // import DataTable from 'datatables.net-dt';
+
+            // let table = new DataTable('#room_info');
+
             function show_confirm_modal_data(data) {
                 var data = JSON.parse(data);
                 document.getElementById("con_cus_id").value = data.id
@@ -280,6 +290,20 @@
                     }
                 })
             }
+
+            document.getElementById("search_input").addEventListener("input", function() {
+                var searchValue = this.value.toLowerCase();
+                var tableRows = document.querySelectorAll("#room_info tbody tr");
+
+                tableRows.forEach(function(row) {
+                    var rowData = row.textContent.toLowerCase();
+                    if (rowData.includes(searchValue)) {
+                        row.style.display = "table-row";
+                    } else {
+                        row.style.display = "none";
+                    }
+                });
+            });
         </script>
 
         <%- include('./sidenav/sidenav_close.ejs')%>

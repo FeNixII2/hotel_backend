@@ -1,4 +1,4 @@
-module.exports = function(app, con, moment) {
+module.exports = function (app, con, moment) {
     app.get('/maidindex', (req, res) => {
         if (req.session.isLoggedIn && req.session.emp_pos == 1) {
             con.query("select * from rooms", (err, room) => {
@@ -10,12 +10,6 @@ module.exports = function(app, con, moment) {
         }
     })
 
-    app.post('/maidindex', (req, res) => {
-        con.query("select * from rooms", (err, room) => {
-            if (err) throw err
-            res.render(('maid/maidindex.ejs'), { room })
-        })
-    })
 
     app.post('/get_todo_data', (req, res) => {
         var { id } = req.body
@@ -43,11 +37,21 @@ module.exports = function(app, con, moment) {
         })
     })
 
-    app.post('/maidroomchecking', (req, res) => {
-        con.query("select * from reserved where status = 2", (err, wait_for_check) => {
-            if (err) throw err
-            res.render('maid/maidroomchecking.ejs', { wait_for_check })
-        })
+    app.get('/maidroomchecking', (req, res) => {
+        if (req.session.emp_pos == 1) {
+            con.query("select * from reserved where status = 2", (err, wait_for_check) => {
+                if (err) throw err
+                res.render('maid/maidroomchecking.ejs', { wait_for_check })
+            })
+        } else {
+            req.session.destroy((err) => {
+                if (err) {
+                    console.log('Error destroying session:', err);
+                } else {
+                    res.render('login.ejs');
+                }
+            });
+        }
     })
 
     app.post('/done_checking', (req, res) => {

@@ -24,52 +24,63 @@
             </center>
             <br>
             <br>
-            <table class="table table-hover text-center align-middle" id="room_checking">
-                <thead class="table-dark">
-                    <tr>
-                        <th scope="col">ลำดับที่</th>
-                        <th scope="col">รหัส</th>
-                        <th scope="col">เลขห้อง</th>
-                        <th scope="col">สถานะ</th>
-                        <th scope="col">เพิ่มเติม</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% if (wait_for_check.length===0) { %>
-                        <tr>
-                            <td colspan="5">
-                                <h2>ยังไม่มีการเช็คเอาท์</h2>
-                            </td>
-                        </tr>
-                        <% } else { %>
-                            <% for(i=0;i< wait_for_check.length;i++){%>
+            <div class="container" style="width: 50%;">
+                <label for="search_input" class="form-label">ค้นหา:</label>
+                <input type="text" id="search_input" class="form-control" placeholder="คำค้นหา">
+            </div>
+            <br>
+            <div class="container">
+                <div class="table-responsive ">
+                    <div class="table-container">
+                        <table class="table table-striped table-hover text-center align-middle" id="room_checking">
+                            <thead class="">
                                 <tr>
-                                    <td>
-                                        <%= i %>
-                                    </td>
-                                    <td>
-                                        <%= wait_for_check[i].id %>
-                                    </td>
-                                    <td>
-                                        <%= wait_for_check[i].num_room %>
-                                    </td>
-                                    <td>
-                                        <% if ( wait_for_check[i].status==1) { %>
-                                            เข้าพักอยู่
-                                            <%}else if (wait_for_check[i].status==2) {%>
-                                                รอตรวจสอบ
-                                                <%}else if (wait_for_check[i].status==3) {%>
-                                                    ตรวจสอบแล้ว
-                                                    <%}%>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-sm btn-info" onclick="getTableData('<%= wait_for_check[i].id %>')">ดูเพิ่มเติม</button>
-                                    </td>
+                                    <th scope="col">ลำดับที่</th>
+                                    <th scope="col">รหัส</th>
+                                    <th scope="col">เลขห้อง</th>
+                                    <th scope="col">สถานะ</th>
+                                    <th scope="col">เพิ่มเติม</th>
                                 </tr>
-                                <%}%>
-                                    <%}%>
-                </tbody>
-            </table>
+                            </thead>
+                            <tbody>
+                                <% if (wait_for_check.length===0) { %>
+                                    <tr>
+                                        <td colspan="5">
+                                            <h2>ยังไม่มีการเช็คเอาท์</h2>
+                                        </td>
+                                    </tr>
+                                    <% } else { %>
+                                        <% for(i=0;i< wait_for_check.length;i++){%>
+                                            <tr>
+                                                <td>
+                                                    <%= i %>
+                                                </td>
+                                                <td>
+                                                    <%= wait_for_check[i].id %>
+                                                </td>
+                                                <td>
+                                                    <%= wait_for_check[i].num_room %>
+                                                </td>
+                                                <td>
+                                                    <% if ( wait_for_check[i].status==1) { %>
+                                                        เข้าพักอยู่
+                                                        <%}else if (wait_for_check[i].status==2) {%>
+                                                            รอตรวจสอบ
+                                                            <%}else if (wait_for_check[i].status==3) {%>
+                                                                ตรวจสอบแล้ว
+                                                                <%}%>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-info" onclick="getTableData('<%= wait_for_check[i].id %>')">ดูเพิ่มเติม</button>
+                                                </td>
+                                            </tr>
+                                            <%}%>
+                                                <%}%>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="modal fade" id="maidClean_more_info" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -150,6 +161,20 @@
 
         })
     }
+
+    document.getElementById("search_input").addEventListener("input", function() {
+        var searchValue = this.value.toLowerCase();
+        var tableRows = document.querySelectorAll("#room_checking tbody tr");
+
+        tableRows.forEach(function(row) {
+            var rowData = row.textContent.toLowerCase();
+            if (rowData.includes(searchValue)) {
+                row.style.display = "table-row";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    });
 </script>
 
 </html>

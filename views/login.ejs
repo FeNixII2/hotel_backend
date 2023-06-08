@@ -9,7 +9,7 @@
 </head>
 
 <body class="d-flex justify-content-center align-items-center vh-100">
-    <div class="card p-3 mx-auto w-50" style="max-width: 500px;">
+    <div class="card mx-auto w-50 p-3">
         <h1 class="text-center mb-3">Login</h1>
         <form class="d-flex justify-content-center flex-column">
             <div class="mb-3">
@@ -27,7 +27,7 @@
 
 <script>
     const loginBtn = document.getElementById('login-btn');
-    loginBtn.addEventListener('click', function(event) {
+    loginBtn.addEventListener('click', function (event) {
         event.preventDefault();
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
@@ -59,7 +59,7 @@
     });
 
 
-    (function() {
+    (function () {
         function changepage(id) {
             fetch(id, {
                 method: 'POST'

@@ -11470,3 +11470,19 @@ fieldset:disabled .btn {
         display: none !important;
     }
 }
+
+body {}
+
+.table-container {
+    max-height: 650px;
+    overflow-y: scroll;
+}
+
+.container {
+    max-height: 100%;
+}
+
+thead {
+    position: sticky;
+    top: 0;
+}

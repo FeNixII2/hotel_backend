@@ -1,6 +1,6 @@
 const session = require("express-session");
 
-module.exports = function(app, con) {
+module.exports = function (app, con) {
     app.post('/login', (req, res) => {
         var { username, password } = req.body
         con.query("select * from emp where emp_id = ? and emp_password = ?", [username, password], (err, id) => {
@@ -10,7 +10,7 @@ module.exports = function(app, con) {
                 req.session.emp_lname = id[0].emp_lname
                 req.session.emp_pos = id[0].emp_pos
                 req.session.isLoggedIn = true;
-                choosepage(req.session.emp_pos, function(page) {
+                choosepage(req.session.emp_pos, function (page) {
                     res.send({ success: true, pos: req.session.emp_pos, page })
                 })
             } else if (id.length == 0) {
@@ -31,16 +31,16 @@ module.exports = function(app, con) {
 
     app.get('/index', (req, res) => {
 
-            if (req.session.isLoggedIn && req.session.emp_pos == 2) {
-                res.render('index.ejs')
-            } else {
-                res.redirect("login.ejs");
-            }
+        if (req.session.isLoggedIn && req.session.emp_pos == 2) {
+            res.render('index.ejs')
+        } else {
+            res.render("login.ejs");
+        }
 
-        })
-        // app.post('/index', (req, res) => {
-        //     res.render(('index.ejs'))
-        // })
+    })
+    // app.post('/index', (req, res) => {
+    //     res.render(('index.ejs'))
+    // })
 
     app.post('/logout', (req, res) => {
         req.session.destroy((err) => {

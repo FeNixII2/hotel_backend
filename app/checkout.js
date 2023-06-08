@@ -1,9 +1,19 @@
 module.exports = function (app, con, moment) {
-    app.post('/checkout', (req, res) => {
-        con.query("SELECT *,reserved.id as reserv_id FROM reserved INNER JOIN customer ON reserved.cus_id = customer.id INNER JOIN roomstype ON reserved.id_typeroom = roomstype.id WHERE status NOT IN (0, 4,5); ", (err, stay) => {
-            if (err) throw err
-            res.render(('checkout'), { stay })
-        })
+    app.get('/checkout', (req, res) => {
+        if (req.session.emp_pos == 2) {
+            con.query("SELECT *,reserved.id as reserv_id FROM reserved INNER JOIN customer ON reserved.cus_id = customer.id INNER JOIN roomstype ON reserved.id_typeroom = roomstype.id WHERE status NOT IN (0, 4,5); ", (err, stay) => {
+                if (err) throw err
+                res.render(('checkout'), { stay })
+            })
+        } else {
+            req.session.destroy((err) => {
+                if (err) {
+                    console.log('Error destroying session:', err);
+                } else {
+                    res.render('login.ejs');
+                }
+            });
+        }
     })
 
     app.post('/room_checking', (req, res) => {

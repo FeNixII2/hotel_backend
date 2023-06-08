@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ประวัติแม่บ้าน</title>
+    <style>
+
+    </style>
 </head>
 <link rel="stylesheet" href="main.css">
 <script src="bootstrap.bundle.min.js"></script>
@@ -17,49 +20,53 @@
 
         <center>
             <br>
-            <div class="container">
-                <div class="border p-3 rounded-3 shadow" style="max-width: 800px;">
-                    <h1 class="text-center">ข้อมูลทำความสะอาดห้อง</h1>
-                </div>
+            <div class="border p-3 rounded-3 shadow" style="max-width: 800px;">
+                <h1 class="text-center">ข้อมูลทำความสะอาดห้อง</h1>
             </div>
             <br>
             <br>
+            <div class="container" style="width: 50%;">
+                <label for="search_input" class="form-label">ค้นหา:</label>
+                <input type="text" id="search_input" class="form-control" placeholder="คำค้นหา">
+            </div>
             <div class="container">
                 <div class="table-responsive ">
-                    <table class="table table-hover text-center align-middle">
-                        <thead>
-                            <tr>
-                                <th scope="col">ลำดับที่</th>
-                                <th scope="col">ห้องที่</th>
-                                <th scope="col">สถานะ</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% for(i=0;i<room.length;i++){ %>
-
+                    <div class="table-container">
+                        <table class="table table-striped table-hover text-center align-middle" id="maid_his">
+                            <thead class="bg-white">
                                 <tr>
-                                    <td scope="row ">
-                                        <%= i %>
-                                    </td>
-                                    <td>
-                                        <%= room[i].num_room %>
-                                    </td>
-                                    <td id="status">
-                                        <%if(room[i].status==0){%>
-                                            ยังไม่ได้ทำความสะอาด
-                                            <%}else if(room[i].status==1){%>
-                                                กำลังทำความสะอาด
-                                                <%}else if(room[i].status==2){%>
-                                                    ทำความสะอาดเรียบร้อยแล้ว
-                                                    <%}%>
-                                    </td>
+                                    <th scope="col">ลำดับที่</th>
+                                    <th scope="col">ห้องที่</th>
+                                    <th scope="col">สถานะ</th>
                                 </tr>
-                                <%}%>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <% for(i=0;i<room.length;i++){ %>
+
+                                    <tr>
+                                        <td scope="row ">
+                                            <%= i %>
+                                        </td>
+                                        <td>
+                                            <%= room[i].num_room %>
+                                        </td>
+                                        <td id="status">
+                                            <%if(room[i].status==0){%>
+                                                ยังไม่ได้ทำความสะอาด
+                                                <%}else if(room[i].status==1){%>
+                                                    กำลังทำความสะอาด
+                                                    <%}else if(room[i].status==2){%>
+                                                        ทำความสะอาดเรียบร้อยแล้ว
+                                                        <%}%>
+                                        </td>
+                                    </tr>
+                                    <%}%>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
         </center>
+        </div>
         <%- include('./sidenav/sidenav_close.ejs') %>
             <%- include('./sidenav/sidenav_script.ejs') %>
 </body>
@@ -83,7 +90,20 @@
             statusCell.style.backgroundColor = '#77DD77';
         }
     });
-</script>
+
+    document.getElementById("search_input").addEventListener("input", function() {
+        var searchValue = this.value.toLowerCase();
+        var tableRows = document.querySelectorAll("#maid_his tbody tr");
+
+        tableRows.forEach(function(row) {
+            var rowData = row.textContent.toLowerCase();
+            if (rowData.includes(searchValue)) {
+                row.style.display = "table-row";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    });
 </script>
 
 </html>

@@ -28,43 +28,51 @@
             </div>
             <br>
             <br>
+            <div class="container" style="width: 50%;">
+                <label for="search_input" class="form-label">ค้นหา:</label>
+                <input type="text" id="search_input" class="form-control" placeholder="คำค้นหา">
+            </div>
             <div class="container">
                 <div class="table-responsive ">
-                    <table class="table table-hover text-center align-middle">
-                        <thead>
-                            <tr>
-                                <th scope="col">ลำดับที่</th>
-                                <th scope="col">ห้องที่</th>
-                                <th scope="col">สถานะ</th>
-                                <th scope="col">เริ่มทำความสะอาด</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% for(i=0;i<room.length;i++){ %>
+                    <div class="table-container">
+                        <div class="table-responsive ">
+                            <table class="table table-striped table-hover text-center align-middle" id="maid_index_table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ลำดับที่</th>
+                                        <th scope="col">ห้องที่</th>
+                                        <th scope="col">สถานะ</th>
+                                        <th scope="col">เริ่มทำความสะอาด</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% for(i=0;i<room.length;i++){ %>
 
-                                <tr>
-                                    <td scope="row ">
-                                        <%= i %>
-                                    </td>
-                                    <td>
-                                        <%= room[i].num_room %>
-                                    </td>
-                                    <td id="status">
-                                        <%if(room[i].status==0){%>
-                                            ยังไม่ได้ทำความสะอาด
-                                            <%}else if(room[i].status==1){%>
-                                                กำลังทำความสะอาด
-                                                <%}else if(room[i].status==2){%>
-                                                    ทำความสะอาดเรียบร้อยแล้ว
-                                                    <%}%>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-primary" onclick="cleaningmodal('<%= room[i].id %>')">เริ่มทำความสะอาด</button>
-                                    </td>
-                                </tr>
-                                <%}%>
-                        </tbody>
-                    </table>
+                                        <tr>
+                                            <td scope="row ">
+                                                <%= i %>
+                                            </td>
+                                            <td>
+                                                <%= room[i].num_room %>
+                                            </td>
+                                            <td id="status">
+                                                <%if(room[i].status==0){%>
+                                                    ยังไม่ได้ทำความสะอาด
+                                                    <%}else if(room[i].status==1){%>
+                                                        กำลังทำความสะอาด
+                                                        <%}else if(room[i].status==2){%>
+                                                            ทำความสะอาดเรียบร้อยแล้ว
+                                                            <%}%>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-primary" onclick="cleaningmodal('<%= room[i].id %>')">เริ่มทำความสะอาด</button>
+                                            </td>
+                                        </tr>
+                                        <%}%>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </center>
@@ -257,6 +265,19 @@
                     })
                 }
             }
+            document.getElementById("search_input").addEventListener("input", function() {
+                var searchValue = this.value.toLowerCase();
+                var tableRows = document.querySelectorAll("#maid_index_table tbody tr");
+
+                tableRows.forEach(function(row) {
+                    var rowData = row.textContent.toLowerCase();
+                    if (rowData.includes(searchValue)) {
+                        row.style.display = "table-row";
+                    } else {
+                        row.style.display = "none";
+                    }
+                });
+            });
         </script>
 
         <%- include('../maid/sidenav/sidenav_close.ejs') %>
