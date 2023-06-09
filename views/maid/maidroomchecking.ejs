@@ -155,18 +155,19 @@
                         checking_comment
                     })
                 }).then((response) => response.json()).then((body) => {
-                    window.app.changepage('/maidroomchecking')
+                    location.href = '/maidroomchecking'
+                    // window.app.changepage('/maidroomchecking')
                 })
             }
 
         })
     }
 
-    document.getElementById("search_input").addEventListener("input", function() {
+    document.getElementById("search_input").addEventListener("input", function () {
         var searchValue = this.value.toLowerCase();
         var tableRows = document.querySelectorAll("#room_checking tbody tr");
 
-        tableRows.forEach(function(row) {
+        tableRows.forEach(function (row) {
             var rowData = row.textContent.toLowerCase();
             if (rowData.includes(searchValue)) {
                 row.style.display = "table-row";
