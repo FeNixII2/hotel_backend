@@ -18,7 +18,7 @@ const con = mysql.createConnection({
     database: "hotel",
     connectTimeout: 10000,
 });
-``
+
 con.connect((err) => {
     if (err) {
         console.log(err);
