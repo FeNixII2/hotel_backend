@@ -7,10 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="/modal_css/modal.css">
+    <script src="bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.all.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css" />
-    <script src="bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="/modal_css/modal.css">
+
 </head>
 
 <body>
@@ -20,41 +21,41 @@
             <br>
             <div class="container">
                 <div class="border p-3 rounded-3 shadow">
-                    <h1 class=" text-center ">ยืนยันห้องพัก</h1>
+                    <h1 class="text-center">ยืนยันห้องพัก</h1>
                 </div>
                 <br>
             </div>
             <br>
-            <div class=" container " style=" width: 50%; ">
-                <label for=" search_input " class=" form-label ">ค้นหา:</label>
-                <input type=" text " id=" search_input " class=" form-control " placeholder=" คำค้นหา ">
+            <div class="container" style="width: 50%;">
+                <label for="search_input" class="form-label">ค้นหา:</label>
+                <input type="text" id="search_input" class="form-control" placeholder="คำค้นหา">
             </div>
-            <div class=" container ">
-                <div class=" table-responsive ">
-                    <div class=" table-container ">
-                        <div id=" table_search " class=" mb-3 ">
+            <div class="container">
+                <div class="table-responsive">
+                    <div class="table-container">
+                        <div id="table_search" class="mb-3">
 
-                            <table class=" table table-striped table-hover text-center align-middle " id='room_info'>
+                            <table class="table table-striped table-hover text-center align-middle" id='room_info'>
                                 <thead>
                                     <tr>
-                                        <th scope=" col ">ลำดับที่</th>
-                                        <th scope=" col ">ห้องที่</th>
-                                        <th scope=" col ">วันเข้าพัก</th>
-                                        <th scope=" col ">วันเช็คเอาท์</th>
-                                        <th scope=" col ">เพิ่มเติม</th>
+                                        <th scope="col">ลำดับที่</th>
+                                        <th scope="col">ห้องที่</th>
+                                        <th scope="col">วันเข้าพัก</th>
+                                        <th scope="col">วันเช็คเอาท์</th>
+                                        <th scope="col">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
-                                <tbody class=" border-start border-end ">
+                                <tbody class="border-start border-end">
                                     <% if (unconfirm_room.length===0) { %>
                                         <tr>
-                                            <td colspan=" 5 ">
+                                            <td colspan="5">
                                                 <h2>ยังไม่มีการจองห้องพัก</h2>
                                             </td>
                                         </tr>
                                         <% } else { %>
                                             <% for (var i=0; i < unconfirm_room.length; i++) { %>
                                                 <tr>
-                                                    <td scope=" row ">
+                                                    <td scope="row">
                                                         <%= i %>
                                                     </td>
                                                     <td>
@@ -67,7 +68,7 @@
                                                         <%= unconfirm_room[i].checkout %>
                                                     </td>
                                                     <td>
-                                                        <button type=" button " class=" btn btn-secondary " onclick=" openModal( 'confirmModal' ),show_confirm_modal_data( '<%= JSON.stringify(unconfirm_room[i]) %>' ) ">
+                                                        <button type="button" class="btn btn-secondary" onclick="openModal( 'confirmModal' ),show_confirm_modal_data( '<%= JSON.stringify(unconfirm_room[i]) %>' )">
                                                             เพิ่มเติม
                                                         </button>
                                                     </td>
@@ -81,102 +82,134 @@
                 </div>
         </center>
 
-        <div class=" modal fade " id=" confirmModal " tabindex=" -1 " aria-labelledby=" exampleModalLabel " aria-hidden=" true ">
-            <div class=" modal-dialog modal-content-fit ">
-                <div class=" modal-content ">
-                    <div class=" modal-header ">
-                        <h3 class=" modal-title " id=" exampleModalLabel ">ข้อมูลเพิ่มเติม</h3>
-                        <button type=" button " class=" btn-close " data-bs-dismiss=" modal " aria-label=" Close "></button>
+        <!-- <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-content-fit">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="exampleModalLabel">ข้อมูลเพิ่มเติม</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class=" modal-body ">
+                    <div class="modal-body">
                         <h4>ข้อมูลลูกค้า</h4>
-                        <div class=" table-responsive ">
-                            <table class=" table modal-table ">
+                        <div class="table-responsive">
+                            <table class="table modal-table">
                                 <tr>
-                                    <td class=" align-middle ">
-                                        <label for=" con_cus_id ">รหัสลูกค้า</label>
+                                    <td class="align-middle">
+                                        <label for="con_cus_id">รหัสลูกค้า</label>
                                     </td>
-                                    <td class=" align-middle ">
-                                        <input type=" text " name=" con_cus_id " id=" con_cus_id " readonly>
+                                    <td class="align-middle">
+                                        <input type="text" name="con_cus_id" id="con_cus_id" readonly>
                                     </td>
-                                    <td class=" align-middle ">
-                                        <label for=" con_f_name ">ชื่อ-นามสกุล</label>
+                                    <td class="align-middle">
+                                        <label for="con_f_name">ชื่อ-นามสกุล</label>
                                     </td>
-                                    <td class=" align-middle ">
-                                        <input type=" text " name=" con_f_name " id=" con_f_name " readonly>
+                                    <td class="align-middle">
+                                        <input type="text" name="con_f_name" id="con_f_name" readonly>
                                     </td>
 
                                 </tr>
                                 <tr>
-                                    <td class=" align-middle ">
-                                        <label for=" con_p_num ">เบอร์โทรติดต่อ</label>
+                                    <td class="align-middle">
+                                        <label for="con_p_num">เบอร์โทรติดต่อ</label>
                                     </td>
-                                    <td class=" align-middle ">
-                                        <input type=" text " name=" con_p_num " id=" con_p_num " readonly>
+                                    <td class="align-middle">
+                                        <input type="text" name="con_p_num" id="con_p_num" readonly>
                                     </td>
-                                    <td class=" align-middle ">
-                                        <label for=" con_email ">Email</label>
+                                    <td class="align-middle">
+                                        <label for="con_email">Email</label>
                                     </td>
-                                    <td class=" align-middle ">
-                                        <input type=" text " name=" con_email " id=" con_email " readonly>
+                                    <td class="align-middle">
+                                        <input type="text" name="con_email" id="con_email" readonly>
                                     </td>
                                 </tr>
                             </table>
                             <h4>ข้อมูลการจอง</h4>
-                            <table class=" table modal-table " id=" confirm_data_table ">
+                            <table class="table modal-table" id="confirm_data_table">
                                 <tr>
-                                    <td class=" align-middle ">
-                                        <label for=" con_reserv_id ">รหัสการจอง</label>
+                                    <td class="align-middle">
+                                        <label for="con_reserv_id">รหัสการจอง</label>
                                     </td>
-                                    <td class=" align-middle ">
-                                        <input type=" text " name=" con_reserv_id " id=" con_reserv_id " readonly>
+                                    <td class="align-middle">
+                                        <input type="text" name="con_reserv_id" id="con_reserv_id" readonly>
                                     </td>
-                                    <td class=" align-middle ">
-                                        <label for=" con_room_number ">เลขห้อง</label>
+                                    <td class="align-middle">
+                                        <label for="con_room_number">เลขห้อง</label>
                                     </td>
-                                    <td class=" align-middle ">
-                                        <input type=" text " name=" con_room_number " id=" con_room_number " readonly>
+                                    <td class="align-middle">
+                                        <input type="text" name="con_room_number" id="con_room_number" readonly>
                                     </td>
-                                    <td class=" align-middle ">
-                                        <label for=" con_room_type ">ประเภทห้อง</label>
+                                    <td class="align-middle">
+                                        <label for="con_room_type">ประเภทห้อง</label>
                                     </td>
-                                    <td class=" align-middle ">
-                                        <input type=" text " name=" con_room_type " id=" con_room_type " readonly>
+                                    <td class="align-middle">
+                                        <input type="text" name="con_room_type" id="con_room_type" readonly>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class=" align-middle ">
-                                        <label for=" con_check_in ">วันเข้าพัก</label>
+                                    <td class="align-middle">
+                                        <label for="con_check_in">วันเข้าพัก</label>
                                     </td>
-                                    <td class=" align-middle ">
-                                        <input type=" text " name=" con_check_in " id=" con_check_in " readonly>
+                                    <td class="align-middle">
+                                        <input type="text" name="con_check_in" id="con_check_in" readonly>
                                     </td>
-                                    <td class=" align-middle ">
-                                        <label for=" con_check_out ">วันออก</label>
+                                    <td class="align-middle">
+                                        <label for="con_check_out">วันออก</label>
                                     </td>
-                                    <td class=" align-middle ">
-                                        <input type=" text " name=" con_check_out " id=" con_check_out " readonly>
+                                    <td class="align-middle">
+                                        <input type="text" name="con_check_out" id="con_check_out" readonly>
                                     </td>
                                 </tr>
                             </table>
-                            <div class=" form-floating ">
+                            <div class="form-floating">
                                 เพิ่มเติม
                                 <br>
-                                <textarea class=" form-control " placeholder=" Enter your message here " id=" con_more_info " rows=" 30 " readonly></textarea>
-                                <label for=" message "></label>
+                                <textarea class="form-control" placeholder="Enter your message here" id="con_more_info" rows="30" readonly></textarea>
+                                <label for="message"></label>
                             </div>
 
                         </div>
                     </div>
-                    <div class=" modal-footer ">
-                        <button type=" button " class=" btn btn-secondary " data-bs-dismiss=" modal ">ปิด</button>
-                        <button type=" button " class=" btn btn-danger " id=" cancel_room " onclick=" cancelRoom(); ">ยกเลิก</button>
-                        <button type=" button " class=" btn btn-primary " id=" room_confirm_btn " onclick=" confirmRoom() ">ยืนยันการจอง</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+                        <button type="button" class="btn btn-danger" id="cancel_room" onclick="cancelRoom();">ยกเลิก</button>
+                        <button type="button" class="btn btn-primary" id="room_confirm_btn" onclick="confirmRoom()">ยืนยันการจอง</button>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <style>
+            .modal-dialog {
+                margin: 5 auto;
+            }
+        </style>
+
+        <div class="modal fade " id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog  modal-content-fit ">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="exampleModalLabel">ข้อมูลเพิ่มเติม</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <label for="con_cus_id">รหัสลูกค้า</label>
+                                <input class="form-control" type="text" name="con_cus_id" id="con_cus_id" readonly>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="con_cus_id">ชื่อ-นามสกุล</label>
+                                <input class="form-control" type="text" name="con_f_name" id="con_f_name" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+                        <button type="button" class="btn btn-danger" id="cancel_room" onclick="cancelRoom();">ยกเลิก</button>
+                        <button type="button" class="btn btn-primary" id="room_confirm_btn" onclick="confirmRoom()">ยืนยันการจอง</button>
                     </div>
                 </div>
             </div>
         </div>
-
 
         <script>
             // import DataTable from 'datatables.net-dt';
@@ -184,17 +217,19 @@
             // let table = new DataTable('#room_info');
 
             function show_confirm_modal_data(data) {
+
                 var data = JSON.parse(data);
-                document.getElementById(" con_cus_id ").value = data.id
-                document.getElementById(" con_f_name ").value = data.f_name + " " + data.l_name
-                document.getElementById(" con_p_num ").value = data.p_num
-                document.getElementById(" con_email ").value = data.email
-                document.getElementById(" con_reserv_id ").value = data.reserv_id
-                document.getElementById(" con_room_number ").value = data.num_room
-                document.getElementById(" con_room_type ").value = data.name_th + " " + data.bed
-                document.getElementById(" con_check_in ").value = data.checkin
-                document.getElementById(" con_check_out ").value = data.checkout
-                document.getElementById(" con_more_info ").value = data.more_info
+                console.log(data);
+                document.getElementById("con_cus_id").value = data.id
+                document.getElementById("con_f_name").value = data.f_name + " " + data.l_name
+                document.getElementById("con_p_num").value = data.p_num
+                document.getElementById("con_email").value = data.email
+                document.getElementById("con_reserv_id").value = data.reserv_id
+                document.getElementById("con_room_number").value = data.num_room
+                document.getElementById("con_room_type").value = data.name_th + " " + data.bed
+                document.getElementById("con_check_in").value = data.checkin
+                document.getElementById("con_check_out").value = data.checkout
+                document.getElementById("con_more_info").value = data.more_info
             }
 
             function confirmRoom() {
@@ -295,16 +330,16 @@
                 })
             }
 
-            document.getElementById(" search_input ").addEventListener(" input ", function () {
+            document.getElementById("search_input").addEventListener("input", function () {
                 var searchValue = this.value.toLowerCase();
-                var tableRows = document.querySelectorAll(" #room_info tbody tr ");
+                var tableRows = document.querySelectorAll("#room_info tbody tr");
 
                 tableRows.forEach(function (row) {
                     var rowData = row.textContent.toLowerCase();
                     if (rowData.includes(searchValue)) {
-                        row.style.display = " table-row ";
+                        row.style.display = "table-row";
                     } else {
-                        row.style.display = " none ";
+                        row.style.display = "none";
                     }
                 });
             });

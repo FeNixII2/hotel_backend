@@ -4,6 +4,7 @@ module.exports = function (app, con, transporter, fs, path, pdf, moment) {
             con.query("SELECT reserved.id'reserv_id', reserved.*,customer.*,payment.pay_type,roomstype.name_th,roomstype.bed FROM reserved,customer,payment,roomstype WHERE reserved.cus_id = customer.id AND reserved.payment = payment.id AND reserved.id_typeroom = roomstype.id AND reserved.status = '0'", (err, unconfirm_room) => {
                 if (err) throw err;
                 res.render('roomconfirmation', { unconfirm_room })
+                console.log(unconfirm_room);
             });
         } else {
             req.session.destroy((err) => {
