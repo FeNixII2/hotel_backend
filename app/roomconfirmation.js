@@ -4,7 +4,7 @@ module.exports = function (app, con, transporter, fs, path, pdf, moment) {
             con.query("SELECT reserved.id'reserv_id', reserved.*,customer.*,payment.pay_type,roomstype.name_th,roomstype.bed FROM reserved,customer,payment,roomstype WHERE reserved.cus_id = customer.id AND reserved.payment = payment.id AND reserved.id_typeroom = roomstype.id AND reserved.status = '0'", (err, unconfirm_room) => {
                 if (err) throw err;
                 res.render('roomconfirmation', { unconfirm_room })
-                console.log(unconfirm_room);
+                // console.log(unconfirm_room);
             });
         } else {
             req.session.destroy((err) => {
@@ -25,7 +25,7 @@ module.exports = function (app, con, transporter, fs, path, pdf, moment) {
             const checkin = moment(id.checkin, 'DD-MM-YYYY');
             const checkout = moment(id.checkout, 'DD-MM-YYYY');
             const numberOfDays = checkout.diff(checkin, 'days');
-            console.log(numberOfDays);
+            // console.log(numberOfDays);
             var price = id.price * numberOfDays
             con.query("update reserved set status = '1' where id = ?", [reserv_id], (err, result) => {
                 const html = `<!DOCTYPE html>
@@ -184,7 +184,7 @@ module.exports = function (app, con, transporter, fs, path, pdf, moment) {
 
                 pdf.create(html, {}).toFile(path.join(directoryPath, 'receipt' + id.reserved_id + '.pdf'), function (err, res) {
                     if (err) return console.log(err);
-                    console.log('PDF created successfully.');
+                    // console.log('PDF created successfully.');
 
                     // Prepare email data
                     const mailOptions = {
@@ -204,7 +204,7 @@ module.exports = function (app, con, transporter, fs, path, pdf, moment) {
                         if (error) {
                             console.log(error);
                         } else {
-                            console.log('Email sent successfully:', info.response);
+                            // console.log('Email sent successfully:', info.response);
 
                             // Delete the PDF file after sending email
                             // fs.unlinkSync(path.join(__dirname, 'receipt' + id.reserved_id + '.pdf'));
