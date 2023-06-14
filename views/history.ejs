@@ -27,7 +27,7 @@
             <br>
             <div class="container">
                 <div class="border p-3 rounded-3 shadow container">
-                    <h1 class="text-center">ประวัติการจองห้องทั้งหมด</h1>
+                    <h1 class="text-center fs-6 text-sm-5 text-md-4 text-lg-3 fs-sm-6 fs-md-7 fs-lg-8 ">ประวัติการจองห้องทั้งหมด</h1>
                 </div>
             </div>
 
@@ -79,103 +79,78 @@
             </div>
         </center>
 
-        <div class="modal fade" id="history_more_info" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-content-fit">
+        <div class="modal fade " id="history_more_info" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-content-fit mw-100">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title" id="exampleModalLabel">ข้อมูลเพิ่มเติม</h3>
+                    <div class="modal-header sticky-top">
+                        <h2 class="modal-title" id="exampleModalLabel">ข้อมูลเพิ่มเติม</h2>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body " style="overflow-y: auto;">
                         <h4>ข้อมูลลูกค้า</h4>
-                        <div class="table-responsive">
-                            <table class="table modal-table ">
-                                <tr>
-                                    <td class="align-middle">
-                                        <label for="his_cus_id">รหัสลูกค้า</label>
-                                    </td>
-                                    <td class="align-middle">
-                                        <input type="text" name="his_cus_id" id="his_cus_id" readonly>
-                                    </td>
-                                    <td class="align-middle">
-                                        <label for="his_f_name">ชื่อ-นามสกุล</label>
-                                    </td>
-                                    <td class="align-middle">
-                                        <input type="text" name="his_f_name" id="his_f_name" readonly>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td class="align-middle">
-                                        <label for="his_p_num">เบอร์โทรติดต่อ</label>
-                                    </td>
-                                    <td class="align-middle">
-                                        <input type="text" name="his_p_num" id="his_p_num" readonly>
-                                    </td>
-                                    <td class="align-middle">
-                                        <label for="his_email">Email</label>
-                                    </td>
-                                    <td class="align-middle">
-                                        <input type="text" name="his_email" id="his_email" readonly>
-                                    </td>
-                                </tr>
-                            </table>
-                            <h4>ข้อมูลการจอง</h4>
-                            <table class="table modal-table" id="his_data_table">
-                                <tr>
-                                    <td class="align-middle">
-                                        <label for="his_reserv_id">รหัสการจอง</label>
-                                    </td>
-                                    <td class="align-middle">
-                                        <input type="text" name="his_reserv_id" id="his_reserv_id" readonly>
-                                    </td>
-                                    <td class="align-middle">
-                                        <label for="his_room_number">เลขห้อง</label>
-                                    </td>
-                                    <td class="align-middle">
-                                        <input type="text" name="his_room_number" id="his_room_number" readonly>
-                                    </td>
-                                    <td class="align-middle">
-                                        <label for="his_room_type">ประเภทห้อง</label>
-                                    </td>
-                                    <td class="align-middle">
-                                        <input type="text" name="his_room_type" id="his_room_type" readonly>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="align-middle">
-                                        <label for="his_check_in">วันเข้าพัก</label>
-                                    </td>
-                                    <td class="align-middle">
-                                        <input type="text" name="his_check_in" id="his_check_in" readonly>
-                                    </td>
-                                    <td class="align-middle">
-                                        <label for="his_check_out">วันออก</label>
-                                    </td>
-                                    <td class="align-middle">
-                                        <input type="text" name="his_check_out" id="his_check_out" readonly>
-                                    </td>
-                                    <td class="align-middle">
-                                        <label for="his_status">สถานะ</label>
-                                    </td>
-                                    <td class="align-middle">
-                                        <input type="text" name="his_status" id="his_status" readonly>
-                                    </td>
-                                </tr>
-                            </table>
-                            <div class="form-floating">
-                                เพิ่มเติม
-                                <br>
-                                <textarea class="form-control" placeholder="Enter your message here" id="his_more_info" rows="30" readonly></textarea>
-                                <label for="message"></label>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <label for="his_cus_id">รหัสลูกค้า</label>
+                                <input type="text" name="his_cus_id" id="his_cus_id" readonly class="form-control">
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="his_f_name">ชื่อ-นามสกุล</label>
+                                <input type="text" name="his_f_name" id="his_f_name" readonly class="form-control">
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <label for="his_p_num">เบอร์โทรติดต่อ</label>
+                                <input type="text" name="his_p_num" id="his_p_num" readonly class="form-control">
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="his_email">Email</label>
+                                <input type="text" name="his_email" id="his_email" readonly class="form-control">
+                            </div>
                         </div>
+                        <h4>ข้อมูลการจอง</h4>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4">
+                                <label for="his_reserv_id">รหัสการจอง</label>
+                                <input type="text" name="his_reserv_id" id="his_reserv_id" readonly class="form-control">
+                            </div>
+                            <div class="col-sm-12 col-md-4">
+                                <label for="his_room_number">เลขห้อง</label>
+                                <input type="text" name="his_room_number" id="his_room_number" readonly class="form-control">
+                            </div>
+                            <div class="col-sm-12 col-md-4">
+                                <label for="his_room_type">ประเภทห้อง</label>
+                                <input type="text" name="his_room_type" id="his_room_type" readonly class="form-control">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4">
+                                <label for="his_check_in">วันเข้าพัก</label>
+                                <input type="text" name="his_check_in" id="his_check_in" readonly class="form-control">
+                            </div>
+                            <div class="col-sm-12 col-md-4">
+                                <label for="his_check_out">วันออก</label>
+                                <input type="text" name="his_check_out" id="his_check_out" readonly class="form-control">
+                            </div>
+                            <div class="col-sm-12 col-md-4">
+                                <label for="his_status">สถานะ</label>
+                                <input type="text" name="his_status" id="his_status" readonly class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-floating">
+                            เพิ่มเติม
+                            <br>
+                            <textarea class="form-control" placeholder="Enter your message here" id="his_more_info" rows="30" readonly></textarea>
+                            <label for="message"></label>
+                        </div>
+                    </div>
+                    <div class="modal-footer sticky-bottom">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
 
         <!-- <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script> -->
@@ -200,11 +175,11 @@
 
             }
 
-            document.getElementById("search_input").addEventListener("input", function () {
+            document.getElementById("search_input").addEventListener("input", function() {
                 var searchValue = this.value.toLowerCase();
                 var tableRows = document.querySelectorAll("#data_table tbody tr");
 
-                tableRows.forEach(function (row) {
+                tableRows.forEach(function(row) {
                     var rowData = row.textContent.toLowerCase();
                     if (rowData.includes(searchValue)) {
                         row.style.display = "table-row";
