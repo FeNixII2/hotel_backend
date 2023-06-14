@@ -81,11 +81,11 @@
             </div>
         </center>
         <script>
-            document.getElementById("search_input").addEventListener("input", function () {
+            document.getElementById("search_input").addEventListener("input", function() {
                 var searchValue = this.value.toLowerCase();
                 var tableRows = document.querySelectorAll("#payment_his tbody tr");
 
-                tableRows.forEach(function (row) {
+                tableRows.forEach(function(row) {
                     var rowData = row.textContent.toLowerCase();
                     if (rowData.includes(searchValue)) {
                         row.style.display = "table-row";
