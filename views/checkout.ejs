@@ -98,21 +98,21 @@
                         <div class="modal-body " style="overflow-y: auto;">
                             <h5>ข้อมูลลูกค้า</h5>
                             <div class="row">
-                                <div class=" col-sm-12">
+                                <div class=" col-sm-12 col-md-6">
                                     <label for="checkout_cus_id">รหัสลูกค้า</label>
                                     <input class="form-control" type="text" name="checkout_cus_id" id="checkout_cus_id" readonly>
                                 </div>
-                                <div class=" col-sm-12">
+                                <div class=" col-sm-12 col-md-6">
                                     <label for="checkout_f_name">ชื่อ-นามสกุล</label>
                                     <input class="form-control" type="text" name="checkout_f_name" id="checkout_f_name" readonly>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class=" col-sm-12">
+                                <div class=" col-sm-12 col-md-6">
                                     <label for="checkout_p_num">เบอร์โทรติดต่อ</label>
                                     <input class="form-control" type="text" name="checkout_p_num" id="checkout_p_num" readonly>
                                 </div>
-                                <div class=" col-sm-12">
+                                <div class=" col-sm-12 col-md-6">
                                     <label for="checkout_email">Email</label>
                                     <input class="form-control" type="text" name="checkout_email" id="checkout_email" readonly>
                                 </div>
@@ -120,29 +120,29 @@
                             <br>
                             <h5>ข้อมูลการจอง</h5>
                             <div class="row">
-                                <div class=" col-sm-12">
+                                <div class=" col-sm-12 col-md-4">
                                     <label for="checkout_reserv_id">รหัสการจอง</label>
                                     <input class="form-control" type="text" name="checkout_reserv_id" id="checkout_reserv_id" readonly>
                                 </div>
-                                <div class=" col-sm-12">
+                                <div class=" col-sm-12 col-md-4">
                                     <label for="checkout_room_number">เลขห้อง</label>
                                     <input class="form-control" type="text" name="checkout_room_number" id="checkout_room_number" readonly>
                                 </div>
-                                <div class=" col-sm-12">
+                                <div class=" col-sm-12 col-md-4">
                                     <label for="checkout_room_type">ประเภทห้อง</label>
                                     <input class="form-control" type="text" name="checkout_room_type" id="checkout_room_type" readonly>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class=" col-sm-12">
+                                <div class=" col-sm-12 col-md-4">
                                     <label for="checkout_check_in">วันเข้าพัก</label>
                                     <input class="form-control" type="text" name="checkout_check_in" id="checkout_check_in" readonly>
                                 </div>
-                                <div class=" col-sm-12">
+                                <div class=" col-sm-12 col-md-4">
                                     <label for="checkout_check_out">วันออก</label>
                                     <input class="form-control" type="text" name="checkout_check_out" id="checkout_check_out" readonly>
                                 </div>
-                                <div class=" col-sm-12">
+                                <div class=" col-sm-12 col-md-4">
                                     <label for="checkout_check_out">สถานะ</label>
                                     <input class="form-control" type="text" name="checkout_status" id="checkout_status" readonly>
                                 </div>
@@ -287,7 +287,7 @@
                 if (data.status == 1) {
                     btn.onclick = null
                     btn.disabled = false
-                    btn.addEventListener('click', function () {
+                    btn.addEventListener('click', function() {
                         room_checking(btn.value);
                     });
                     btn.innerHTML = 'ตรวจสอบห้องพัก'
@@ -301,7 +301,7 @@
                     btn.onclick = null
                     btn.disabled = false
                     btn.innerHTML = 'เช็คเอาท์'
-                    btn.addEventListener('click', function () {
+                    btn.addEventListener('click', function() {
                         confirm_checkout(data.cus_id);
                     });
                 }
@@ -336,7 +336,7 @@
                                 timer: 1500
                             }).then(() => {
                                 location.href = '/checkout'
-                                // window.app.changepage('/checkout');
+                                    // window.app.changepage('/checkout');
                             });
                         })
                     }
@@ -369,24 +369,23 @@
                             })
                         }).then((response) => response.json()).then((body) => {
                             Swal.fire({
-                                position: 'top',
                                 icon: 'success',
                                 title: 'บันทึกข้อมูลเรียบร้อยแล้ว',
                                 showConfirmButton: false,
                                 timer: 1500
                             }).then(() => {
                                 location.href = '/checkout'
-                                // window.app.changepage('/checkout');
+                                    // window.app.changepage('/checkout');
                             });
                         })
                     }
                 })
             }
-            document.getElementById("search_input").addEventListener("input", function () {
+            document.getElementById("search_input").addEventListener("input", function() {
                 var searchValue = this.value.toLowerCase();
                 var tableRows = document.querySelectorAll("#checkout_data_table tbody tr");
 
-                tableRows.forEach(function (row) {
+                tableRows.forEach(function(row) {
                     var rowData = row.textContent.toLowerCase();
                     if (rowData.includes(searchValue)) {
                         row.style.display = "table-row";
