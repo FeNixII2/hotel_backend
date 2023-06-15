@@ -1,4 +1,4 @@
-module.exports = function (app, con, moment) {
+module.exports = function(app, con, moment) {
     app.get('/checkout', (req, res) => {
         if (req.session.emp_pos == 2) {
             con.query("SELECT *,reserved.id as reserv_id FROM reserved INNER JOIN customer ON reserved.cus_id = customer.id INNER JOIN roomstype ON reserved.id_typeroom = roomstype.id WHERE status NOT IN (0, 4,5); ", (err, stay) => {
