@@ -11484,3 +11484,12 @@ thead {
     position: sticky;
     top: 0;
 }
+
+@media (max-width: 1024px) {
+    .table {
+        width: max-content;
+    }
+    .table-responsive {
+        width: max-content;
+    }
+}
