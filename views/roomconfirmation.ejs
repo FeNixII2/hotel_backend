@@ -6,11 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="main.css">
-    <script src="bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.all.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css" />
-    <link rel="stylesheet" href="/modal_css/modal.css">
 
 </head>
 
@@ -195,14 +190,14 @@
                     if (result.isConfirmed) {
                         var id = document.getElementById('con_reserv_id').value
                         fetch('/confirmroom', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({
-                                id
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    id
+                                })
                             })
-                        })
                             .then(response => {
                                 if (!response.ok) {
                                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -219,7 +214,7 @@
                                     showConfirmButton: false
                                 }).then(() => {
                                     location.href = '/indexroomconfirmation'
-                                    // window.app.changepage('/indexroomconfirmation')
+                                        // window.app.changepage('/indexroomconfirmation')
                                 });
                             })
                             .catch(error => {
@@ -245,14 +240,14 @@
                         var id = document.getElementById('con_reserv_id').value
 
                         fetch('/cancelroom', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({
-                                id
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    id
+                                })
                             })
-                        })
                             .then(response => {
                                 if (!response.ok) {
                                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -269,7 +264,7 @@
                                     showConfirmButton: false
                                 }).then(() => {
                                     location.href = '/indexroomconfirmation'
-                                    // window.app.changepage('/indexroomconfirmation')
+                                        // window.app.changepage('/indexroomconfirmation')
                                 });
                             })
                             .catch(error => {
@@ -279,11 +274,11 @@
                 })
             }
 
-            document.getElementById("search_input").addEventListener("input", function () {
+            document.getElementById("search_input").addEventListener("input", function() {
                 var searchValue = this.value.toLowerCase();
                 var tableRows = document.querySelectorAll("#room_info tbody tr");
 
-                tableRows.forEach(function (row) {
+                tableRows.forEach(function(row) {
                     var rowData = row.textContent.toLowerCase();
                     if (rowData.includes(searchValue)) {
                         row.style.display = "table-row";

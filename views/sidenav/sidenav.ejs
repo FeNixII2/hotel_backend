@@ -1,5 +1,19 @@
-<link rel="stylesheet" href="sidenav_css/sidenav.css">
+<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="/sidenav_css/sidenav.css">
+<link rel="stylesheet" href="/modal_css/modal.css">
+<link rel="stylesheet" href="sweetalert2.min.css" />
+<link rel="stylesheet" href="jquery.dataTables.min.css">
+
+<script src="jquery.min.js"></script>
+
+<script src="bootstrap.bundle.min.js"></script>
+
+<script src="jquery.dataTables.min.js"></script>
+
+<script src="sweetalert2.all.min.js"></script>
+
 <script src="https://kit.fontawesome.com/4dd06c2468.js" crossorigin="anonymous"></script>
+
 <div class="d-flex vh-100">
     <div class=" flex-column flex-shrink-0 p-3 text-white bg-dark sidenav" id="sidenav" style="width: 280px;">
         <div class="d-flex justify-content-end">
@@ -75,8 +89,8 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         fetch('/logout', {
-                            method: 'POST'
-                        })
+                                method: 'POST'
+                            })
                             .then(response => {
                                 if (response.ok) {
                                     // Logout successful
@@ -99,13 +113,13 @@
             const main_content = document.getElementById('main_content')
 
             const menu_button = document.getElementById('menu_button')
-            menu_button.onclick = function () {
+            menu_button.onclick = function() {
                 sidenav.classList.toggle('sidenav-active');
                 main_content.classList.toggle('blur')
             }
 
             const back_button = document.getElementById('back_button')
-            back_button.onclick = function () {
+            back_button.onclick = function() {
                 sidenav.classList.remove('sidenav-active');
                 main_content.classList.remove('blur')
             }

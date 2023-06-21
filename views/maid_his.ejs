@@ -10,10 +10,6 @@
 
     </style>
 </head>
-<link rel="stylesheet" href="main.css">
-<script src="bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.all.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css" />
 
 <body>
     <%- include('./sidenav/sidenav.ejs') %>
@@ -94,11 +90,11 @@
         }
     });
 
-    document.getElementById("search_input").addEventListener("input", function () {
+    document.getElementById("search_input").addEventListener("input", function() {
         var searchValue = this.value.toLowerCase();
         var tableRows = document.querySelectorAll("#maid_his tbody tr");
 
-        tableRows.forEach(function (row) {
+        tableRows.forEach(function(row) {
             var rowData = row.textContent.toLowerCase();
             if (rowData.includes(searchValue)) {
                 row.style.display = "table-row";

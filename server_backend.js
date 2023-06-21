@@ -64,7 +64,7 @@ app.use(
 );
 
 //port setting to run on the server
-var port = 8888;
+var port = 7777;
 app.listen(port, () => {
     console.log("web start listening on port  : " + port);
 });
