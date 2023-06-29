@@ -11491,5 +11491,6 @@ thead {
     }
     .table-responsive {
         width: max-content;
+        width: 100%;
     }
 }

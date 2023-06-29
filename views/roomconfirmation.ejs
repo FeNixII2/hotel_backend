@@ -273,16 +273,16 @@
                 })
             }
 
-            document.getElementById("search_input ").addEventListener("input ", function() {
+            document.getElementById("search_input").addEventListener("input", function() {
                 var searchValue = this.value.toLowerCase();
-                var tableRows = document.querySelectorAll("#room_info tbody tr ");
+                var tableRows = document.querySelectorAll("#room_info tbody tr");
 
                 tableRows.forEach(function(row) {
                     var rowData = row.textContent.toLowerCase();
                     if (rowData.includes(searchValue)) {
-                        row.style.display = "table-row ";
+                        row.style.display = "table-row";
                     } else {
-                        row.style.display = "none ";
+                        row.style.display = "none";
                     }
                 });
             });
