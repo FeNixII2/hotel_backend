@@ -259,18 +259,18 @@
                                     timer: 1500
                                 }).then(() => {
                                     location.href = '/maidindex'
-                                    // window.app.changepage('/maidindex');
+                                        // window.app.changepage('/maidindex');
                                 });
                             })
                         }
                     })
                 }
             }
-            document.getElementById("search_input").addEventListener("input", function () {
+            document.getElementById("search_input").addEventListener("input", function() {
                 var searchValue = this.value.toLowerCase();
                 var tableRows = document.querySelectorAll("#maid_index_table tbody tr");
 
-                tableRows.forEach(function (row) {
+                tableRows.forEach(function(row) {
                     var rowData = row.textContent.toLowerCase();
                     if (rowData.includes(searchValue)) {
                         row.style.display = "table-row";

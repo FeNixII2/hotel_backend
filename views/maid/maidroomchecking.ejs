@@ -71,7 +71,7 @@
                                                                 <%}%>
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-sm btn-info" onclick="getTableData('<%= wait_for_check[i].id %>')">ดูเพิ่มเติม</button>
+                                                    <button class="btn btn-primary" onclick="getTableData('<%= wait_for_check[i].id %>')">ดูเพิ่มเติม</button>
                                                 </td>
                                             </tr>
                                             <%}%>
@@ -156,18 +156,18 @@
                     })
                 }).then((response) => response.json()).then((body) => {
                     location.href = '/maidroomchecking'
-                    // window.app.changepage('/maidroomchecking')
+                        // window.app.changepage('/maidroomchecking')
                 })
             }
 
         })
     }
 
-    document.getElementById("search_input").addEventListener("input", function () {
+    document.getElementById("search_input").addEventListener("input", function() {
         var searchValue = this.value.toLowerCase();
         var tableRows = document.querySelectorAll("#room_checking tbody tr");
 
-        tableRows.forEach(function (row) {
+        tableRows.forEach(function(row) {
             var rowData = row.textContent.toLowerCase();
             if (rowData.includes(searchValue)) {
                 row.style.display = "table-row";

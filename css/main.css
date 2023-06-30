@@ -11485,6 +11485,16 @@ thead {
     top: 0;
 }
 
+@media (max-width: 768) {
+    .table {
+        width: max-content;
+    }
+    .table-responsive {
+        width: max-content;
+        width: 100%;
+    }
+}
+
 @media (max-width: 1024px) {
     .table {
         width: max-content;
