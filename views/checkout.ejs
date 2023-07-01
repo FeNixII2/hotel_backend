@@ -91,55 +91,62 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body " style="overflow-y: auto;">
-                            <h5>ข้อมูลลูกค้า</h5>
-                            <div class="row">
-                                <div class=" col-sm-12 col-md-6">
-                                    <label for="checkout_cus_id">รหัสลูกค้า</label>
-                                    <input class="form-control" type="text" name="checkout_cus_id" id="checkout_cus_id" readonly>
-                                </div>
-                                <div class=" col-sm-12 col-md-6">
-                                    <label for="checkout_f_name">ชื่อ-นามสกุล</label>
-                                    <input class="form-control" type="text" name="checkout_f_name" id="checkout_f_name" readonly>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class=" col-sm-12 col-md-6">
-                                    <label for="checkout_p_num">เบอร์โทรติดต่อ</label>
-                                    <input class="form-control" type="text" name="checkout_p_num" id="checkout_p_num" readonly>
-                                </div>
-                                <div class=" col-sm-12 col-md-6">
-                                    <label for="checkout_email">Email</label>
-                                    <input class="form-control" type="text" name="checkout_email" id="checkout_email" readonly>
+                            <div class="card p-3" id="customer-info">
+                                <h5>ข้อมูลลูกค้า</h5>
+                                <div class="row">
+                                    <div class=" col-sm-12 col-md-6">
+                                        <label for="checkout_cus_id">รหัสลูกค้า</label>
+                                        <input class="form-control" type="text" name="checkout_cus_id" id="checkout_cus_id" readonly>
+                                    </div>
+                                    <div class=" col-sm-12 col-md-6">
+                                        <label for="checkout_f_name">ชื่อ-นามสกุล</label>
+                                        <input class="form-control" type="text" name="checkout_f_name" id="checkout_f_name" readonly>
+                                    </div>
+                                    <div class=" col-sm-12 col-md-6">
+                                        <label for="checkout_p_num">เบอร์โทรติดต่อ</label>
+                                        <input class="form-control" type="text" name="checkout_p_num" id="checkout_p_num" readonly>
+                                    </div>
+                                    <div class=" col-sm-12 col-md-6">
+                                        <label for="checkout_email">Email</label>
+                                        <input class="form-control" type="text" name="checkout_email" id="checkout_email" readonly>
+                                    </div>
                                 </div>
                             </div>
                             <br>
-                            <h5>ข้อมูลการจอง</h5>
-                            <div class="row">
-                                <div class=" col-sm-12 col-md-4">
-                                    <label for="checkout_reserv_id">รหัสการจอง</label>
-                                    <input class="form-control" type="text" name="checkout_reserv_id" id="checkout_reserv_id" readonly>
+                            <div class="card p-3" id="reserved-info">
+                                <h5>ข้อมูลการจอง</h5>
+                                <div class="row">
+                                    <div class=" col-sm-12 col-md-4">
+                                        <label for="checkout_reserv_id">รหัสการจอง</label>
+                                        <input class="form-control" type="text" name="checkout_reserv_id" id="checkout_reserv_id" readonly>
+                                    </div>
+                                    <div class=" col-sm-12 col-md-4">
+                                        <label for="checkout_room_number">เลขห้อง</label>
+                                        <input class="form-control" type="text" name="checkout_room_number" id="checkout_room_number" readonly>
+                                    </div>
+                                    <div class=" col-sm-12 col-md-4">
+                                        <label for="checkout_room_type">ประเภทห้อง</label>
+                                        <input class="form-control" type="text" name="checkout_room_type" id="checkout_room_type" readonly>
+                                    </div>
                                 </div>
-                                <div class=" col-sm-12 col-md-4">
-                                    <label for="checkout_room_number">เลขห้อง</label>
-                                    <input class="form-control" type="text" name="checkout_room_number" id="checkout_room_number" readonly>
+                                <div class="row">
+                                    <div class=" col-sm-12 col-md-4">
+                                        <label for="checkout_check_in">วันเข้าพัก</label>
+                                        <input class="form-control" type="text" name="checkout_check_in" id="checkout_check_in" readonly>
+                                    </div>
+                                    <div class=" col-sm-12 col-md-4">
+                                        <label for="checkout_check_out">วันออก</label>
+                                        <input class="form-control" type="text" name="checkout_check_out" id="checkout_check_out" readonly>
+                                    </div>
+                                    <div class=" col-sm-12 col-md-4">
+                                        <label for="checkout_check_out">สถานะ</label>
+                                        <input class="form-control" type="text" name="checkout_status" id="checkout_status" readonly>
+                                    </div>
                                 </div>
-                                <div class=" col-sm-12 col-md-4">
-                                    <label for="checkout_room_type">ประเภทห้อง</label>
-                                    <input class="form-control" type="text" name="checkout_room_type" id="checkout_room_type" readonly>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class=" col-sm-12 col-md-4">
-                                    <label for="checkout_check_in">วันเข้าพัก</label>
-                                    <input class="form-control" type="text" name="checkout_check_in" id="checkout_check_in" readonly>
-                                </div>
-                                <div class=" col-sm-12 col-md-4">
-                                    <label for="checkout_check_out">วันออก</label>
-                                    <input class="form-control" type="text" name="checkout_check_out" id="checkout_check_out" readonly>
-                                </div>
-                                <div class=" col-sm-12 col-md-4">
-                                    <label for="checkout_check_out">สถานะ</label>
-                                    <input class="form-control" type="text" name="checkout_status" id="checkout_status" readonly>
+                                <br>
+                                <div id="service">
+                                    <h5>บริการเสริม</h5>
+                                    <div id="service_info"></div>
                                 </div>
                             </div>
                             <div class="table-responsive">
@@ -158,7 +165,6 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-
                                                 </tbody>
                                             </table>
                                         </div>
@@ -190,15 +196,14 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="modal-footer sticky-bottom">
-                            <button class="btn btn-danger" id='checkout_btn'>
+                            <div class="modal-footer sticky-bottom">
+                                <button class="btn btn-danger" id='checkout_btn'>
                                 เช็คเอาท์ </button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
         </center>
 
@@ -209,6 +214,45 @@
                 all_comment.classList.add('d-none')
 
                 var data = JSON.parse(data);
+
+                fetch("/get_service", {
+                    method: "post",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        reserv_id: data.reserved_id
+                    })
+                }).then((response) => response.json()).then((body) => {
+
+                    var service = body.service
+                    var service_info = document.getElementById('service_info')
+                    service_info.innerHTML = ''
+
+                    var row = document.createElement('div')
+                    row.classList.add('row')
+
+                    for (i = 0; i < service.length; i++) {
+
+                        var name_col = document.createElement('div')
+                        name_col.classList.add('col-6', 'col-lg-2', 'col-md-2', 'col-sm-3', 'col-form-label', 'text-end')
+                        name_col.innerHTML = service[i].name
+                        name_col.id = 'servicename' + i
+                        row.appendChild(name_col)
+
+                        var price_col = document.createElement('div')
+                        price_col.classList.add('col-6', 'col-lg-2', 'col-md-2', 'col-sm-3', 'col-form-label', 'text-start')
+                        price_col.innerHTML = service[i].price
+                        price_col.id = 'serviceprice' + i
+                        row.appendChild(price_col)
+                        console.log(i, service[i].name, service[i].price);
+
+                        service_info.appendChild(row)
+                    }
+
+                })
+
                 document.getElementById("checkout_cus_id").value = data.cus_id
                 document.getElementById("checkout_f_name").value = data.f_name + " " + data.l_name
                 document.getElementById("checkout_p_num").value = data.p_num

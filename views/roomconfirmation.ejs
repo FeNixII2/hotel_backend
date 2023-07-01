@@ -12,6 +12,7 @@
 <body>
 
     <%- include('./sidenav/sidenav.ejs')%>
+        <input type="text" id="reserv_number" style="display: none;">
         <center>
             <br>
             <div class="container">
@@ -84,66 +85,68 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body" style="overflow-y: auto;">
-                        <center>
+                        <div class="card p-3" id="customer-info">
                             <h5>ข้อมูลลูกค้า</h5>
-                        </center>
-                        <div class="row">
-                            <div class="col-sm-12 col-md-6">
-                                <label for="con_cus_id">รหัสลูกค้า</label>
-                                <input class="form-control" type="text" name="con_cus_id" id="con_cus_id" readonly>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="con_f_name">ชื่อ-นามสกุล</label>
-                                <input class="form-control" type="text" name="con_f_name" id="con_f_name" readonly>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12 col-md-6">
-                                <label for="con_p_num">เบอร์โทรติดต่อ</label>
-                                <input class="form-control" type="text" name="con_p_num" id="con_p_num" readonly>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="con_email">Email</label>
-                                <input class="form-control" type="text" name="con_email" id="con_email" readonly>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+                                    <label for="con_cus_id">รหัสลูกค้า</label>
+                                    <input class="form-control" type="text" name="con_cus_id" id="con_cus_id" readonly>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <label for="con_f_name">ชื่อ-นามสกุล</label>
+                                    <input class="form-control" type="text" name="con_f_name" id="con_f_name" readonly>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <label for="con_p_num">เบอร์โทรติดต่อ</label>
+                                    <input class="form-control" type="text" name="con_p_num" id="con_p_num" readonly>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <label for="con_email">Email</label>
+                                    <input class="form-control" type="text" name="con_email" id="con_email" readonly>
+                                </div>
                             </div>
                         </div>
                         <br>
-                        <center>
+                        <div class="card p-3" id="reserved-info">
                             <h5>ข้อมูลการจองห้องพัก</h5>
-                        </center>
-                        <div class="row">
-                            <div class="col-sm-12 col-md-4">
-                                <label for="con_reserv_id">รหัสการจอง</label>
-                                <input class="form-control" type="text" name="con_reserv_id" id="con_reserv_id" readonly>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-4">
+                                    <label for="con_reserv_id">รหัสการจอง</label>
+                                    <input class="form-control" type="text" name="con_reserv_id" id="con_reserv_id" readonly>
+                                </div>
+                                <div class="col-sm-12 col-md-4">
+                                    <label for="con_room_number">เลขห้อง</label>
+                                    <input class="form-control" type="text" name="con_room_number" id="con_room_number" readonly>
+                                </div>
+                                <div class="col-sm-12 col-md-4">
+                                    <label for="con_room_type">ประเภทห้อง</label>
+                                    <input class="form-control" type="text" name="con_room_type" id="con_room_type" readonly>
+                                </div>
                             </div>
-                            <div class="col-sm-12 col-md-4">
-                                <label for="con_room_number">เลขห้อง</label>
-                                <input class="form-control" type="text" name="con_room_number" id="con_room_number" readonly>
-                            </div>
-                            <div class="col-sm-12 col-md-4">
-                                <label for="con_room_type">ประเภทห้อง</label>
-                                <input class="form-control" type="text" name="con_room_type" id="con_room_type" readonly>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12 col-md-4">
-                                <label for="con_check_in">วันเข้าพัก</label>
-                                <input class="form-control" type="text" name="con_check_in" id="con_check_in" readonly>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-4">
+                                    <label for="con_check_in">วันเข้าพัก</label>
+                                    <input class="form-control" type="text" name="con_check_in" id="con_check_in" readonly>
 
+                                </div>
+                                <div class="col-sm-12 col-md-4">
+                                    <label for="con_check_out">วันออก</label>
+                                    <input class="form-control" type="text" name="con_check_out" id="con_check_out" readonly>
+                                </div>
                             </div>
-                            <div class="col-sm-12 col-md-4">
-                                <label for="con_check_out">วันออก</label>
-                                <input class="form-control" type="text" name="con_check_out" id="con_check_out" readonly>
+                            <br>
+                            <div id="service">
+                                <h5>บริการเสริม</h5>
+                                <div id="service_info"></div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="con_more_info">ข้อมูลเพิ่มเติม</label>
+                                    <textarea class="form-control" id="con_more_info" readonly></textarea>
+                                </div>
                             </div>
                         </div>
-                        <br>
-                        <div class="row">
-                            <div class="col">
-                                <label for="con_more_info">ข้อมูลเพิ่มเติม</label>
-                                <textarea class="form-control" placeholder="Enter your message here" id="con_more_info" readonly></textarea>
-                            </div>
-                        </div>
-
                     </div>
                     <div class="modal-footer sticky-bottom">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
@@ -160,14 +163,52 @@
             // let table = new DataTable('#room_info');
 
             function show_confirm_modal_data(data) {
-
                 var data = JSON.parse(data);
-                console.log(data);
+
+                fetch("/get_service", {
+                    method: "post",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        reserv_id: data.reserved_id
+                    })
+                }).then((response) => response.json()).then((body) => {
+                    var service = body.service
+                    var service_info = document.getElementById('service_info')
+                    service_info.innerHTML = ''
+
+                    var row = document.createElement('div')
+                    row.classList.add('row')
+
+                    for (i = 0; i < service.length; i++) {
+
+                        var name_col = document.createElement('div')
+                        name_col.classList.add('col-6', 'col-lg-2', 'col-md-2', 'col-sm-3', 'col-form-label', 'text-end')
+                        name_col.innerHTML = service[i].name
+                        name_col.id = 'servicename' + i
+                        row.appendChild(name_col)
+
+                        var price_col = document.createElement('div')
+                        price_col.classList.add('col-6', 'col-lg-2', 'col-md-2', 'col-sm-3', 'col-form-label', 'text-start')
+                        price_col.innerHTML = service[i].price
+                        price_col.id = 'serviceprice' + i
+                        row.appendChild(price_col)
+                        console.log(i, service[i].name, service[i].price);
+
+                        service_info.appendChild(row)
+                    }
+
+                })
+
+                // console.log(data);
                 document.getElementById("con_cus_id").value = data.id
                 document.getElementById("con_f_name").value = data.f_name + "" + data.l_name
                 document.getElementById("con_p_num").value = data.p_num
                 document.getElementById("con_email").value = data.email
-                document.getElementById("con_reserv_id").value = data.reserv_id
+                document.getElementById('reserv_number').value = data.reserv_id
+                document.getElementById("con_reserv_id").value = data.reserved_id
                 document.getElementById("con_room_number").value = data.num_room
                 document.getElementById("con_room_type").value = data.name_th + "" + data.bed
                 document.getElementById("con_check_in").value = data.checkin
@@ -187,7 +228,7 @@
                     cancelButtonColor: '#d33'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        var id = document.getElementById('con_reserv_id').value
+                        var id = document.getElementById('reserv_number').value
                         fetch('/confirmroom', {
                                 method: 'POST',
                                 headers: {
@@ -213,7 +254,6 @@
                                     showConfirmButton: false
                                 }).then(() => {
                                     location.href = '/indexroomconfirmation'
-                                        // window.app.changepage('/indexroomconfirmation')
                                 });
                             })
                             .catch(error => {

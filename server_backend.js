@@ -80,6 +80,14 @@ app.get("/", (req, res) => {
     }
 });
 
+app.post('/get_service', (req, res) => {
+    var { reserv_id } = req.body
+    // console.log(reserv_id);
+    con.query(`SELECT service.name,service.price,service.iconclass,service.iconname FROM reserved_service LEFT JOIN service ON reserved_service.service_id = service.id WHERE reserved_service.reserved_id = '${reserv_id}' `, (err, service) => {
+        res.send({ service })
+    })
+})
+
 //js file include
 require("./app/roomconfirmation.js")(app, con, transporter, fs, path, pdf, moment);
 require("./app/payment_history.js")(app, con);

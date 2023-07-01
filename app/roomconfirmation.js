@@ -1,7 +1,11 @@
 module.exports = function (app, con, transporter, fs, path, pdf, moment) {
     app.get('/indexroomconfirmation', (req, res) => {
         if (req.session.emp_pos == 2) {
-            con.query("SELECT reserved.id'reserv_id', reserved.*,customer.*,payment.pay_type,roomstype.name_th,roomstype.bed FROM reserved,customer,payment,roomstype WHERE reserved.cus_id = customer.id AND reserved.payment = payment.id AND reserved.id_typeroom = roomstype.id AND reserved.status = '0'", (err, unconfirm_room) => {
+            con.query(`SELECT reserved.id'reserv_id', reserved.*,customer.*,payment.pay_type,roomstype.name_th,roomstype.bed FROM reserved
+            LEFT JOIN customer on reserved.cus_id = customer.id
+            LEFT JOIN  payment on reserved.payment = payment.id
+            LEFT JOIN roomstype on reserved.id_typeroom = roomstype.id
+            WHERE reserved.status = '0'`, (err, unconfirm_room) => {
                 if (err) throw err;
                 res.render('roomconfirmation', { unconfirm_room })
                 // console.log(unconfirm_room);
@@ -19,6 +23,7 @@ module.exports = function (app, con, transporter, fs, path, pdf, moment) {
 
     app.post('/confirmroom', (req, res) => {
         var { id } = req.body
+        console.log(id);
         var reserv_id = id
         con.query("select * from reserved,customer,payment,roomstype where reserved.id_typeroom = roomstype.id and reserved.payment = payment.id and reserved.cus_id = customer.id and reserved.id = ?", [id], (err, id) => {
             var id = id[0]

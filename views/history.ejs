@@ -86,62 +86,70 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body " style="overflow-y: auto;">
-                        <h4>ข้อมูลลูกค้า</h4>
-                        <div class="row">
-                            <div class="col-sm-12 col-md-6">
-                                <label for="his_cus_id">รหัสลูกค้า</label>
-                                <input type="text" name="his_cus_id" id="his_cus_id" readonly class="form-control">
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="his_f_name">ชื่อ-นามสกุล</label>
-                                <input type="text" name="his_f_name" id="his_f_name" readonly class="form-control">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12 col-md-6">
-                                <label for="his_p_num">เบอร์โทรติดต่อ</label>
-                                <input type="text" name="his_p_num" id="his_p_num" readonly class="form-control">
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="his_email">Email</label>
-                                <input type="text" name="his_email" id="his_email" readonly class="form-control">
-                            </div>
-                        </div>
-                        <h4>ข้อมูลการจอง</h4>
-                        <div class="row">
-                            <div class="col-sm-12 col-md-4">
-                                <label for="his_reserv_id">รหัสการจอง</label>
-                                <input type="text" name="his_reserv_id" id="his_reserv_id" readonly class="form-control">
-                            </div>
-                            <div class="col-sm-12 col-md-4">
-                                <label for="his_room_number">เลขห้อง</label>
-                                <input type="text" name="his_room_number" id="his_room_number" readonly class="form-control">
-                            </div>
-                            <div class="col-sm-12 col-md-4">
-                                <label for="his_room_type">ประเภทห้อง</label>
-                                <input type="text" name="his_room_type" id="his_room_type" readonly class="form-control">
+                        <div id="his_customeInfo">
+                            <h4>ข้อมูลลูกค้า</h4>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+                                    <label for="his_cus_id">รหัสลูกค้า</label>
+                                    <input type="text" name="his_cus_id" id="his_cus_id" readonly class="form-control">
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <label for="his_f_name">ชื่อ-นามสกุล</label>
+                                    <input type="text" name="his_f_name" id="his_f_name" readonly class="form-control">
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <label for="his_p_num">เบอร์โทรติดต่อ</label>
+                                    <input type="text" name="his_p_num" id="his_p_num" readonly class="form-control">
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <label for="his_email">Email</label>
+                                    <input type="text" name="his_email" id="his_email" readonly class="form-control">
+                                </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-12 col-md-4">
-                                <label for="his_check_in">วันเข้าพัก</label>
-                                <input type="text" name="his_check_in" id="his_check_in" readonly class="form-control">
+                        <br>
+                        <div id="his_reservInfo">
+                            <h4>ข้อมูลการจอง</h4>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-4">
+                                    <label for="his_reserv_id">รหัสการจอง</label>
+                                    <input type="text" name="his_reserv_id" id="his_reserv_id" readonly class="form-control">
+                                </div>
+                                <div class="col-sm-12 col-md-4">
+                                    <label for="his_room_number">เลขห้อง</label>
+                                    <input type="text" name="his_room_number" id="his_room_number" readonly class="form-control">
+                                </div>
+                                <div class="col-sm-12 col-md-4">
+                                    <label for="his_room_type">ประเภทห้อง</label>
+                                    <input type="text" name="his_room_type" id="his_room_type" readonly class="form-control">
+                                </div>
                             </div>
-                            <div class="col-sm-12 col-md-4">
-                                <label for="his_check_out">วันออก</label>
-                                <input type="text" name="his_check_out" id="his_check_out" readonly class="form-control">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-4">
+                                    <label for="his_check_in">วันเข้าพัก</label>
+                                    <input type="text" name="his_check_in" id="his_check_in" readonly class="form-control">
+                                </div>
+                                <div class="col-sm-12 col-md-4">
+                                    <label for="his_check_out">วันออก</label>
+                                    <input type="text" name="his_check_out" id="his_check_out" readonly class="form-control">
+                                </div>
+                                <div class="col-sm-12 col-md-4">
+                                    <label for="his_status">สถานะ</label>
+                                    <input type="text" name="his_status" id="his_status" readonly class="form-control">
+                                </div>
                             </div>
-                            <div class="col-sm-12 col-md-4">
-                                <label for="his_status">สถานะ</label>
-                                <input type="text" name="his_status" id="his_status" readonly class="form-control">
-                            </div>
-                        </div>
-
-                        <div class="form-floating">
-                            เพิ่มเติม
                             <br>
-                            <textarea class="form-control" placeholder="Enter your message here" id="his_more_info" rows="30" readonly></textarea>
-                            <label for="message"></label>
+                            <div id="service">
+                                <h5>บริการเสริม</h5>
+                                <div id="service_info"></div>
+                            </div>
+                            <br>
+                            <div class="form-floating">
+                                เพิ่มเติม
+                                <br>
+                                <textarea class="form-control" placeholder="Enter your message here" id="his_more_info" rows="30" readonly></textarea>
+                                <label for="message"></label>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer sticky-bottom">
@@ -159,6 +167,46 @@
 
             function show_his_more_info(data) {
                 var data = JSON.parse(data);
+
+                fetch("/get_service", {
+                    method: "post",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        reserv_id: data.reserved_id
+                    })
+                }).then((response) => response.json()).then((body) => {
+
+                    var service = body.service
+                    var service_info = document.getElementById('service_info')
+                    service_info.innerHTML = ''
+
+                    var row = document.createElement('div')
+                    row.classList.add('row')
+
+                    for (i = 0; i < service.length; i++) {
+
+                        var name_col = document.createElement('div')
+                        name_col.classList.add('col-6', 'col-lg-2', 'col-md-2', 'col-sm-3', 'col-form-label', 'text-end')
+                        name_col.innerHTML = service[i].name
+                        name_col.id = 'servicename' + i
+                        row.appendChild(name_col)
+
+                        var price_col = document.createElement('div')
+                        price_col.classList.add('col-6', 'col-lg-2', 'col-md-2', 'col-sm-3', 'col-form-label', 'text-start')
+                        price_col.innerHTML = service[i].price
+                        price_col.id = 'serviceprice' + i
+                        row.appendChild(price_col)
+                        console.log(i, service[i].name, service[i].price);
+
+                        service_info.appendChild(row)
+                    }
+
+                })
+
+
                 document.getElementById("his_cus_id").value = data.id
                 document.getElementById("his_f_name").value = data.f_name + " " + data.l_name
                 document.getElementById("his_p_num").value = data.p_num
