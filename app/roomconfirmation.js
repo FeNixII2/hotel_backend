@@ -23,7 +23,7 @@ module.exports = function (app, con, transporter, fs, path, pdf, moment) {
 
     app.post('/confirmroom', (req, res) => {
         var { id } = req.body
-        console.log(id);
+        // console.log(id);
         var reserv_id = id
         con.query("select * from reserved,customer,payment,roomstype where reserved.id_typeroom = roomstype.id and reserved.payment = payment.id and reserved.cus_id = customer.id and reserved.id = ?", [id], (err, id) => {
             var id = id[0]
@@ -166,7 +166,7 @@ module.exports = function (app, con, transporter, fs, path, pdf, moment) {
                             <table class="table">
                                 <tr>
                                     <th>Total Amount Paid:</th>
-                                    <td>${price}</td>
+                                    <td>${id.total_price}</td>
                                 </tr>
                                 <tr>
                                     <th>Payment Method:</th>
@@ -225,6 +225,7 @@ module.exports = function (app, con, transporter, fs, path, pdf, moment) {
 
     app.post('/cancelroom', (req, res) => {
         var { id } = req.body
+        console.log(id);
         con.query("update reserved set status = '5' where id = ?", [id], (err, result) => {
             if (err) throw err
             res.send({})

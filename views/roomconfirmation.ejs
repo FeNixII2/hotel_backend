@@ -141,8 +141,8 @@
                             </div>
                             <br>
                             <div class="row">
-                                <div class="col">
-                                    <label for="con_more_info">ข้อมูลเพิ่มเติม</label>
+                                <div class="cols">
+                                    <h5><label for="con_more_info">ข้อมูลเพิ่มเติม</label></h5>
                                     <textarea class="form-control" id="con_more_info" readonly></textarea>
                                 </div>
                             </div>
@@ -276,7 +276,7 @@
                     cancelButtonColor: '#d33'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        var id = document.getElementById('con_reserv_id').value
+                        var id = document.getElementById('reserv_number').value
 
                         fetch('/cancelroom', {
                                 method: 'POST',

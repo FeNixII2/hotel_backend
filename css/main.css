@@ -11471,6 +11471,10 @@ fieldset:disabled .btn {
     }
 }
 
+body {
+    font-family: kanit;
+}
+
 .table-container {
     max-height: 650px;
     overflow-y: scroll;
