@@ -1,11 +1,15 @@
 module.exports = function (app, con, transporter, fs, path, pdf, moment) {
     app.get('/indexroomconfirmation', (req, res) => {
         if (req.session.emp_pos == 2) {
-            con.query(`SELECT reserved.id'reserv_id', reserved.*,customer.*,payment.pay_type,roomstype.name_th,roomstype.bed FROM reserved
-            LEFT JOIN customer on reserved.cus_id = customer.id
-            LEFT JOIN  payment on reserved.payment = payment.id
-            LEFT JOIN roomstype on reserved.id_typeroom = roomstype.id
-            WHERE reserved.status = '0'`, (err, unconfirm_room) => {
+            con.query(`SELECT reserved.id'reserv_id', reserved.*,customer.*,payment.pay_type,roomstype.name_th,
+            roomstype.bed,roomstype.price ,payment_log.*,payment_status.status_name,payment_status.status_class,roomstype.price
+                     FROM reserved
+                            LEFT JOIN customer on reserved.cus_id = customer.id
+                        LEFT JOIN payment on reserved.payment = payment.id
+                        LEFT JOIN roomstype on reserved.id_typeroom = roomstype.id
+                        LEFT JOIN payment_log ON reserved.reserved_id = payment_log.reserv_code
+                        left JOIN payment_status ON payment_log.status = payment_status.status_id
+                        WHERE reserved.status = '0'`, (err, unconfirm_room) => {
                 if (err) throw err;
                 res.render('roomconfirmation', { unconfirm_room })
                 // console.log(unconfirm_room);

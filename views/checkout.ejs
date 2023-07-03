@@ -64,13 +64,8 @@
                                                     <%= stay[i].checkout %>
                                                 </td>
                                                 <td>
-                                                    <% if ( stay[i].status==1) { %>
-                                                        เข้าพักอยู่
-                                                        <%}else if (stay[i].status==2) {%>
-                                                            รอตรวจสอบ
-                                                            <%}else if (stay[i].status==3) {%>
-                                                                ตรวจสอบแล้ว
-                                                                <%}%>
+                                                    <%=  stay[i].reserved_status %>
+
                                                 </td>
                                                 <td>
                                                     <button type="button" class="btn btn-secondary" onclick="openModal('checkout_more_info'),show_checkout_more_info('<%= JSON.stringify(stay[i]) %>');">
@@ -113,6 +108,12 @@
                                         <input class="form-control" type="text" name="checkout_email" id="checkout_email" readonly>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6">
+                                        <label for="country">ประเทศ</label>
+                                        <input class="form-control" type="text" name="country" id="country" readonly>
+                                    </div>
+                                </div>
                             </div>
                             <br>
                             <div class="card p-3" id="reserved-info">
@@ -140,15 +141,47 @@
                                         <label for="checkout_check_out">วันออก</label>
                                         <input class="form-control" type="text" name="checkout_check_out" id="checkout_check_out" readonly>
                                     </div>
+                                    <div class="col-sm-12 col-md-4">
+                                        <label for="reserv_date">วันที่ทำการจอง</label>
+                                        <input class="form-control" type="text" name="reserv_date" id="reserv_date" readonly>
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <div class=" col-sm-12 col-md-4">
                                         <label for="checkout_check_out">สถานะ</label>
                                         <input class="form-control" type="text" name="checkout_status" id="checkout_status" readonly>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4">
+                                        <label for="room_price">ราคาห้องพัก</label>
+                                        <input class="form-control" type="text" name="room_price" id="room_price" readonly>
                                     </div>
                                 </div>
                                 <br>
                                 <div id="service">
                                     <h5>บริการเสริม</h5>
                                     <div id="service_info"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-4">
+                                        <label for="total_price">ราคารวม</label>
+                                        <input class="form-control" type="text" name="total_price" id="total_price" readonly>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4">
+                                        <label for="pay_type">ประเภทการชำระเงิน</label>
+                                        <input class="form-control" type="text" name="pay_type" id="pay_type" readonly>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4">
+                                        <label for="pay_status">สถานะการชำระเงิน</label>
+                                        <input class="form-control" type="text" name="pay_status" id="pay_status" readonly>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="form-floating">
+                                        ข้อมูลเพิ่มเติมจากลูกค้า
+                                        <br>
+                                        <textarea class="form-control" id="comment_from_cus" rows="30" readonly></textarea>
+                                    </div>
                                 </div>
                                 <div class="table-responsive">
                                     <div id="more_info_section">
@@ -189,22 +222,25 @@
                                             </div>
 
                                         </div>
-                                        <div id="comment" class="form-floating">
-                                            Comment เพิ่มเติม
-                                            <br>
-                                            <textarea class="form-control" placeholder="Enter your message here" id="more_cus_comment" rows="30"></textarea>
+                                        <div class="row">
+                                            <div id="comment" class="form-floating">
+                                                ความเห็นเพิ่มเติม
+                                                <br>
+                                                <textarea class="form-control" placeholder="Enter your message here" id="more_cus_comment" rows="30"></textarea>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="modal-footer sticky-bottom">
-                                <button class="btn btn-danger" id='checkout_btn'>
+                        </div>
+                        <div class="modal-footer sticky-bottom">
+                            <button class="btn btn-danger" id='checkout_btn'>
                                 เช็คเอาท์ </button>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
-                            </div>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
                         </div>
                     </div>
                 </div>
+            </div>
 
         </center>
 
@@ -247,7 +283,7 @@
                         price_col.innerHTML = service[i].price
                         price_col.id = 'serviceprice' + i
                         row.appendChild(price_col)
-                        console.log(i, service[i].name, service[i].price);
+                            // console.log(i, service[i].name, service[i].price);
 
                         service_info.appendChild(row)
                     }
@@ -258,23 +294,35 @@
                 document.getElementById("checkout_f_name").value = data.f_name + " " + data.l_name
                 document.getElementById("checkout_p_num").value = data.p_num
                 document.getElementById("checkout_email").value = data.email
+                document.getElementById("country").value = data.country
                 document.getElementById('reserv_number').value = data.reserv_id
                 document.getElementById("checkout_reserv_id").value = data.reserved_id
                 document.getElementById("checkout_room_number").value = data.num_room
                 document.getElementById("checkout_room_type").value = data.name_th + " " + data.bed
                 document.getElementById("checkout_check_in").value = data.checkin
                 document.getElementById("checkout_check_out").value = data.checkout
+                document.getElementById("reserv_date").value = data.date
                 document.getElementById("checkout_btn").value = data.reserv_id
+
+                document.getElementById("checkout_status").value = data.reserved_status
+                document.getElementById("room_price").value = data.price
+
+                document.getElementById("total_price").value = data.total_price
+                document.getElementById("pay_type").value = data.pay_type
+                var pay_status = document.getElementById("pay_status")
+                pay_status.value = data.status_name
+                    // console.log(data.status_class);
+                pay_status.classList.add(data.status_class)
+
+                document.getElementById('comment_from_cus').value = data.more_info
+
                 var comment = document.getElementById('comment')
-                var status
-                if (data.status == 1) {
-                    status = 'เข้าพักอยู่'
+
+                if (data.reserved_status_int == 1) {
                     comment.style.display = 'none'
-                } else if (data.status == 2) {
-                    status = 'รอตรวจสอบ'
+                } else if (data.reserved_status_int == 2) {
                     comment.style.display = 'none'
-                } else if (data.status == 3) {
-                    status = 'ตรวจสอบเสร็จแล้ว'
+                } else if (data.reserved_status_int == 3) {
                     comment.style.display = 'block'
                     all_comment.classList.remove('d-none')
                     all_comment.classList.add('d-block')
@@ -322,14 +370,11 @@
                         }
                     })
 
-                } else if (data.status == 4) {
-                    status = 'เช็คเอาท์แล้ว'
                 }
-                document.getElementById("checkout_status").value = status
 
                 var btn = document.getElementById("checkout_btn")
 
-                if (data.status == 1) {
+                if (data.reserved_status_int == 1) {
                     btn.onclick = null
                     btn.disabled = false
                     btn.addEventListener('click', function() {
@@ -337,12 +382,12 @@
                     });
                     btn.innerHTML = 'ตรวจสอบห้องพัก'
 
-                } else if (data.status == 2) {
+                } else if (data.reserved_status_int == 2) {
                     btn.onclick = null
                     btn.disabled = true
                     btn.innerHTML = 'รอแม่บ้านตรวจสอบห้องพัก'
 
-                } else if (data.status == 3) {
+                } else if (data.reserved_status_int == 3) {
                     btn.onclick = null
                     btn.disabled = false
                     btn.innerHTML = 'เช็คเอาท์'

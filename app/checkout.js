@@ -1,7 +1,16 @@
 module.exports = function (app, con, moment) {
     app.get('/checkout', (req, res) => {
         if (req.session.emp_pos == 2) {
-            con.query("SELECT *,reserved.id as reserv_id FROM reserved INNER JOIN customer ON reserved.cus_id = customer.id INNER JOIN roomstype ON reserved.id_typeroom = roomstype.id WHERE status NOT IN (0, 4,5); ", (err, stay) => {
+            con.query(`SELECT reserved.id'reserv_id', reserved.*,reserved_status.status_name AS reserved_status,reserved_status.status_id as reserved_status_int,customer.*,payment.pay_type,roomstype.name_th,
+            roomstype.bed,roomstype.price,payment_log.*,payment_status.status_name,payment_status.status_class,roomstype.price
+                     FROM reserved
+                            LEFT JOIN customer on reserved.cus_id = customer.id
+                        LEFT JOIN payment on reserved.payment = payment.id
+                        LEFT JOIN roomstype on reserved.id_typeroom = roomstype.id
+                        LEFT JOIN payment_log ON reserved.reserved_id = payment_log.reserv_code
+                        left JOIN payment_status ON payment_log.status = payment_status.status_id
+                        LEFT JOIN reserved_status ON reserved.status = reserved_status.status_id
+                        WHERE  reserved.status NOT IN (0, 4,5)`, (err, stay) => {
                 if (err) throw err
                 res.render(('checkout'), { stay })
             })
@@ -18,6 +27,7 @@ module.exports = function (app, con, moment) {
 
     app.post('/room_checking', (req, res) => {
         var { id } = req.body
+        console.log(id);
         con.query("update reserved set status = 2 where id = ?", [id], (err, result) => {
             if (err) throw err
             res.send({});

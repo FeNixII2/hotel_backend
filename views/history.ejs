@@ -86,7 +86,8 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body " style="overflow-y: auto;">
-                        <div id="his_customeInfo">
+
+                        <div id="his_customeInfo" class="card p-3">
                             <h4>ข้อมูลลูกค้า</h4>
                             <div class="row">
                                 <div class="col-sm-12 col-md-6">
@@ -106,9 +107,15 @@
                                     <input type="text" name="his_email" id="his_email" readonly class="form-control">
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+                                    <label for="country">ประเทศ</label>
+                                    <input class="form-control" type="text" name="country" id="country" readonly>
+                                </div>
+                            </div>
                         </div>
                         <br>
-                        <div id="his_reservInfo">
+                        <div id="his_reservInfo" class="card p-3">
                             <h4>ข้อมูลการจอง</h4>
                             <div class="row">
                                 <div class="col-sm-12 col-md-4">
@@ -138,17 +145,78 @@
                                     <input type="text" name="his_status" id="his_status" readonly class="form-control">
                                 </div>
                             </div>
+                            <div class="col-sm-12 col-md-4">
+                                <label for="room_price">ราคาห้องพัก</label>
+                                <input class="form-control" type="text" name="room_price" id="room_price" readonly>
+                            </div>
                             <br>
                             <div id="service">
                                 <h5>บริการเสริม</h5>
                                 <div id="service_info"></div>
                             </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-4">
+                                    <label for="total_price">ราคารวม</label>
+                                    <input class="form-control" type="text" name="total_price" id="total_price" readonly>
+                                </div>
+                                <div class="col-sm-12 col-md-4">
+                                    <label for="pay_type">ประเภทการชำระเงิน</label>
+                                    <input class="form-control" type="text" name="pay_type" id="pay_type" readonly>
+                                </div>
+                                <div class="col-sm-12 col-md-4">
+                                    <label for="pay_status">สถานะการชำระเงิน</label>
+                                    <input class="form-control" type="text" name="pay_status" id="pay_status" readonly>
+                                </div>
+                            </div>
                             <br>
                             <div class="form-floating">
                                 <h5>เพิ่มเติม</h5>
-                                <br>
                                 <textarea class="form-control" placeholder="Enter your message here" id="his_more_info" rows="30" readonly></textarea>
                                 <label for="message"></label>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="card p-3">
+                            <div class="table-responsive">
+                                <div id="more_info_section">
+                                    <div class="form-floating" id='all_comment'>
+                                        <h5>ประวัติลูกค้า</h5>
+                                        <br>
+                                        <div class="container">
+                                            <table class="table table-striped table-hover text-center" id="cus_comment_table">
+                                                <thead>
+                                                    <tr>
+                                                        <td>ลำดับที่</td>
+                                                        <td>รายละเอียด</td>
+                                                        <td>วันที่</td>
+                                                        <td>ห้องเลขที่</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <br>
+                                        <h5>ข้อมูลการตรวจสอบห้องพัก</h5>
+                                        <br>
+                                        <div class="container">
+                                            <table class="table table-striped table-hover text-center" id="room_comment_table">
+                                                <thead>
+                                                    <tr>
+                                                        <td>ลำดับที่</td>
+                                                        <td>รายละเอียด</td>
+                                                        <td>วันที่</td>
+                                                        <td>ห้องเลขที่</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -199,13 +267,53 @@
                         price_col.innerHTML = service[i].price
                         price_col.id = 'serviceprice' + i
                         row.appendChild(price_col)
-                        console.log(i, service[i].name, service[i].price);
 
                         service_info.appendChild(row)
                     }
 
                 })
+                fetch("/get_comment", {
+                    method: "post",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        num_room: data.num_room,
+                        cus_id: data.cus_id
+                    })
+                }).then((response) => response.json()).then((body) => {
 
+                    var cus_coms = body.cus_coms
+                    var cus_comment_tbody = document.getElementById('cus_comment_table').getElementsByTagName('tbody')[0];
+                    cus_comment_tbody.innerHTML = ''
+                    for (i = 0; i < cus_coms.length; i++) {
+                        var newRow = cus_comment_tbody.insertRow();
+                        var cell1 = newRow.insertCell(0);
+                        var cell2 = newRow.insertCell(1);
+                        var cell3 = newRow.insertCell(2);
+                        var cell4 = newRow.insertCell(3);
+                        cell1.innerHTML = i + 1;
+                        cell2.innerHTML = cus_coms[i].detail;
+                        cell3.innerHTML = cus_coms[i].date;
+                        cell4.innerHTML = cus_coms[i].room_number;
+                    }
+
+                    var room_coms = body.room_coms
+                    var room_comment_tbody = document.getElementById('room_comment_table').getElementsByTagName('tbody')[0];
+                    room_comment_tbody.innerHTML = ''
+                    for (i = 0; i < room_coms.length; i++) {
+                        var newRow = room_comment_tbody.insertRow();
+                        var cell1 = newRow.insertCell(0);
+                        var cell2 = newRow.insertCell(1);
+                        var cell3 = newRow.insertCell(2);
+                        var cell4 = newRow.insertCell(3);
+                        cell1.innerHTML = i + 1;
+                        cell2.innerHTML = room_coms[i].detail;
+                        cell3.innerHTML = room_coms[i].date;
+                        cell4.innerHTML = room_coms[i].room_number;
+                    }
+                })
 
                 document.getElementById("his_cus_id").value = data.id
                 document.getElementById("his_f_name").value = data.f_name + " " + data.l_name
@@ -217,8 +325,18 @@
                 document.getElementById("his_check_in").value = data.checkin
                 document.getElementById("his_check_out").value = data.checkout
                 document.getElementById("his_more_info").value = data.more_info
-                var status_array = ['รอยืนยัน', 'ยืนยันแล้ว', 'รอตรวจสอบ', 'ตรวจสอบแล้ว', ' เช็คเอาท์แล้ว', 'ยกเลิก']
-                document.getElementById("his_status").value = status_array[data.status]
+
+
+                document.getElementById("country").value = data.country
+                document.getElementById("his_status").value = data.reserved_status
+                document.getElementById("room_price").value = data.price
+
+                document.getElementById("total_price").value = data.total_price
+                document.getElementById("pay_type").value = data.pay_type
+                var pay_status = document.getElementById("pay_status")
+                pay_status.value = data.status_name
+                    // console.log(data.status_class);
+                pay_status.classList.add(data.status_class)
 
             }
 

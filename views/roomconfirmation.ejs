@@ -105,6 +105,12 @@
                                     <input class="form-control" type="text" name="con_email" id="con_email" readonly>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+                                    <label for="country">ประเทศ</label>
+                                    <input class="form-control" type="text" name="country" id="country" readonly>
+                                </div>
+                            </div>
                         </div>
                         <br>
                         <div class="card p-3" id="reserved-info">
@@ -127,17 +133,41 @@
                                 <div class="col-sm-12 col-md-4">
                                     <label for="con_check_in">วันเข้าพัก</label>
                                     <input class="form-control" type="text" name="con_check_in" id="con_check_in" readonly>
-
                                 </div>
                                 <div class="col-sm-12 col-md-4">
                                     <label for="con_check_out">วันออก</label>
                                     <input class="form-control" type="text" name="con_check_out" id="con_check_out" readonly>
                                 </div>
+                                <div class="col-sm-12 col-md-4">
+                                    <label for="reserv_date">วันที่ทำการจอง</label>
+                                    <input class="form-control" type="text" name="reserv_date" id="reserv_date" readonly>
+                                </div>
                             </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-4">
+                                    <label for="room_price">ราคาห้องพัก</label>
+                                    <input class="form-control" type="text" name="room_price" id="room_price" readonly>
+                                </div>
+                            </div>
+
                             <br>
                             <div id="service">
                                 <h5>บริการเสริม</h5>
                                 <div id="service_info"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-4">
+                                    <label for="total_price">ราคารวม</label>
+                                    <input class="form-control" type="text" name="total_price" id="total_price" readonly>
+                                </div>
+                                <div class="col-sm-12 col-md-4">
+                                    <label for="pay_type">ประเภทการชำระเงิน</label>
+                                    <input class="form-control" type="text" name="pay_type" id="pay_type" readonly>
+                                </div>
+                                <div class="col-sm-12 col-md-4">
+                                    <label for="pay_status">สถานะการชำระเงิน</label>
+                                    <input class="form-control" type="text" name="pay_status" id="pay_status" readonly>
+                                </div>
                             </div>
                             <br>
                             <div class="row">
@@ -195,7 +225,7 @@
                         price_col.innerHTML = service[i].price
                         price_col.id = 'serviceprice' + i
                         row.appendChild(price_col)
-                        console.log(i, service[i].name, service[i].price);
+                            // console.log(i, service[i].name, service[i].price);
 
                         service_info.appendChild(row)
                     }
@@ -207,13 +237,24 @@
                 document.getElementById("con_f_name").value = data.f_name + "" + data.l_name
                 document.getElementById("con_p_num").value = data.p_num
                 document.getElementById("con_email").value = data.email
+                document.getElementById("country").value = data.country
                 document.getElementById('reserv_number').value = data.reserv_id
                 document.getElementById("con_reserv_id").value = data.reserved_id
                 document.getElementById("con_room_number").value = data.num_room
                 document.getElementById("con_room_type").value = data.name_th + "" + data.bed
                 document.getElementById("con_check_in").value = data.checkin
                 document.getElementById("con_check_out").value = data.checkout
+                document.getElementById("reserv_date").value = data.date
+                document.getElementById("room_price").value = data.price
                 document.getElementById("con_more_info").value = data.more_info
+
+                document.getElementById("total_price").value = data.total_price
+                document.getElementById("pay_type").value = data.pay_type
+                var pay_status = document.getElementById("pay_status")
+                pay_status.value = data.status_name
+                    // console.log(data.status_class);
+                pay_status.classList.add(data.status_class)
+
             }
 
             function confirmRoom() {

@@ -33,41 +33,44 @@
                         <table class="table table-striped table-hover text-center align-middle" id="payment_his">
                             <thead class="bg-white">
                                 <tr>
-                                    <th scope="col">ลำดับที่</th>
-                                    <th scope="col">รหัส</th>
-                                    <th scope="col">ข้อมูล</th>
-                                    <th scope="col">รหัสลูกค้า</th>
+                                    <th scope="col">รหัสการจองห้อง</th>
+                                    <th scope="col">ห้อง</th>
                                     <th scope="col">ชื่อ-นามสกุล</th>
                                     <!-- <th scope="col">รหัสบัตรประชาชน</th> -->
                                     <th scope="col">เบอร์โทร</th>
                                     <th scope="col">email</th>
+                                    <th scope="col">ประเภทการชำระเงิน</th>
+                                    <th scope="col">ราคา</th>
+                                    <th scope="col">สถานะ</th>
                                 </tr>
                             </thead>
-                            <tbody class="text-start">
+                            <tbody class="text-center">
                                 <% for(i=0;i<payment.length;i++){ %>
-
                                     <tr>
-                                        <td scope="row " class="text-center">
-                                            <%= i %>
+                                        <td>
+                                            <%= payment[0].reserv_code %>
                                         </td>
                                         <td>
-                                            <%= payment[i].payment_id%>
+                                            <%= payment[0].num_room %>
                                         </td>
                                         <td>
-                                            <%= payment[i].detail %>
-                                        </td>
-                                        <td class="text-center">
-                                            <%= payment[i].cus_id %>
+                                            <%= payment[0].f_name %>
+                                                <%= payment[0].l_name%>
                                         </td>
                                         <td>
-                                            <%= payment[i].f_name %>
-                                                <%= payment[i].l_name %>
+                                            <%= payment[0].p_num %>
                                         </td>
                                         <td>
-                                            <%= payment[i].p_num %>
+                                            <%= payment[0].email %>
                                         </td>
                                         <td>
-                                            <%= payment[i].email %>
+                                            <%= payment[0].pay_type %>
+                                        </td>
+                                        <td>
+                                            <%= payment[0].total_price %>
+                                        </td>
+                                        <td class="<%= payment[0].status_class %>">
+                                            <%= payment[0].status_name %>
                                         </td>
                                     </tr>
                                     <%}%>
