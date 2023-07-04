@@ -11489,6 +11489,20 @@ thead {
     top: 0;
 }
 
+.btn-sky {
+    background-color: #1cc3b2;
+    color: white;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.05);
+    transition: 0.3s;
+}
+
+.btn-sky:hover {
+    background-color: white;
+    color: #1cc3b2;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.05);
+    transition: 0.3s;
+}
+
 @media (max-width: 768) {
     .table {
         width: max-content;

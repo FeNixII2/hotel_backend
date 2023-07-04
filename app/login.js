@@ -24,7 +24,7 @@ module.exports = function (app, con) {
         if (pos == 1) {
             page = '/maidindex'
         } else if (pos == 2) {
-            page = '/indexroomconfirmation'
+            page = '/reserve'
         }
         callback(page);
     }

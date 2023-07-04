@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>จองห้องพัก</title>
+</head>
+
+<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="/sidenav_css/sidenav.css">
+<link rel="stylesheet" href="/modal_css/modal.css">
+<link rel="stylesheet" href="sweetalert2.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css" integrity="sha512-MQXduO8IQnJVq1qmySpN87QQkiR1bZHtorbJBD0tzy7/0U9+YIC93QWHeGTEoojMVHWWNkoCp8V6OzVSYrX0oQ==" crossorigin="anonymous" referrerpolicy="no-referrer"
+/>
+
+<script src="jquery.min.js"></script>
+<script src="bootstrap.bundle.min.js"></script>
+<script src="jquery.dataTables.min.js"></script>
+<script src="sweetalert2.all.min.js"></script>
+<script src="https://kit.fontawesome.com/4dd06c2468.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/th.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js" integrity="sha512-K/oyQtMXpxI4+K0W7H25UopjM8pzq0yrVdFdG21Fh5dBe91I40pDd9A4lzNlHPHBIP2cwZuoxaUSX0GJSObvGA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/l10n/th.min.js" integrity="sha512-0XU8EDwsRqhnSukLw3KIQoRvFJs3SGlsoLpX1RpRAjmYrc7w56F6J5pwJ0p0p+v23qg14VPRQe9OhPRfbhVzdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<body>
+    <%- include('./sidenav/sidenav.ejs') %>
+
+        <div class="container">
+
+            <div class="d-flex justify-content-center">
+                <!-- style="box-shadow:  0px 0px 10px 0.1px rgb(138, 138, 138);background-color: white;" -->
+                <div class="card col-lg-10 p-3  mt-5 mb-4 ">
+
+                    <div class=" text-center px-0 fs-1 fw-semibold"></div>
+
+                    <div class=" d-flex">
+                        <i class="fa-solid fa-door-closed d-flex align-self-center text-sky "></i>
+                        <div cla ss="ms-2 mb-1">รายละเอียดห้องพัก</div>
+                    </div>
+
+                    <div class="row py-3">
+                        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 mb-3" id="psb">
+                            <label for="checkin" class="no-select form-label">เช็คอิน</label>
+                            <input type="text" id="checkin" name="checkin" class="form-control" />
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 mb-3" id="psb2">
+                            <label for="checkout" class="no-select form-label">เช็คเอาท์</label>
+                            <input type="text" id="checkout" name="checkout" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="rooms-label row ">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-3">
+                            <div class="mb-1">ห้องที่เลือก</div>
+                            <input class="form-control bg-white p-3 shadow-info" type="text" id="roomtype-label" aria-label="Disabled input example" disabled readonly>
+                        </div>
+                    </div>
+
+                    <div class>
+                        <div class="  d-flex ">
+                            <i class="fa-solid fa-user d-flex align-self-center text-sky "></i>
+                            <div class="ms-2 ">ข้อมูลผู้เข้าพัก</div>
+                        </div>
+                        <form class="row" id="form_bookinginfo" action="javascript:confirm()" novalidate>
+                            <div class="col-md-6 my-custom-class mb-3">
+                                <div class="d-flex mb-1">
+                                    <div class>ชื่อ</div>
+                                    <div class="text-danger fs-4">*</div>
+                                </div>
+                                <input type="text" class="form-control p-3 shadow-info " id="firstName" name="firstName" placeholder="กรอกชื่อ" required>
+                            </div>
+                            <div class="col-md-6 my-custom-class mb-3">
+                                <div class="d-flex mb-1">
+                                    <div class>นามสกุล</div>
+                                    <div class="text-danger fs-4">*</div>
+                                </div>
+                                <input type="text" class="form-control p-3 shadow-info " id="lastName" name="lastName" placeholder="กรอกนามสกุล" required>
+                            </div>
+                            <div class="col-md-6 my-custom-class mb-3">
+                                <div class="d-flex mb-1">
+                                    <div class>เบอร์โทรศัพท์</div>
+                                    <div class="text-danger fs-4">*</div>
+                                </div>
+
+                                <input type="tel" class="form-control p-3 shadow-info " id="p_number" name="p_number" placeholder="กรอกโทรศัพท์" minlength="10" maxlength="10" title="กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง" required>
+                            </div>
+                            <div class="col-md-6 my-custom-class mb-3">
+                                <div class="d-flex mb-1">
+                                    <div class>อีเมลล์</div>
+                                    <div class="text-danger fs-4">*</div>
+
+                                </div>
+
+                                <input type="email" class="form-control  p-3 shadow-info " id="email" name="email" placeholder="กรอกอีเมลล์" required>
+                            </div>
+
+                            <div class="col-md-6 my-custom-class mb-3">
+                                <div class="d-flex mb-1">
+                                    <div class>คุณมาจากประเทศ</div>
+                                    <div class="text-danger fs-4">*</div>
+
+                                </div>
+                                <select class="form-select p-3 shadow-info " id="namecountry" name="namecountry" required>
+                                <option selected value="">Country</option>
+                                <% for(i=0;i<listcountry.length;i++) { %>
+                                    <option value="<%= listcountry[i].nameENG%>"><%=
+                                        listcountry[i].nameENG%></option>
+                                    <%
+                                    }%>
+                                </select>
+                            </div>
+
+                            <div class="col-lg-12 my-custom-class mb-3">
+                                <div class="d-flex mb-1">
+
+                                    <div class>คำขอเพิ่มเติม</div>
+                                </div>
+                                <textarea class="form-control p-3 shadow-info " name="more_info" id="more_info" rows="3" placeholder="กรอกข้อมูลเพิ่มเติม.."></textarea>
+                            </div>
+                    </div>
+
+                    <div class=" mb-3">
+                        <div class=" d-flex mb-1">
+                            <i class="fa-solid fa-note-sticky d-flex align-self-center text-sky "></i>
+                            <div class="ms-2  ">บริการเสริม</div>
+                        </div>
+                        <div id="service_block" class="box-service row gy-2">
+                        </div>
+                    </div>
+
+                    <div class=" mb-3">
+                        <div class="textpaymeant  d-flex mb-1">
+                            <i class="text-sky  fa-solid fa-money-check-dollar d-flex align-self-center"></i>
+                            <div class="ms-2 ">รูปแบบการชำระเงิน</div>
+                        </div>
+
+
+                        <div class="row">
+                            <% for(i=0;i<payment_type.length;i++){%>
+                                <div class="col-2 d-flex justify-content-end">
+                                    <input class="form-check-input" type="radio" id="option<%=i%>" name="myGroup" value="<%=payment_type[i].id%>" checked="true">
+                                </div>
+                                <div class="col-2">
+                                    <label class="form-check-label" for="option<%=i%>"><%=payment_type[i].pay_type%></label>
+                                </div>
+                                <%}%>
+                        </div>
+
+
+                    </div>
+
+                    <div class="textprice  d-flex mb-3 d-flex  ">
+                        <i class="fa-solid fa-coins d-flex align-self-center text-sky "></i>
+                        <div class="ms-2 me-2 d-flex align-self-center">ราคารวมทั้งสิ้น</div>
+                        <b>
+                                <div class="total-price fs-3" id="total-price"
+                                    style="color: red;">0</div>
+                            </b>
+                        <div class="ms-2 me-2 d-flex align-self-center">บาท</div>
+                    </div>
+
+                    <!-- <button onclick="confirm()" id="con_reserv">ยืนยันการจอง</button> -->
+
+                    <div class="col-lg-12 d-flex justify-content-center">
+                        <button type="submit" class="btn btn-sky fs-4 w-50 p-3 " id="con_reserv" name="con_reserv">ยืนยันการจอง</button>
+                        <!-- <div button type="button" class="btn btn-primary " onclick="confirm()" id="con_reserv">ยืนยันการจอง
+                    </div> -->
+                    </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <%- include('./sidenav/sidenav_close.ejs') %>
+            <%- include('./sidenav/sidenav_script.ejs') %>
+</body>
+<script>
+    const checkin = document.querySelector("#checkin");
+    const checkout = document.querySelector("#checkout");
+
+    flatpickr(checkin, {
+        defaultDate: new Date(),
+        locale: "th",
+        dateFormat: "d-m-Y",
+        minDate: new Date(),
+        onChange: function(selectedDates, dateStr, instance) {
+
+            if (checkout.value) {
+                if (checkout.value < dateStr) {
+                    checkout.value = dateStr;
+                }
+            }
+            checkout.flatpickr({
+                locale: "th",
+                dateFormat: "d-m-Y",
+                minDate: selectedDates[0].fp_incr(1),
+                defaultDate: selectedDates[0].fp_incr(1)
+            });
+
+        }
+    });
+    flatpickr(checkout, {
+        locale: "th",
+        dateFormat: "d-m-Y",
+        defaultDate: new Date(Date.now() + 86400000),
+        minDate: new Date(Date.now() + 86400000)
+    });
+</script>
+
+</html>
