@@ -33,7 +33,7 @@
                 <a href="/reserve" class="nav-link text-white ">
                     <svg class="bi me-2 " width="16 " height="16 ">
                         <use xlink:href="# "></use>
-                    </svg> ประวัติการทำความสะอาด
+                    </svg> จองห้องพัก
                 </a>
             </li>
             <li class="nav-item">
@@ -96,8 +96,8 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         fetch('/logout', {
-                                method: 'POST'
-                            })
+                            method: 'POST'
+                        })
                             .then(response => {
                                 if (response.ok) {
                                     // Logout successful
@@ -120,13 +120,13 @@
             const main_content = document.getElementById('main_content')
 
             const menu_button = document.getElementById('menu_button')
-            menu_button.onclick = function() {
+            menu_button.onclick = function () {
                 sidenav.classList.toggle('sidenav-active');
                 main_content.classList.toggle('blur')
             }
 
             const back_button = document.getElementById('back_button')
-            back_button.onclick = function() {
+            back_button.onclick = function () {
                 sidenav.classList.remove('sidenav-active');
                 main_content.classList.remove('blur')
             }

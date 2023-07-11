@@ -11,15 +11,12 @@
 <link rel="stylesheet" href="/sidenav_css/sidenav.css">
 <link rel="stylesheet" href="/modal_css/modal.css">
 <link rel="stylesheet" href="sweetalert2.min.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css" integrity="sha512-MQXduO8IQnJVq1qmySpN87QQkiR1bZHtorbJBD0tzy7/0U9+YIC93QWHeGTEoojMVHWWNkoCp8V6OzVSYrX0oQ==" crossorigin="anonymous" referrerpolicy="no-referrer"
-/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css" integrity="sha512-MQXduO8IQnJVq1qmySpN87QQkiR1bZHtorbJBD0tzy7/0U9+YIC93QWHeGTEoojMVHWWNkoCp8V6OzVSYrX0oQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <script src="jquery.min.js"></script>
 <script src="bootstrap.bundle.min.js"></script>
-<script src="jquery.dataTables.min.js"></script>
 <script src="sweetalert2.all.min.js"></script>
 <script src="https://kit.fontawesome.com/4dd06c2468.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/th.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js" integrity="sha512-K/oyQtMXpxI4+K0W7H25UopjM8pzq0yrVdFdG21Fh5dBe91I40pDd9A4lzNlHPHBIP2cwZuoxaUSX0GJSObvGA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/l10n/th.min.js" integrity="sha512-0XU8EDwsRqhnSukLw3KIQoRvFJs3SGlsoLpX1RpRAjmYrc7w56F6J5pwJ0p0p+v23qg14VPRQe9OhPRfbhVzdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
@@ -31,7 +28,6 @@
             <div class="d-flex justify-content-center">
                 <!-- style="box-shadow:  0px 0px 10px 0.1px rgb(138, 138, 138);background-color: white;" -->
                 <div class="card col-lg-10 p-3  mt-5 mb-4 ">
-
                     <div class=" text-center px-0 fs-1 fw-semibold"></div>
 
                     <div class=" d-flex">
@@ -41,48 +37,78 @@
 
                     <div class="row py-3">
                         <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 mb-3" id="psb">
-                            <label for="checkin" class="no-select form-label">เช็คอิน</label>
+                            <label for="checkin" class="no-select form-label" require>เช็คอิน</label>
                             <input type="text" id="checkin" name="checkin" class="form-control" />
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 mb-3" id="psb2">
-                            <label for="checkout" class="no-select form-label">เช็คเอาท์</label>
+                            <label for="checkout" class="no-select form-label" require>เช็คเอาท์</label>
                             <input type="text" id="checkout" name="checkout" class="form-control" />
                         </div>
                     </div>
-                    <div class="rooms-label row ">
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-3">
-                            <div class="mb-1">ห้องที่เลือก</div>
-                            <input class="form-control bg-white p-3 shadow-info" type="text" id="roomtype-label" aria-label="Disabled input example" disabled readonly>
-                        </div>
-                    </div>
+                    <form id="form_bookinginfo" action="javascript:confirm()">
+                        <div class="rooms-label row ">
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-3">
+                                <div class="mb-1">ประเภทห้อง</div>
+                                <select class="form-select" name="main_type" id="main_type" onchange="get_type(this.value)" required>
+                                    <option value="" disabled selected> กรุณาเลือกประเภทห้อง </option>
+                                    <% for(i=0;i<main_type.length;i++){%>
+                                        <option value="<%= main_type[i].main_roomtype_id %>">
+                                            <%= main_type[i].name %> (<%= main_type[i].name_th %>)
+                                        </option>
+                                        <% } %>
+                                </select>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-3">
+                                <div class="mb-1">เลือกห้อง</div>
+                                <select class="form-select" name="nd_type" id="nd_type" onchange="get_facility(this.value),update_price()" required>
+                                    <option value="" disabled selected> เลือกห้อง </option>
 
-                    <div class>
-                        <div class="  d-flex ">
-                            <i class="fa-solid fa-user d-flex align-self-center text-sky "></i>
-                            <div class="ms-2 ">ข้อมูลผู้เข้าพัก</div>
+                                </select>
+                            </div>
                         </div>
-                        <form class="row" id="form_bookinginfo" action="javascript:confirm()" novalidate>
-                            <div class="col-md-6 my-custom-class mb-3">
+                        <div class="d-flex">
+                            <i class="fa-solid fa-bed d-flex align-self-center text-sky"></i>
+                            <div class="ms-2 ">สิ่งอำนวยความสะดวก</div>
+                        </div>
+                        <div class="row mb-3 pt-1" id="facility">
+
+                        </div>
+                        <div class="row">
+                            <div class="  d-flex ">
+                                <i class="fa-solid fa-user d-flex align-self-center text-sky "></i>
+                                <div class="ms-2 ">ข้อมูลผู้เข้าพัก</div>
+                            </div>
+                            <div class="col-12 col-lg-6 col-md-6 col-sm-12  mb-3">
                                 <div class="d-flex mb-1">
                                     <div class>ชื่อ</div>
                                     <div class="text-danger fs-4">*</div>
                                 </div>
                                 <input type="text" class="form-control p-3 shadow-info " id="firstName" name="firstName" placeholder="กรอกชื่อ" required>
                             </div>
-                            <div class="col-md-6 my-custom-class mb-3">
+                            <div class="col-12 col-lg-6 col-md-10 col-sm-12  mb-3">
                                 <div class="d-flex mb-1">
                                     <div class>นามสกุล</div>
                                     <div class="text-danger fs-4">*</div>
                                 </div>
                                 <input type="text" class="form-control p-3 shadow-info " id="lastName" name="lastName" placeholder="กรอกนามสกุล" required>
                             </div>
-                            <div class="col-md-6 my-custom-class mb-3">
+                            <div class="col-12 col-lg-6 col-md-2 col-sm-12 mb-3">
                                 <div class="d-flex mb-1">
-                                    <div class>เบอร์โทรศัพท์</div>
+                                    <div class="me-2">เบอร์โทรศัพท์</div>
                                     <div class="text-danger fs-4">*</div>
                                 </div>
-
-                                <input type="tel" class="form-control p-3 shadow-info " id="p_number" name="p_number" placeholder="กรอกโทรศัพท์" minlength="10" maxlength="10" title="กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง" required>
+                                <div class="input-group">
+                                    <select class="form-select" id="countryCode" name="countryCode" required>
+                                        <option id="p_code" disabled selected>Phone codes</option>
+                                        <%for(i=0;i<listcountry.length;i++){ %>
+                                            <option value="<%= listcountry[i].phone %>">
+                                                <%= listcountry[i].nameENG %> (<%= listcountry[i].phone %>)
+                                            </option>
+                                            <%}%>
+                                                <!-- Add more country code options as needed -->
+                                    </select>
+                                    <input type="tel" class="form-control p-3 shadow-info" id="p_number" name="p_number" placeholder="หมายเลขโทรศัพท์" title="กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง" required>
+                                </div>
                             </div>
                             <div class="col-md-6 my-custom-class mb-3">
                                 <div class="d-flex mb-1">
@@ -101,12 +127,12 @@
 
                                 </div>
                                 <select class="form-select p-3 shadow-info " id="namecountry" name="namecountry" required>
-                                <option selected value="">Country</option>
-                                <% for(i=0;i<listcountry.length;i++) { %>
-                                    <option value="<%= listcountry[i].nameENG%>"><%=
-                                        listcountry[i].nameENG%></option>
-                                    <%
-                                    }%>
+                                    <option selected value="">Country</option>
+                                    <% for(i=0;i<listcountry.length;i++) { %>
+                                        <option value="<%= listcountry[i].nameENG%>">
+                                            <%= listcountry[i].nameENG%>
+                                        </option>
+                                        <% }%>
                                 </select>
                             </div>
 
@@ -117,55 +143,53 @@
                                 </div>
                                 <textarea class="form-control p-3 shadow-info " name="more_info" id="more_info" rows="3" placeholder="กรอกข้อมูลเพิ่มเติม.."></textarea>
                             </div>
-                    </div>
-
-                    <div class=" mb-3">
-                        <div class=" d-flex mb-1">
-                            <i class="fa-solid fa-note-sticky d-flex align-self-center text-sky "></i>
-                            <div class="ms-2  ">บริการเสริม</div>
-                        </div>
-                        <div id="service_block" class="box-service row gy-2">
-                        </div>
-                    </div>
-
-                    <div class=" mb-3">
-                        <div class="textpaymeant  d-flex mb-1">
-                            <i class="text-sky  fa-solid fa-money-check-dollar d-flex align-self-center"></i>
-                            <div class="ms-2 ">รูปแบบการชำระเงิน</div>
                         </div>
 
+                        <div class=" mb-3">
+                            <div class=" d-flex mb-1">
+                                <i class="fa-solid fa-note-sticky d-flex align-self-center text-sky "></i>
+                                <div class="ms-2  ">บริการเสริม</div>
+                            </div>
+                            <div id="service_block" class=" row m-3">
 
-                        <div class="row">
-                            <% for(i=0;i<payment_type.length;i++){%>
-                                <div class="col-2 d-flex justify-content-end">
-                                    <input class="form-check-input" type="radio" id="option<%=i%>" name="myGroup" value="<%=payment_type[i].id%>" checked="true">
-                                </div>
-                                <div class="col-2">
-                                    <label class="form-check-label" for="option<%=i%>"><%=payment_type[i].pay_type%></label>
-                                </div>
-                                <%}%>
+                            </div>
                         </div>
 
+                        <div class=" mb-3">
+                            <div class="textpaymeant  d-flex mb-1">
+                                <i class="text-sky  fa-solid fa-money-check-dollar d-flex align-self-center"></i>
+                                <div class="ms-2 ">รูปแบบการชำระเงิน</div>
+                            </div>
 
-                    </div>
 
-                    <div class="textprice  d-flex mb-3 d-flex  ">
-                        <i class="fa-solid fa-coins d-flex align-self-center text-sky "></i>
-                        <div class="ms-2 me-2 d-flex align-self-center">ราคารวมทั้งสิ้น</div>
-                        <b>
-                                <div class="total-price fs-3" id="total-price"
-                                    style="color: red;">0</div>
+                            <div class="row">
+                                <% for(i=0;i<payment_type.length;i++){%>
+                                    <div class="col-2 d-flex justify-content-end">
+                                        <input class="form-check-input" type="radio" id="option<%=i%>" name="myGroup" value="<%=payment_type[i].id%>" checked="true">
+                                    </div>
+                                    <div class="col-2">
+                                        <label class="form-check-label" for="option<%=i%>">
+                                            <%=payment_type[i].pay_type%>
+                                        </label>
+                                    </div>
+                                    <%}%>
+                            </div>
+
+
+                        </div>
+
+                        <div class="textprice  d-flex mb-3 d-flex  ">
+                            <i class="fa-solid fa-coins d-flex align-self-center text-sky "></i>
+                            <div class="ms-2 me-2 d-flex align-self-center">ราคารวมทั้งสิ้น</div>
+                            <b>
+                                <div class="total-price fs-3" id="total-price" style="color: red;">0</div>
                             </b>
-                        <div class="ms-2 me-2 d-flex align-self-center">บาท</div>
-                    </div>
+                            <div class="ms-2 me-2 d-flex align-self-center">บาท</div>
+                        </div>
 
-                    <!-- <button onclick="confirm()" id="con_reserv">ยืนยันการจอง</button> -->
-
-                    <div class="col-lg-12 d-flex justify-content-center">
-                        <button type="submit" class="btn btn-sky fs-4 w-50 p-3 " id="con_reserv" name="con_reserv">ยืนยันการจอง</button>
-                        <!-- <div button type="button" class="btn btn-primary " onclick="confirm()" id="con_reserv">ยืนยันการจอง
-                    </div> -->
-                    </div>
+                        <div class="col-lg-12 d-flex justify-content-center">
+                            <button type="submit" class="btn btn-sky fs-4 w-50 p-3 " id="con_reserv" name="con_reserv">ยืนยันการจอง</button>
+                        </div>
                     </form>
 
                 </div>
@@ -174,7 +198,142 @@
         <%- include('./sidenav/sidenav_close.ejs') %>
             <%- include('./sidenav/sidenav_script.ejs') %>
 </body>
-<script>
+<script type="text/javascript">
+    function get_type(type) {
+
+        fetch("/get_type", {
+            method: "post",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                type
+            })
+        }).then((response) => response.json()).then((body) => {
+            var all_in_type = body.all_in_type
+            const select = document.getElementById('nd_type');
+            for (var i = select.options.length - 1; i > 0; i--) {
+                select.remove(i);
+            }
+            for (i = 0; i < all_in_type.length; i++) {
+                let newOption = new Option(`${all_in_type[i].name} (${all_in_type[i].name_th} ${all_in_type[i].bed}) ราคา ${all_in_type[i].price} ว่าง ${all_in_type[i].count_id} ห้อง`, `${all_in_type[i].id}`);
+                newOption.setAttribute('data-value2', `${all_in_type[i].price}`)
+                select.add(newOption, undefined);
+            }
+            select.selectedIndex = 0;
+        })
+    }
+
+    function get_facility(id) {
+        fetch("/get_facility", {
+            method: "post",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                id
+            })
+        }).then((response) => response.json()).then((body) => {
+            var facility = body.facility
+            var facility_div = document.getElementById('facility')
+            facility_div.innerHTML = ''
+            for (i = 0; i < facility.length; i++) {
+                var add_facility = document.createElement('div')
+                add_facility.classList.add('col-12', 'col-lg-4', 'col-md-4', 'col-sm-4')
+                add_facility.innerHTML = facility[i].name
+                facility_div.appendChild(add_facility)
+            }
+            var service = body.service
+            var service_block = document.getElementById('service_block')
+            service_block.innerHTML = ''
+
+            for (i = 0; i < service.length; i++) {
+
+                // var choiceDiv = document.createElement('div')
+                // choiceDiv.classList.add('col-12', 'col-lg-4', 'col-md-4', 'col-sm-12', 'mb-2')
+
+                var form_check = document.createElement('div')
+                form_check.classList.add('form-check', 'col-12', 'col-lg-4', 'col-md-4', 'col-sm-12')
+
+                var checkbox = document.createElement('input')
+                checkbox.type = 'checkbox'
+                checkbox.name = 'service'
+                checkbox.id = service[i].service_id
+                checkbox.value = service[i].price
+                checkbox.classList.add('form-check-input')
+                checkbox.onclick = update_price
+
+                var textDiv = document.createElement('label')
+                textDiv.classList.add('text-start', 'form-check-label')
+                textDiv.innerHTML = `${service[i].name} ราคา ${service[i].price} บาท`
+                textDiv.setAttribute('for', `${service[i].service_id}`)
+
+                form_check.appendChild(checkbox)
+                form_check.appendChild(textDiv)
+
+                // choiceDiv.appendChild(form_check)
+
+                service_block.appendChild(form_check)
+            }
+        })
+    }
+
+    function update_price() {
+        var selectElement = document.getElementById("nd_type");
+        var selectedOption = selectElement.options[selectElement.selectedIndex];
+        var select_price = selectedOption.dataset.value2
+
+
+        var checkboxContainer = document.getElementById("service_block");
+        var checkboxes = checkboxContainer.querySelectorAll("input[type='checkbox']");
+        var service_price = 0;
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                var value = parseFloat(checkboxes[i].value);
+                if (!isNaN(value)) {
+                    service_price += value;
+                }
+            }
+        }
+
+        var total_price = Number(select_price) + Number(service_price)
+        var price_div = document.getElementById('total-price')
+        price_div.innerHTML = total_price
+    }
+
+    function confirm() {
+        Swal.fire({
+            title: 'ต้องการจองห้องนี้หรือไม่',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'ไม่',
+            confirmButtonText: 'ใช่'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var serviceBlock = document.getElementById('service_block');
+                var checkboxes = serviceBlock.querySelectorAll('input[type="checkbox"]');
+                var checkboxData = [];
+
+                checkboxes.forEach(function (checkbox) {
+                    if (checkbox.checked) {
+                        var checkboxId = checkbox.id;
+                        checkboxData.push(checkboxId);
+                    }
+                });
+
+                console.log(checkboxData);
+
+            }
+        })
+
+    }
+
+
+
     const checkin = document.querySelector("#checkin");
     const checkout = document.querySelector("#checkout");
 
@@ -183,7 +342,7 @@
         locale: "th",
         dateFormat: "d-m-Y",
         minDate: new Date(),
-        onChange: function(selectedDates, dateStr, instance) {
+        onChange: function (selectedDates, dateStr, instance) {
 
             if (checkout.value) {
                 if (checkout.value < dateStr) {
