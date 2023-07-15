@@ -96,4 +96,4 @@ require("./app/chambermaid.js")(app, con, moment);
 require("./app/checkout.js")(app, con, moment);
 require("./app/maidhistory.js")(app, con);
 require("./app/login.js")(app, con);
-require("./app/reserve.js")(app, con);
+require("./app/reserve.js")(app, con, moment);

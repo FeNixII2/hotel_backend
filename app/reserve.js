@@ -1,4 +1,4 @@
-module.exports = function (app, con) {
+module.exports = function (app, con, moment) {
 
     app.get('/reserve', (req, res) => {
         con.query(`select * from listcountry `, (err, listcountry) => {
@@ -53,21 +53,40 @@ module.exports = function (app, con) {
     })
 
     app.post('/confirm_booking_room', (req, res) => {
-        var { firstName, p_number, email, lastName, more_info, payment, checkin, checkout, room_type, totalprice, country, checkboxData } = req.body
+        var { firstName, lastName, p_number, email, more_info, payment, checkin, checkout, room_type, totalprice, country, checkboxData } = req.body
+
+        con.query("select id from customer where f_name = ? and l_name = ? and p_num = ? and email = ?", [firstName, lastName, p_number, email], (err, cus_id) => {
+            if (err) throw err
+            if (cus_id.length != 0) {
+
+                reserv(more_info, payment, checkin, checkout, room_type, cus_id[0].id, totalprice, checkboxData, function (reserved_custom_id) {
+                    // console.log("Reserved custom ID:", reserved_custom_id);
+                    res.send({ reserved_custom_id })
+                });
+            } else if (cus_id.length == 0) {
+                con.query("insert into customer values ('',?,?,?,?,?)", [firstName, lastName, p_number, email, country], (err, cus_id) => {
+                    var cus_id = cus_id.insertId
+                    if (err) throw err
+                    reserv(more_info, payment, checkin, checkout, room_type, cus_id, totalprice, checkboxData, function (reserved_custom_id) {
+                        // console.log("Reserved custom ID:", reserved_custom_id);
+                        res.send({ reserved_custom_id })
+                    });
+
+                })
+            }
+        })
 
     })
 
+
     function reserv(more_info, payment, checkin, checkout, room_type, cus_id, totalprice, checkboxData, callback) {
         const currentDate = moment();
-        const formattedDate = currentDate.format('DD/MM/YYYY HH:mm');
         con.query("SELECT num_room FROM rooms WHERE id_typeroom = ? AND num_room NOT IN (SELECT num_room FROM reserved WHERE id_typeroom = ? AND checkin BETWEEN ? AND ? AND checkout BETWEEN ? AND ? AND status NOT IN(4,5)) LIMIT 1", [room_type, room_type, checkin, checkout, checkin, checkout], (err, num_room) => {
             if (err) throw err
             var reserved_custom_date = currentDate.format('DMYYHmm')
             var reserved_custom_id = 'SF' + cus_id + reserved_custom_date
             var booking_date = currentDate.format('DD-MM-YYYY')
             con.query("insert into reserved (num_room,id_typeroom,checkin,checkout,cus_id, more_info, payment,reserved_id,total_price,date,status) values (?,?,?,?,?,?,?,?,?,?,0) ", [num_room[0].num_room, room_type, checkin, checkout, cus_id, more_info, payment, reserved_custom_id, totalprice, booking_date], (err, result) => {
-
-
                 if (err) throw err
                 con.query(`insert into payment_log (reserv_code,total_price,payment_type,status,cus_id,date) values ('${reserved_custom_id}','${totalprice}','${payment}','1','${cus_id}','${booking_date}')`, (err, result) => {
                     if (err) throw err

@@ -11,7 +11,8 @@
 <link rel="stylesheet" href="/sidenav_css/sidenav.css">
 <link rel="stylesheet" href="/modal_css/modal.css">
 <link rel="stylesheet" href="sweetalert2.min.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css" integrity="sha512-MQXduO8IQnJVq1qmySpN87QQkiR1bZHtorbJBD0tzy7/0U9+YIC93QWHeGTEoojMVHWWNkoCp8V6OzVSYrX0oQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css" integrity="sha512-MQXduO8IQnJVq1qmySpN87QQkiR1bZHtorbJBD0tzy7/0U9+YIC93QWHeGTEoojMVHWWNkoCp8V6OzVSYrX0oQ==" crossorigin="anonymous" referrerpolicy="no-referrer"
+/>
 
 <script src="jquery.min.js"></script>
 <script src="bootstrap.bundle.min.js"></script>
@@ -34,18 +35,18 @@
                         <i class="fa-solid fa-door-closed d-flex align-self-center text-sky "></i>
                         <div cla ss="ms-2 mb-1">รายละเอียดห้องพัก</div>
                     </div>
-
-                    <div class="row py-3">
-                        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 mb-3" id="psb">
-                            <label for="checkin" class="no-select form-label" require>เช็คอิน</label>
-                            <input type="text" id="checkin" name="checkin" class="form-control" />
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 mb-3" id="psb2">
-                            <label for="checkout" class="no-select form-label" require>เช็คเอาท์</label>
-                            <input type="text" id="checkout" name="checkout" class="form-control" />
-                        </div>
-                    </div>
                     <form id="form_bookinginfo" action="javascript:confirm()">
+
+                        <div class="row py-3">
+                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 mb-3" id="psb">
+                                <label for="checkin" class="no-select form-label" require>เช็คอิน</label>
+                                <input type="text" id="checkin" name="checkin" class="form-control" />
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 mb-3" id="psb2">
+                                <label for="checkout" class="no-select form-label" require>เช็คเอาท์</label>
+                                <input type="text" id="checkout" name="checkout" class="form-control" />
+                            </div>
+                        </div>
                         <div class="rooms-label row ">
                             <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-3">
                                 <div class="mb-1">ประเภทห้อง</div>
@@ -85,21 +86,21 @@
                                 </div>
                                 <input type="text" class="form-control p-3 shadow-info " id="firstName" name="firstName" placeholder="กรอกชื่อ" required>
                             </div>
-                            <div class="col-12 col-lg-6 col-md-10 col-sm-12  mb-3">
+                            <div class="col-12 col-lg-6 col-md-6 col-sm-12  mb-3">
                                 <div class="d-flex mb-1">
                                     <div class>นามสกุล</div>
                                     <div class="text-danger fs-4">*</div>
                                 </div>
                                 <input type="text" class="form-control p-3 shadow-info " id="lastName" name="lastName" placeholder="กรอกนามสกุล" required>
                             </div>
-                            <div class="col-12 col-lg-6 col-md-2 col-sm-12 mb-3">
+                            <div class="col-12 col-lg-6 col-md-6 col-sm-12 mb-3">
                                 <div class="d-flex mb-1">
                                     <div class="me-2">เบอร์โทรศัพท์</div>
                                     <div class="text-danger fs-4">*</div>
                                 </div>
                                 <div class="input-group">
                                     <select class="form-select" id="countryCode" name="countryCode" required>
-                                        <option id="p_code" disabled selected>Phone codes</option>
+                                        <option id="p_code" value="" disabled selected>Phone codes</option>
                                         <%for(i=0;i<listcountry.length;i++){ %>
                                             <option value="<%= listcountry[i].phone %>">
                                                 <%= listcountry[i].nameENG %> (<%= listcountry[i].phone %>)
@@ -318,14 +319,64 @@
                 var checkboxes = serviceBlock.querySelectorAll('input[type="checkbox"]');
                 var checkboxData = [];
 
-                checkboxes.forEach(function (checkbox) {
+                checkboxes.forEach(function(checkbox) {
                     if (checkbox.checked) {
                         var checkboxId = checkbox.id;
                         checkboxData.push(checkboxId);
                     }
                 });
 
-                console.log(checkboxData);
+                var p_number = `+${document.getElementById('countryCode').value}${document.getElementById('p_number').value}`
+
+                var firstName = document.getElementById('firstName').value
+                var lastName = document.getElementById('lastName').value
+                var email = document.getElementById('email').value
+                var more_info = document.getElementById('more_info').value
+                var checkin = document.getElementById('checkin').value
+                var checkout = document.getElementById('checkout').value
+                var room_type = document.getElementById('nd_type').value
+                var totalprice = document.getElementById('total-price').innerHTML
+                var country = document.getElementById('namecountry').value
+
+                var payment = document.getElementsByName('myGroup')
+                var payment = Array.from(payment).find(
+                    (radio) => radio.checked
+                );
+                payment = payment.value
+
+                fetch("/confirm_booking_room", {
+                    method: "post",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        checkboxData,
+                        p_number,
+                        firstName,
+                        lastName,
+                        email,
+                        more_info,
+                        checkin,
+                        checkout,
+                        room_type,
+                        totalprice,
+                        country,
+                        payment
+                    })
+                }).then((response) => response.json()).then((body) => {
+                    Swal.fire({
+                        title: 'รบกวนรอการยืนยันทางอีเมลล์',
+                        text: 'รหัสการจองห้องคือ ' + body.reserved_custom_id + ' สามารถใช้ค้นหาในเมนูเช็คห้องพักได้',
+                        icon: 'success',
+                        showConfirmButton: true,
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        allowEnterKey: false,
+                    }).then(() => {
+                        location.reload();
+                    });
+                })
 
             }
         })
@@ -342,7 +393,7 @@
         locale: "th",
         dateFormat: "d-m-Y",
         minDate: new Date(),
-        onChange: function (selectedDates, dateStr, instance) {
+        onChange: function(selectedDates, dateStr, instance) {
 
             if (checkout.value) {
                 if (checkout.value < dateStr) {
